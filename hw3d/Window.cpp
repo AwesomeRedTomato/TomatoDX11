@@ -57,28 +57,22 @@ Window::~Window()
 
 LRESULT Window::HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
-	// use create parameter passed in from CreateWindow() to store window class pointer at WinAPI side
 	if (msg == WM_NCCREATE)
 	{
-		// extract ptr to window class from creation data
 		const CREATESTRUCTW* const pCreate = reinterpret_cast<CREATESTRUCTW*>(lParam);
 		Window* const pWnd = static_cast<Window*>(pCreate->lpCreateParams);
-		// set WinAPI-managed user data to store ptr to window instance
+
 		SetWindowLongPtr(hWnd, GWLP_USERDATA, reinterpret_cast<LONG_PTR>(pWnd));
-		// set message proc to normal (non-setup) handler now that setup is finished
 		SetWindowLongPtr(hWnd, GWLP_WNDPROC, reinterpret_cast<LONG_PTR>(&Window::HandleMsgThunk));
-		// forward message to window instance handler
+		
 		return pWnd->HandleMsg(hWnd, msg, wParam, lParam);
 	}
-	// if we get a message before the WM_NCCREATE message, handle with default handler
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
 LRESULT Window::HandleMsgThunk(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept
 {
-	// retrieve ptr to window instance
 	Window* const pWnd = reinterpret_cast<Window*>(GetWindowLongPtr(hWnd, GWLP_USERDATA));
-	// forward message to window instance handler
 	return pWnd->HandleMsg(hWnd, msg, wParam, lParam);
 }
 
@@ -110,6 +104,73 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 
 	/********** MOUSE **********/
 
+	case WM_MOUSEMOVE:
+	{
+		const POINTS pt = MAKEPOINTS(lParam);
+		if (pt.x >= 0 && pt.x < _width && pt.y >= 0 && pt.y < _height)
+		{
+			_mouse.OnMouseMove(pt.x, pt.y);
+			if (!_mouse.IsInWindow())
+			{
+				SetCapture(hWnd);
+				_mouse.OnMouseEnter();
+			}
+		}
+		else
+		{
+			if (wParam & (MK_LBUTTON | MK_RBUTTON))
+			{
+				_mouse.OnMouseMove(pt.x, pt.y);
+			}
+			else
+			{
+				ReleaseCapture();
+				_mouse.OnMouseLeave();
+			}
+		}
+		break;
+	}
+	case WM_LBUTTONDOWN:
+	{
+		const POINTS pt = MAKEPOINTS(lParam);
+		_mouse.OnLeftPressed(pt.x, pt.y);
+		break;
+	}
+	case WM_RBUTTONDOWN:
+	{
+		const POINTS pt = MAKEPOINTS(lParam);
+		_mouse.OnRightPressed(pt.x, pt.y);
+		break;
+	}
+	case WM_LBUTTONUP:
+	{
+		const POINTS pt = MAKEPOINTS(lParam);
+		_mouse.OnLeftReleased(pt.x, pt.y);
+		if (pt.x < 0 || pt.x >= _width || pt.y < 0 || pt.y >= _height)
+		{
+			ReleaseCapture();
+			_mouse.OnMouseLeave();
+		}
+		break;
+	}
+	case WM_RBUTTONUP:
+	{
+		const POINTS pt = MAKEPOINTS(lParam);
+		_mouse.OnRightReleased(pt.x, pt.y);
+		if (pt.x < 0 || pt.x >= _width || pt.y < 0 || pt.y >= _height)
+		{
+			ReleaseCapture();
+			_mouse.OnMouseLeave();
+		}
+		break;
+	}
+	case WM_MOUSEWHEEL:
+	{
+		const POINTS pt = MAKEPOINTS(lParam);
+		const int delta = GET_WHEEL_DELTA_WPARAM(wParam);
+		_mouse.OnWheelDelta(pt.x, pt.y, delta);
+		break;
+	}
 
 
 	case WM_CLOSE:
@@ -118,5 +179,28 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	}
 
 	return DefWindowProc(hWnd, msg, wParam, lParam);
+}
+
+void Window::SetTitle(const string& title)
+{
+	SetWindowText(_hWnd, title.c_str());
+}
+
+optional<int> Window::ProcessMessages()
+{
+	MSG msg;
+
+	while (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
+	{
+		if (msg.message == WM_QUIT)
+		{
+			return msg.wParam;
+		}
+
+		TranslateMessage(&msg);
+		DispatchMessage(&msg);
+	}
+
+	return {};
 }
 

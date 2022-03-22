@@ -1,6 +1,5 @@
 #include "pch.h"
-#include "Window.h"
-
+#include "App.h"
 
 int CALLBACK WinMain(
 	HINSTANCE hInstance,
@@ -10,16 +9,7 @@ int CALLBACK WinMain(
 {
 	try
 	{
-		Window wnd(800, 300, "WinMain");
-
-		MSG msg;
-		while (GetMessage(&msg, nullptr, 0, 0) > 0)
-		{
-			TranslateMessage(&msg);
-			DispatchMessage(&msg);
-		}
-
-		return msg.wParam;
+		return App{}.Go();
 	}
 	catch (const Exception& e)
 	{

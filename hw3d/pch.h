@@ -11,5 +11,5 @@
 #include <exception>
 #include <bitset>
 
-
 using namespace std;
+

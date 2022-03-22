@@ -35,6 +35,10 @@ private:
 	LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 
 public:
+	void SetTitle(const string& title);
+	static optional<int> ProcessMessages();
+
+public:
 	Keyboard _keyboard;
 	Mouse _mouse;
 
