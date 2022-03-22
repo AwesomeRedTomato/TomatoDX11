@@ -21,4 +21,6 @@ int App::Go()
 
 void App::Update()
 {
+	_wnd._gfx->RenderBegin();
+	_wnd._gfx->RenderEnd();
 }

@@ -23,13 +23,13 @@ string Exception::GetOriginString() const noexcept
 	return oss.str();
 }
 
-HrException::HrException(int line, const char* file, HRESULT hr) noexcept
+WinException::WinException(int line, const char* file, HRESULT hr) noexcept
 	:
 	Exception(line, file), _hr(hr)
 {
 }
 
-const char* HrException::what() const noexcept
+const char* WinException::what() const noexcept
 {
 	ostringstream oss;
 	oss << "HrException" << endl << "[ErrorCode] " << _hr << endl <<
@@ -38,7 +38,7 @@ const char* HrException::what() const noexcept
 	return oss.str().c_str();
 }
 
-string HrException::TranslateErrorCode(HRESULT hr) const noexcept
+string WinException::TranslateErrorCode(HRESULT hr) const noexcept
 {
 	char* msgBuffer = nullptr;
 
@@ -55,4 +55,62 @@ string HrException::TranslateErrorCode(HRESULT hr) const noexcept
 	LocalFree(msgBuffer);
 
 	return errorString;
+}
+
+HrException::HrException(int line, const char* file, HRESULT hr, vector<string> infoMsgs) noexcept
+	: Exception(line,file), _hr(hr)
+{
+	for (const auto& m : infoMsgs)
+	{
+		_info += m;
+		_info.push_back('\n');
+	}
+	if (!_info.empty())
+	{
+		_info.pop_back();
+	}
+}
+
+const char* HrException::what() const noexcept
+{
+	ostringstream oss;
+	oss << GetType() << std::endl
+		<< "[Error Code] 0x" << hex << uppercase << GetErrorCode()
+		<< dec << " (" << (unsigned long)GetErrorCode() << ")" << endl
+		<< "[Error String] " << GetErrorString() << endl
+		<< "[Description] " << GetErrorDescription() << endl;
+	if (!_info.empty())
+	{
+		oss << "\n[Error Info]\n" << GetErrorInfo() << endl << endl;
+	}
+	oss << GetOriginString();
+
+	return oss.str().c_str();
+}
+
+const char* HrException::GetType() const noexcept
+{
+	return "HrException";
+}
+
+HRESULT HrException::GetErrorCode() const noexcept
+{
+	return _hr;
+}
+
+string HrException::GetErrorString() const noexcept
+{
+	return DXGetErrorString(_hr);
+}
+
+string HrException::GetErrorDescription() const noexcept
+{
+	char buffer[512];
+	DXGetErrorDescription(_hr, buffer, sizeof(buffer));
+	return buffer;
+}
+
+string HrException::GetErrorInfo() const noexcept
+{
+	return _info;
 }

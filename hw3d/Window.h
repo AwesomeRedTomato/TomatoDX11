@@ -1,6 +1,8 @@
+#include "pch.h"
 #include "Exception.h"
 #include "Keyboard.h"
 #include "Mouse.h" 
+#include "Graphics.h"
 
 class Window
 {
@@ -39,6 +41,7 @@ public:
 	static optional<int> ProcessMessages();
 
 public:
+	unique_ptr<Graphics> _gfx;
 	Keyboard _keyboard;
 	Mouse _mouse;
 

@@ -35,10 +35,7 @@ Window::Window(int width, int height, const char* name)
 	wr.right = width + wr.left;
 	wr.top = 100;
 	wr.bottom = height + wr.top;
-	if (FAILED(AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE)))
-	{
-		throw EXCEPTION();
-	}
+	AdjustWindowRect(&wr, WS_CAPTION | WS_MINIMIZEBOX | WS_SYSMENU, FALSE);
 	
 	_hWnd = CreateWindow(
 		WindowClass::GetName(),
@@ -48,6 +45,8 @@ Window::Window(int width, int height, const char* name)
 		wr.right - wr.left, wr.bottom - wr.top,
 		nullptr, nullptr, WindowClass::GetInstance(), this);
 	ShowWindow(_hWnd, SW_SHOWDEFAULT);
+
+	_gfx = make_unique<Graphics>(_hWnd);
 }
 
 Window::~Window()

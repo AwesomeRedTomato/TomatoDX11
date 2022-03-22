@@ -12,10 +12,10 @@ private:
 	string _file;
 };
 
-class HrException : public Exception
+class WinException : public Exception
 {
 public:
-	HrException(int line, const char* file, HRESULT hr)	noexcept;
+	WinException(int line, const char* file, HRESULT hr)	noexcept;
 
 	const char* what() const noexcept override;
 	string TranslateErrorCode(HRESULT hr) const noexcept;
@@ -23,5 +23,22 @@ private:
 	HRESULT _hr;
 };
 
-#define EXCEPTION() Exception(__LINE__, __FILE__)
-#define HREXCEPTION(hr) HrException(__LINE__, __FILE__, GetLastError())
+class HrException : public Exception
+{
+public:
+	HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs = {}) noexcept;
+	
+	const char* what() const noexcept override;
+	const char* GetType() const noexcept;
+	
+	HRESULT GetErrorCode() const noexcept;
+	string GetErrorString() const noexcept;
+	string GetErrorDescription() const noexcept;
+	string GetErrorInfo() const noexcept;
+
+private:
+	HRESULT _hr;
+	string _info;
+};
+
+#define GFX_THROW_FAILED(hr) if(FAILED((hr))) throw HrException(__LINE__, __FILE__, hr)
