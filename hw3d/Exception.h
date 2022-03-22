@@ -26,7 +26,7 @@ private:
 class HrException : public Exception
 {
 public:
-	HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs = {}) noexcept;
+	HrException(int line, const char* file, HRESULT hr, vector<string> infoMsgs = {}) noexcept;
 	
 	const char* what() const noexcept override;
 	const char* GetType() const noexcept;
