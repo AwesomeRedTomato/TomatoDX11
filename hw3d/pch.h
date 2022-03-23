@@ -19,6 +19,7 @@ using namespace std;
 #include <wrl.h>
 #include <d3dcompiler.h>
 #include <dxgi.h>
+#include <dxgidebug.h>
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
 #include <DirectXColors.h>

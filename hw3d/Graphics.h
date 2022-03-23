@@ -12,6 +12,12 @@ public:
 	void RenderBegin();
 	void RenderEnd();
 
+	void DrawTriangle();
+
+#ifndef NDEBUG
+	DxgiInfoManager _infoManager;
+#endif
+
 private:
 	ComPtr<ID3D11Device> _device;
 	ComPtr<IDXGISwapChain> _swapChain;
@@ -19,4 +25,3 @@ private:
 	ComPtr<ID3D11RenderTargetView> _rtv;
 	
 };
-

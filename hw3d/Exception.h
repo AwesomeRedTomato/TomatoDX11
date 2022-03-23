@@ -1,4 +1,5 @@
 #pragma once
+#include "DxgiInfoManager.h"
 
 class Exception : public exception
 {
@@ -36,9 +37,23 @@ public:
 	string GetErrorDescription() const noexcept;
 	string GetErrorInfo() const noexcept;
 
+#ifndef NDEBUG
+	DxgiInfoManager _infoManager;
+#endif
+
 private:
 	HRESULT _hr;
 	string _info;
 };
 
-#define GFX_THROW_FAILED(hr) if(FAILED((hr))) throw HrException(__LINE__, __FILE__, hr)
+#define EXCEPTION() Exception(__LINE__, __FILE__)
+#define LAST_EXCEPTION() HrException(__LINE__, __FILE__, GetLastError())
+
+#ifndef NDEBUG
+#define THROW_FAILED(hr) if(FAILED((hr))) throw HrException(__LINE__, __FILE__, hr, _infoManager.GetMessages())
+#define THROW_INFO(hrcall) _infoManager.Set(); if(FAILED(hr = (hrcall))) THROW_FAILED(hr)
+#define NOINFO_THROW_FAILED(hrcall) if(FAILED(hr = (hrcall))) throw HrException(__LINE__, __FILE__, hr)
+#else
+#define THROW_FAILED(hr) if(FAILED((hr))) throw HrException(__LINE__, __FILE__, hr)
+#define NOINFO_THROW_FAILED(hrcall) if(FAILED(hr = (hrcall))) throw HrException(__LINE__, __FILE__, hr)
+#endif
