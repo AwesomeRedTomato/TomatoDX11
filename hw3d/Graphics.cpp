@@ -91,79 +91,40 @@ void Graphics::RenderEnd()
 
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
-	//struct Vertex
-	//{
-	//	struct
-	//	{
-	//		float x;
-	//		float y;
-	//		float z;
-	//	} pos;
-	//	struct
-	//	{
-	//		unsigned char r;
-	//		unsigned char g;
-	//		unsigned char b;
-	//		unsigned char a;
-	//	} color;
-	//};
-
-	// create vertex buffer (1 2d triangle at center of screen)
 	vector<Vertex> vertices(8);
-	vertices[0] = Vertex(XMFLOAT3(-1.0f,-1.0f,-1.0f));
-	vertices[1] = Vertex(XMFLOAT3(1.0f, -1.0f, -1.0f));
-	vertices[2] = Vertex(XMFLOAT3(-1.0f, 1.0f, -1.0f));
-	vertices[3] = Vertex(XMFLOAT3(1.0f, 1.0f, -1.0f));
-	vertices[4] = Vertex(XMFLOAT3(-1.0f, -1.0f, 1.0f));
-	vertices[5] = Vertex(XMFLOAT3(1.0f, -1.0f, 1.0f));
-	vertices[6] = Vertex(XMFLOAT3(-1.0f, 1.0f, 1.0f));
+
+	vertices[0] = Vertex(XMFLOAT3(-1.0f, -1.0f, -1.0f));
+	vertices[1] = Vertex(XMFLOAT3(1.0f,-1.0f,-1.0f));
+	vertices[2] = Vertex(XMFLOAT3(-1.0f,1.0f,-1.0f));
+	vertices[3] = Vertex(XMFLOAT3(1.0f,1.0f,-1.0f));
+	vertices[4] = Vertex(XMFLOAT3(-1.0f,-1.0f,1.0f));
+	vertices[5] = Vertex(XMFLOAT3(1.0f,-1.0f,1.0f));
+	vertices[6] = Vertex(XMFLOAT3(-1.0f,1.0f,1.0f));
 	vertices[7] = Vertex(XMFLOAT3(1.0f, 1.0f, 1.0f));
 
-	vector<uint16_t>indices =
-	{
-		0,2,1, 2,3,1,
-		1,3,5, 3,7,5,
-		2,6,3, 3,6,7,
-		4,5,7, 4,7,6,
-		0,4,2, 2,4,6,
-		0,1,4, 1,5,4
-	};
+	vector<uint16_t> idx(36);
 
-	_mesh->Init(vertices, indices);
+	// ¾Õ¸é
+	idx[0] = 0; idx[1] = 2; idx[2] = 1;
+	idx[3] = 2; idx[4] = 3; idx[5] = 1;
+	// µÞ¸é
+	idx[6] = 1; idx[7] = 3; idx[8] = 5;
+	idx[9] = 3; idx[10] = 7; idx[11] = 5;
+	// À­¸é
+	idx[12] = 2; idx[13] = 6; idx[14] = 3;
+	idx[15] = 3; idx[16] = 6; idx[17] = 7;
+	// ¾Æ·§¸é
+	idx[18] = 4; idx[19] = 5; idx[20] = 7;
+	idx[21] = 4; idx[22] = 7; idx[23] = 6;
+	// ¿ÞÂÊ¸é
+	idx[24] = 0; idx[25] = 4; idx[26] = 2;
+	idx[27] = 2; idx[28] = 4; idx[29] = 6;
+	// ¿À¸¥ÂÊ¸é
+	idx[30] = 0; idx[31] = 1; idx[32] = 4;
+	idx[33] = 1; idx[34] = 5; idx[35] = 4;
+
+	_mesh->Init(vertices, idx);
 	_mesh->Bind();
-
-	//ComPtr<ID3D11Buffer> vertexBuffer;
-	//D3D11_BUFFER_DESC bd = {};
-	//bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	//bd.Usage = D3D11_USAGE_DEFAULT;
-	//bd.CPUAccessFlags = 0u;
-	//bd.MiscFlags = 0u;
-	//bd.ByteWidth = sizeof(vertices);
-	//bd.StructureByteStride = sizeof(Vertex);
-	//D3D11_SUBRESOURCE_DATA sd = {};
-	//sd.pSysMem = vertices;
-	//_device->CreateBuffer(&bd, &sd, &vertexBuffer);
-	//
-	//const UINT stride = sizeof(Vertex);
-	//const UINT offset = 0u;
-	//_context->IASetVertexBuffers(0u, 1u, vertexBuffer.GetAddressOf(), &stride, &offset);
-	//
-	//// create index buffer
-	//ComPtr<ID3D11Buffer> pIndexBuffer;
-	//D3D11_BUFFER_DESC ibd = {};
-	//ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	//ibd.Usage = D3D11_USAGE_DEFAULT;
-	//ibd.CPUAccessFlags = 0u;
-	//ibd.MiscFlags = 0u;
-	//ibd.ByteWidth = sizeof(indices);
-	//ibd.StructureByteStride = sizeof(uint16_t);
-	//D3D11_SUBRESOURCE_DATA isd = {};
-	//isd.pSysMem = indices;
-	//_device->CreateBuffer(&ibd, &isd, &pIndexBuffer);
-
-	//// bind index buffer
-	//_context->IASetIndexBuffer(pIndexBuffer.Get(), DXGI_FORMAT_R16_UINT, 0u);
-
 
 	// create constant buffer for transform matrix
 	struct ConstantBuffer
@@ -284,5 +245,5 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 	_context->RSSetViewports(1u, &vp);
 
 
-	_context->DrawIndexed((UINT)std::size(indices), 0u, 0u);
+	_context->DrawIndexed((UINT)std::size(idx), 0u, 0u);
 }

@@ -48,15 +48,12 @@ public:								\
 
 #define GET_SINGLE(type)	type::GetInstance()
 
-
 struct Vertex
 {
 	Vertex() {}
-	Vertex(XMFLOAT3 pos) : pos(pos) {}
-
+	Vertex(XMFLOAT3 p) : pos(p) {}
 	XMFLOAT3 pos;
 };
-
 
 extern unique_ptr<class Graphics> _gfx;
 #define DEVICE _gfx->GetDevice()
