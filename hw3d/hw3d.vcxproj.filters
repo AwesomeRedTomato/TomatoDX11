@@ -19,9 +19,6 @@
     <Filter Include="셰이더">
       <UniqueIdentifier>{3a14c8d9-b841-410d-953a-b0722958f6ad}</UniqueIdentifier>
     </Filter>
-    <Filter Include="소스 파일\Geometry">
-      <UniqueIdentifier>{435bb449-8d67-4ddd-aac4-1346ecfaf66c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Pipeline">
       <UniqueIdentifier>{9d10dc15-0753-4d3e-b72c-ac46abcab3ac}</UniqueIdentifier>
     </Filter>
@@ -33,6 +30,9 @@
     </Filter>
     <Filter Include="소스 파일\Device">
       <UniqueIdentifier>{5b2cd699-401c-4556-9bbb-ead44e2c1ea5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Geometry">
+      <UniqueIdentifier>{7d437e0d-91c0-4ae2-ae23-0bf72c85d7b8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +121,9 @@
     </ClInclude>
     <ClInclude Include="Graphics.h">
       <Filter>헤더 파일\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Box.h">
+      <Filter>헤더 파일\Geometry</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
