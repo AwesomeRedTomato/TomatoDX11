@@ -2,6 +2,8 @@
 
 
 #include <Windows.h>
+#include <tchar.h>
+#include <chrono>
 #include <string>
 #include <vector>
 #include <map>
@@ -12,6 +14,7 @@
 #include <exception>
 #include <bitset>
 #include <memory>
+#include <cmath>
 using namespace std;
 
 #include "dxerr.h"
@@ -32,4 +35,15 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "dxguid")
 #pragma comment(lib, "d3dcompiler")
 
+#define SINGLETON(type)				\
+private:							\
+	type() {}						\
+	~type() {}						\
+public:								\
+	static type* GetInstance()		\
+	{								\
+		static type instance;		\
+		return &instance;			\
+	}								\
 
+#define GET_SINGLE(type)	type::GetInstance()

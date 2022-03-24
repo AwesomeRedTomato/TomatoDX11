@@ -1,5 +1,9 @@
 #include "pch.h"
 #include "App.h"
+#include "Timer.h"
+#include "Graphics.h"
+
+float App::time = 0;
 
 App::App()
 	:
@@ -16,12 +20,19 @@ int App::Go()
 			return *ecode;
 		}
 		Update();
+		Render();
 	}
 }
 
 void App::Update()
 {
+
+	++time;
+}
+
+void App::Render()
+{
 	_wnd._gfx->RenderBegin();
-	_wnd._gfx->DrawTriangle();
+	_wnd._gfx->DrawTriangle(GET_SINGLE(Timer)->Peek(), 0,0);
 	_wnd._gfx->RenderEnd();
 }
