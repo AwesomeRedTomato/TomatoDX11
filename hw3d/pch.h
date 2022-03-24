@@ -47,3 +47,17 @@ public:								\
 	}								\
 
 #define GET_SINGLE(type)	type::GetInstance()
+
+
+struct Vertex
+{
+	Vertex() {}
+	Vertex(XMFLOAT3 pos) : pos(pos) {}
+
+	XMFLOAT3 pos;
+};
+
+
+extern unique_ptr<class Graphics> _gfx;
+#define DEVICE _gfx->GetDevice()
+#define CONTEXT _gfx->GetContext()

@@ -15,6 +15,5 @@ private:
 
 private:
 	Window _wnd;
-	static float time;
 };
 

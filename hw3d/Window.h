@@ -26,10 +26,8 @@ public:
 	};
 
 public:
-	Window(int width, int height, const char* name);
+	void Init(int width, int height, const char* name);
 	~Window();
-	Window(const Window&) = delete;
-	Window& operator=(const Window&) = delete;
 
 private:
 	static LRESULT CALLBACK HandleMsgSetup(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
@@ -41,12 +39,11 @@ public:
 	static optional<int> ProcessMessages();
 
 public:
-	unique_ptr<Graphics> _gfx;
 	Keyboard _keyboard;
 	Mouse _mouse;
+	HWND _hWnd;
 
 private:
 	int _width;
 	int _height;
-	HWND _hWnd;
 };

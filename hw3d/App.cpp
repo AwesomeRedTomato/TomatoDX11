@@ -3,12 +3,10 @@
 #include "Timer.h"
 #include "Graphics.h"
 
-float App::time = 0;
-
 App::App()
-	:
-	_wnd(800, 600, "DirectX 11")
 {
+	_wnd.Init(800, 600, "DirectX 11");
+	_gfx->Init(_wnd);
 }
 
 int App::Go()
@@ -27,12 +25,11 @@ int App::Go()
 void App::Update()
 {
 
-	++time;
 }
 
 void App::Render()
 {
-	_wnd._gfx->RenderBegin();
-	_wnd._gfx->DrawTriangle(GET_SINGLE(Timer)->Peek(), 0,0);
-	_wnd._gfx->RenderEnd();
+	_gfx->RenderBegin();
+	_gfx->DrawTriangle(GET_SINGLE(Timer)->Peek(), 0,0);
+	_gfx->RenderEnd();
 }

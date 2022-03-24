@@ -28,7 +28,7 @@ Window::WindowClass::~WindowClass()
 	UnregisterClass(_wndClassName, _hInst);
 }
 
-Window::Window(int width, int height, const char* name)
+void Window::Init(int width, int height, const char* name)
 {
 	RECT wr;
 	wr.left = 100;
@@ -46,7 +46,6 @@ Window::Window(int width, int height, const char* name)
 		nullptr, nullptr, WindowClass::GetInstance(), this);
 	ShowWindow(_hWnd, SW_SHOWDEFAULT);
 
-	_gfx = make_unique<Graphics>(_hWnd);
 }
 
 Window::~Window()

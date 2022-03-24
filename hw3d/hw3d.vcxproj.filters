@@ -19,78 +19,108 @@
     <Filter Include="셰이더">
       <UniqueIdentifier>{3a14c8d9-b841-410d-953a-b0722958f6ad}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Geometry">
+      <UniqueIdentifier>{435bb449-8d67-4ddd-aac4-1346ecfaf66c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Pipeline">
+      <UniqueIdentifier>{9d10dc15-0753-4d3e-b72c-ac46abcab3ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Pipeline">
+      <UniqueIdentifier>{8d592198-5674-4ec7-a885-d98193f292a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Device">
+      <UniqueIdentifier>{b7f293b9-2743-4613-a2f3-628d6476d69f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Device">
+      <UniqueIdentifier>{5b2cd699-401c-4556-9bbb-ead44e2c1ea5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="WinMain.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="WindowsMessageMap.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Window.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Exception.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="Graphics.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
     <ClCompile Include="dxerr.cpp">
       <Filter>Dxerr</Filter>
     </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="App.cpp">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
     <ClCompile Include="DxgiInfoManager.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Exception.cpp">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Keyboard.cpp">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Mouse.cpp">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>소스 파일\Device</Filter>
     </ClCompile>
     <ClCompile Include="Timer.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowsMessageMap.cpp">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="WinMain.cpp">
+      <Filter>소스 파일\Device</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="WindowsMessageMap.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="dxerr.h">
+      <Filter>Dxerr</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="App.h">
+      <Filter>헤더 파일\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Window.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="DxgiInfoManager.h">
+      <Filter>헤더 파일\Device</Filter>
     </ClInclude>
     <ClInclude Include="Exception.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Keyboard.h">
+      <Filter>헤더 파일\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Mouse.h">
+      <Filter>헤더 파일\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>헤더 파일\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Win.h">
+      <Filter>헤더 파일\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>헤더 파일\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowsMessageMap.h">
+      <Filter>헤더 파일\Device</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>헤더 파일\Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="App.h">
-      <Filter>헤더 파일</Filter>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>헤더 파일\Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="Graphics.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="dxerr.h">
-      <Filter>Dxerr</Filter>
-    </ClInclude>
-    <ClInclude Include="Win.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="DxgiInfoManager.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="Timer.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Pipeline</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
