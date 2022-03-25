@@ -8,6 +8,7 @@ void Mesh::Init(const vector<Vertex>& vertices, const vector<uint16_t>& indices)
 	_vbOffset = 0u;
 	_indexFormat = DXGI_FORMAT_R16_UINT;
 	_ibOffset = 0u;
+	_indexCount = indices.size();
 
 	/********** Vertex Buffer **********/
 	D3D11_BUFFER_DESC vbDesc = {};

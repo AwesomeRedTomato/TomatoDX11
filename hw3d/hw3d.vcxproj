@@ -163,14 +163,16 @@
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Timer.cpp" />
+    <ClCompile Include="Topology.cpp" />
     <ClCompile Include="Window.cpp" />
     <ClCompile Include="WindowsMessageMap.cpp" />
     <ClCompile Include="WinMain.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="App.h" />
-    <ClInclude Include="Box.h" />
+    <ClInclude Include="Cube.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="dxerr.h" />
     <ClInclude Include="DxgiInfoManager.h" />
@@ -180,7 +182,9 @@
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Shader.h" />
     <ClInclude Include="Timer.h" />
+    <ClInclude Include="Topology.h" />
     <ClInclude Include="Win.h" />
     <ClInclude Include="Window.h" />
     <ClInclude Include="WindowsMessageMap.h" />

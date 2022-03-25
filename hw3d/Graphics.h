@@ -1,6 +1,9 @@
 #pragma once
 #include "Exception.h"
 #include "Mesh.h"
+#include "ConstantBuffer.h"
+#include "Shader.h"
+#include "Topology.h"
 
 class Window;
 class Graphics
@@ -33,5 +36,7 @@ private:
 	ComPtr<ID3D11RenderTargetView> _rtv;
 	ComPtr<ID3D11DepthStencilView> _dsv;
 
-	shared_ptr<Mesh> _mesh = make_unique<Mesh>();
+	shared_ptr<Mesh> _mesh = make_shared<Mesh>();
+	shared_ptr<Shader> _shader = make_shared<Shader>();
+	shared_ptr<Topology> _topology = make_shared<Topology>();
 };

@@ -126,7 +126,6 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 	_mesh->Init(vertices, idx);
 	_mesh->Bind();
 
-	// create constant buffer for transform matrix
 	struct ConstantBuffer
 	{
 		XMMATRIX transform;
@@ -195,55 +194,11 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 	// bind constant buffer to pixel shader
 	_context->PSSetConstantBuffers(0u, 1u, pConstantBuffer2.GetAddressOf());
 
+	_shader->Init();
+	_shader->Bind();
 
-	// create pixel shader
-	ComPtr<ID3D11PixelShader> pPixelShader;
-	ComPtr<ID3DBlob> pBlob;
-	D3DReadFileToBlob(L"PixelShader.cso", &pBlob);
-	_device->CreatePixelShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pPixelShader);
+	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	_topology->Bind();
 
-	// bind pixel shader
-	_context->PSSetShader(pPixelShader.Get(), nullptr, 0u);
-
-
-	// create vertex shader
-	ComPtr<ID3D11VertexShader> pVertexShader;
-	D3DReadFileToBlob(L"VertexShader.cso", &pBlob);
-	_device->CreateVertexShader(pBlob->GetBufferPointer(), pBlob->GetBufferSize(), nullptr, &pVertexShader);
-
-	// bind vertex shader
-	_context->VSSetShader(pVertexShader.Get(), nullptr, 0u);
-
-
-	// input (vertex) layout (2d position only)
-	ComPtr<ID3D11InputLayout> pInputLayout;
-	const D3D11_INPUT_ELEMENT_DESC ied[] =
-	{
-		{ "Position",0,DXGI_FORMAT_R32G32B32_FLOAT,0,0,D3D11_INPUT_PER_VERTEX_DATA,0 },
-	};
-	_device->CreateInputLayout(
-		ied, (UINT)std::size(ied),
-		pBlob->GetBufferPointer(),
-		pBlob->GetBufferSize(),
-		&pInputLayout);
-
-	// bind vertex layout
-	_context->IASetInputLayout(pInputLayout.Get());
-
-
-	// Set primitive topology to triangle list (groups of 3 vertices)
-	_context->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-	// configure viewport
-	D3D11_VIEWPORT vp;
-	vp.Width = 800;
-	vp.Height = 600;
-	vp.MinDepth = 0;
-	vp.MaxDepth = 1;
-	vp.TopLeftX = 0;
-	vp.TopLeftY = 0;
-	_context->RSSetViewports(1u, &vp);
-
-
-	_context->DrawIndexed((UINT)std::size(idx), 0u, 0u);
+	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
 }

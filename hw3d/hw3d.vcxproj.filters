@@ -78,6 +78,12 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Topology.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dxerr.h">
@@ -122,8 +128,14 @@
     <ClInclude Include="Graphics.h">
       <Filter>헤더 파일\Pipeline</Filter>
     </ClInclude>
-    <ClInclude Include="Box.h">
+    <ClInclude Include="Cube.h">
       <Filter>헤더 파일\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>헤더 파일\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="Topology.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
