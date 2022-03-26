@@ -6,6 +6,7 @@
 #include "Topology.h"
 
 class Window;
+class Cube;
 class Graphics
 {
 public:
@@ -39,4 +40,5 @@ private:
 	shared_ptr<Mesh> _mesh = make_shared<Mesh>();
 	shared_ptr<Shader> _shader = make_shared<Shader>();
 	shared_ptr<Topology> _topology = make_shared<Topology>();
+
 };

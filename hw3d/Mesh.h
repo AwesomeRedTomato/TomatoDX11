@@ -6,6 +6,7 @@ public:
 	void Bind();
 
 	UINT GetIndexCount() { return _indexCount; }
+
 protected:
 	ComPtr<ID3D11Buffer>	_vertexBuffer;
 	ComPtr<ID3D11Buffer>	_indexBuffer;
