@@ -14,10 +14,12 @@
 #include <exception>
 #include <bitset>
 #include <memory>
+#include <assert.h>
 #include <cmath>
-using namespace std;
+//using namespace std;
 
 #include "dxerr.h"
+#include <gdiplus.h>
 #include <d3d11.h>
 #include <wrl.h>
 #include <d3dcompiler.h>
@@ -29,11 +31,11 @@ using namespace std;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 using namespace Microsoft::WRL;
-
 #pragma comment(lib, "d3d11")
 #pragma comment(lib, "dxgi")
 #pragma comment(lib, "dxguid")
 #pragma comment(lib, "d3dcompiler")
+#pragma comment( lib,"gdiplus" )
 
 #define SINGLETON(type)				\
 private:							\
@@ -55,6 +57,6 @@ struct Vertex
 	XMFLOAT3 pos;
 };
 
-extern unique_ptr<class Graphics> _gfx;
+extern std::unique_ptr<class Graphics> _gfx;
 #define DEVICE _gfx->GetDevice()
 #define CONTEXT _gfx->GetContext()

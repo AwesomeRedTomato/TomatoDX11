@@ -35,8 +35,8 @@ private:
 	LRESULT HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noexcept;
 
 public:
-	void SetTitle(const string& title);
-	static optional<int> ProcessMessages();
+	void SetTitle(const std::string& title);
+	static std::optional<int> ProcessMessages();
 
 public:
 	Keyboard _keyboard;

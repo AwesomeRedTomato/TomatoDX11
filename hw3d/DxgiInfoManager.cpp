@@ -39,9 +39,9 @@ void DxgiInfoManager::Set()
 	_next = _dxgiInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
 }
 
-vector<string> DxgiInfoManager::GetMessages() const
+std::vector<std::string> DxgiInfoManager::GetMessages() const
 {
-	vector<string> messages;
+	std::vector<std::string> messages;
 	const auto end = _dxgiInfoQueue->GetNumStoredMessages(DXGI_DEBUG_ALL);
 	for (auto i = _next; i < end; i++)
 	{
@@ -50,9 +50,9 @@ vector<string> DxgiInfoManager::GetMessages() const
 
 		NOINFO_THROW_FAILED(_dxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, nullptr, &messageLength));
 		
-		auto bytes = make_unique<std::byte[]>(messageLength);
+		auto bytes = std::make_unique<std::byte[]>(messageLength);
 		auto pMessage = reinterpret_cast<DXGI_INFO_QUEUE_MESSAGE*>(bytes.get());
-		// get the message and push its description into the vector
+		// get the message and push its description into the std::vector
 		NOINFO_THROW_FAILED(_dxgiInfoQueue->GetMessage(DXGI_DEBUG_ALL, i, pMessage, &messageLength));
 		messages.emplace_back(pMessage->pDescription);
 	}

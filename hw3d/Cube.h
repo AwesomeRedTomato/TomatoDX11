@@ -5,7 +5,7 @@ class Cube
 {
 public:
 	Cube() {}
-	shared_ptr<Mesh> Init()
+	std::shared_ptr<Mesh> Init()
 	{
 		vertices.emplace_back(Vertex(XMFLOAT3(-1.0f, -1.0f, -1.0f)));
 		vertices.emplace_back(Vertex(XMFLOAT3(1.0f, -1.0f, -1.0f)));
@@ -15,7 +15,6 @@ public:
 		vertices.emplace_back(Vertex(XMFLOAT3(1.0f, -1.0f, 1.0f)));
 		vertices.emplace_back(Vertex(XMFLOAT3(-1.0f, 1.0f, 1.0f)));
 		vertices.emplace_back(Vertex(XMFLOAT3(1.0f, 1.0f, 1.0f)));
-
 
 		// ¾Õ¸é
 		indices.emplace_back(0); 
@@ -65,13 +64,13 @@ public:
 		indices.emplace_back(5); 
 		indices.emplace_back(4);
 
-		shared_ptr<Mesh> mesh = make_unique<Mesh>();
+		std::shared_ptr<Mesh> mesh = std::make_unique<Mesh>();
 		mesh->Init(vertices, indices);
 
 		return mesh;
 	}
 
 public:
-	vector<Vertex> vertices;
-	vector<uint16_t> indices;
+	std::vector<Vertex> vertices;
+	std::vector<uint16_t> indices;
 };

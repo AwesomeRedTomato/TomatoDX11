@@ -1,4 +1,4 @@
 #include "pch.h"
 #include "Graphics.h"
 
-unique_ptr<Graphics> _gfx = make_unique<Graphics>();
+std::unique_ptr<Graphics> _gfx = std::make_unique<Graphics>();

@@ -5,10 +5,10 @@ public:
 	void Init();
 	void Bind();
 
-	void CreateVertexShader(const wstring& path);
-	void CreatePixelShader(const wstring& path);
+	void CreateVertexShader(const std::wstring& path);
+	void CreatePixelShader(const std::wstring& path);
 
-	void CreateShader(const wstring& path, ComPtr<ID3DBlob>& pBlob);
+	void CreateShader(const std::wstring& path, ComPtr<ID3DBlob>& pBlob);
 
 	ComPtr<ID3DBlob> GetByteCode();
 

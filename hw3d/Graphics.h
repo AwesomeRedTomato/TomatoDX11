@@ -4,6 +4,7 @@
 #include "ConstantBuffer.h"
 #include "Shader.h"
 #include "Topology.h"
+#include "Texture.h"
 
 class Window;
 class Cube;
@@ -37,8 +38,9 @@ private:
 	ComPtr<ID3D11RenderTargetView> _rtv;
 	ComPtr<ID3D11DepthStencilView> _dsv;
 
-	shared_ptr<Mesh> _mesh = make_shared<Mesh>();
-	shared_ptr<Shader> _shader = make_shared<Shader>();
-	shared_ptr<Topology> _topology = make_shared<Topology>();
-
+	std::shared_ptr<Mesh> _mesh = std::make_shared<Mesh>();
+	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+	std::shared_ptr<Topology> _topology = std::make_shared<Topology>();
+	std::shared_ptr<ConstantBuffer> _cb = std::make_shared<ConstantBuffer>();
+	std::shared_ptr<Texture> _texture = std::make_shared<Texture>();
 };

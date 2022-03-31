@@ -2,7 +2,7 @@
 #include "Mesh.h"
 #include "Graphics.h"
 
-void Mesh::Init(const vector<Vertex>& vertices, const vector<uint16_t>& indices)
+void Mesh::Init(const std::vector<Vertex>& vertices, const std::vector<uint16_t>& indices)
 {
 	_vbStride = sizeof(Vertex);
 	_vbOffset = 0u;

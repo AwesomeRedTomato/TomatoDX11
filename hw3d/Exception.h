@@ -1,16 +1,16 @@
 #pragma once
 #include "DxgiInfoManager.h"
 
-class Exception : public exception
+class Exception : public std::exception
 {
 public:
 	Exception(int line, const char* file) noexcept;
 
 	const char* what() const noexcept override;
-	string GetOriginString() const noexcept;
+	std::string GetOriginString() const noexcept;
 private:
 	int _line;
-	string _file;
+	std::string _file;
 };
 
 class WinException : public Exception
@@ -19,7 +19,7 @@ public:
 	WinException(int line, const char* file, HRESULT hr)	noexcept;
 
 	const char* what() const noexcept override;
-	string TranslateErrorCode(HRESULT hr) const noexcept;
+	std::string TranslateErrorCode(HRESULT hr) const noexcept;
 private:
 	HRESULT _hr;
 };
@@ -27,15 +27,15 @@ private:
 class HrException : public Exception
 {
 public:
-	HrException(int line, const char* file, HRESULT hr, vector<string> infoMsgs = {}) noexcept;
+	HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs = {}) noexcept;
 	
 	const char* what() const noexcept override;
 	const char* GetType() const noexcept;
 	
 	HRESULT GetErrorCode() const noexcept;
-	string GetErrorString() const noexcept;
-	string GetErrorDescription() const noexcept;
-	string GetErrorInfo() const noexcept;
+	std::string GetErrorString() const noexcept;
+	std::string GetErrorDescription() const noexcept;
+	std::string GetErrorInfo() const noexcept;
 
 #ifndef NDEBUG
 	DxgiInfoManager _infoManager;
@@ -43,7 +43,7 @@ public:
 
 private:
 	HRESULT _hr;
-	string _info;
+	std::string _info;
 };
 
 #define EXCEPTION() Exception(__LINE__, __FILE__)

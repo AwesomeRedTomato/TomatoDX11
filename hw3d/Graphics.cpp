@@ -2,6 +2,7 @@
 #include "Graphics.h"
 #include "Window.h"
 #include "Cube.h"
+#include "Grid.h"
 
 
 void Graphics::Init(const Window& window)
@@ -93,81 +94,18 @@ void Graphics::RenderEnd()
 
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
-	shared_ptr<Cube> _cube = make_shared<Cube>();
-	_mesh = _cube->Init();
-	_mesh->Init(_cube->vertices, _cube->indices);
+	auto cube = std::make_shared<Cube>();
+	_mesh = cube->Init();
+	_mesh->Init(cube->vertices, cube->indices);
 	_mesh->Bind();
 
-	struct ConstantBuffer
-	{
-		XMMATRIX transform;
-	};
-	const ConstantBuffer cb =
-	{
-		{
-			 XMMatrixTranspose(
-					XMMatrixRotationZ(angle)*
-					XMMatrixRotationX(angle)*
-					XMMatrixTranslation(x,0.0f,z + 4.0f)*
-					XMMatrixPerspectiveLH(1.0f,3.0f / 4.0f,0.5f,10.0f))
-		}
-	};
-
-	ComPtr<ID3D11Buffer> pConstantBuffer;
-	D3D11_BUFFER_DESC cbd;
-	cbd.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbd.Usage = D3D11_USAGE_DYNAMIC;
-	cbd.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
-	cbd.MiscFlags = 0u;
-	cbd.ByteWidth = sizeof(cb);
-	cbd.StructureByteStride = 0u;
-	D3D11_SUBRESOURCE_DATA csd = {};
-	csd.pSysMem = &cb;
-	_device->CreateBuffer(&cbd, &csd, &pConstantBuffer);
-
-	_context->VSSetConstantBuffers(0, 1, pConstantBuffer.GetAddressOf());
-
-	
-	struct ConstantBuffer2
-	{
-		struct
-		{
-			float r;
-			float g;
-			float b;
-			float a;
-		} face_colors[6];
-	};
-	
-	const ConstantBuffer2 cb2 =
-	{
-		{
-			{1.0f,0.0f,1.0f},
-			{1.0f,0.0f,0.0f},
-			{0.0f,1.0f,0.0f},
-			{0.0f,0.0f,1.0f},
-			{1.0f,1.0f,0.0f},
-			{0.0f,1.0f,1.0f},
-		}
-	};
-
-	ComPtr<ID3D11Buffer> pConstantBuffer2;
-	D3D11_BUFFER_DESC cbd2;
-	cbd2.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
-	cbd2.Usage = D3D11_USAGE_DEFAULT;
-	cbd2.CPUAccessFlags = 0u;
-	cbd2.MiscFlags = 0u;
-	cbd2.ByteWidth = sizeof(cb2);
-	cbd2.StructureByteStride = 0u;
-	D3D11_SUBRESOURCE_DATA csd2 = {};
-	csd2.pSysMem = &cb2;
-	_device->CreateBuffer(&cbd2, &csd2, &pConstantBuffer2);
-
-	// bind constant buffer to pixel shader
-	_context->PSSetConstantBuffers(0u, 1u, pConstantBuffer2.GetAddressOf());
-
+	_cb->Init(angle, x, z);
+	_cb->Bind();
 	_shader->Init();
 	_shader->Bind();
+
+	_texture->Load(L"kappa50.png");
+	
 
 	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	_topology->Bind();

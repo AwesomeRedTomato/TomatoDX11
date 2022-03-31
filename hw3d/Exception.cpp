@@ -9,16 +9,16 @@ Exception::Exception(int line, const char* file) noexcept
 
 const char* Exception::what() const noexcept
 {
-	ostringstream oss;
-	oss << "Exception" << endl << GetOriginString();
+	std::ostringstream oss;
+	oss << "Exception" << std::endl << GetOriginString();
 	
 	return oss.str().c_str();
 }
 
-string Exception::GetOriginString() const noexcept
+std::string Exception::GetOriginString() const noexcept
 {
-	ostringstream oss;
-	oss << "[File] " << _file << "[Line] " << _line << endl;
+	std::ostringstream oss;
+	oss << "[File] " << _file << "[Line] " << _line << std::endl;
 
 	return oss.str();
 }
@@ -31,14 +31,14 @@ WinException::WinException(int line, const char* file, HRESULT hr) noexcept
 
 const char* WinException::what() const noexcept
 {
-	ostringstream oss;
-	oss << "HrException" << endl << "[ErrorCode] " << _hr << endl <<
-		"[Description] " << TranslateErrorCode(_hr) << endl;
+	std::ostringstream oss;
+	oss << "HrException" << std::endl << "[ErrorCode] " << _hr << std::endl <<
+		"[Description] " << TranslateErrorCode(_hr) << std::endl;
 
 	return oss.str().c_str();
 }
 
-string WinException::TranslateErrorCode(HRESULT hr) const noexcept
+std::string WinException::TranslateErrorCode(HRESULT hr) const noexcept
 {
 	char* msgBuffer = nullptr;
 
@@ -51,13 +51,13 @@ string WinException::TranslateErrorCode(HRESULT hr) const noexcept
 		0,
 		nullptr);
 
-	string errorString = msgBuffer;
+	std::string errorString = msgBuffer;
 	LocalFree(msgBuffer);
 
 	return errorString;
 }
 
-HrException::HrException(int line, const char* file, HRESULT hr, vector<string> infoMsgs) noexcept
+HrException::HrException(int line, const char* file, HRESULT hr, std::vector<std::string> infoMsgs) noexcept
 	: Exception(line,file), _hr(hr)
 {
 	for (const auto& m : infoMsgs)
@@ -73,15 +73,15 @@ HrException::HrException(int line, const char* file, HRESULT hr, vector<string> 
 
 const char* HrException::what() const noexcept
 {
-	ostringstream oss;
+	std::ostringstream oss;
 	oss << GetType() << std::endl
-		<< "[Error Code] 0x" << hex << uppercase << GetErrorCode()
-		<< dec << " (" << (unsigned long)GetErrorCode() << ")" << endl
-		<< "[Error String] " << GetErrorString() << endl
-		<< "[Description] " << GetErrorDescription() << endl;
+		<< "[Error Code] 0x" << std::hex << std::uppercase << GetErrorCode()
+		<< std::dec << " (" << (unsigned long)GetErrorCode() << ")" << std::endl
+		<< "[Error String] " << GetErrorString() << std::endl
+		<< "[Description] " << GetErrorDescription() << std::endl;
 	if (!_info.empty())
 	{
-		oss << "\n[Error Info]\n" << GetErrorInfo() << endl << endl;
+		oss << "\n[Error Info]\n" << GetErrorInfo() << std::endl << std::endl;
 	}
 	oss << GetOriginString();
 
@@ -98,19 +98,19 @@ HRESULT HrException::GetErrorCode() const noexcept
 	return _hr;
 }
 
-string HrException::GetErrorString() const noexcept
+std::string HrException::GetErrorString() const noexcept
 {
 	return DXGetErrorString(_hr);
 }
 
-string HrException::GetErrorDescription() const noexcept
+std::string HrException::GetErrorDescription() const noexcept
 {
 	char buffer[512];
 	DXGetErrorDescription(_hr, buffer, sizeof(buffer));
 	return buffer;
 }
 
-string HrException::GetErrorInfo() const noexcept
+std::string HrException::GetErrorInfo() const noexcept
 {
 	return _info;
 }

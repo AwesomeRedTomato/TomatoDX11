@@ -9,7 +9,7 @@ public:
 
 public:
 	void Set();
-	vector<string> GetMessages() const;
+	std::vector<std::string> GetMessages() const;
 
 private:
 	ULONGLONG _next = 0;

@@ -179,12 +179,12 @@ LRESULT Window::HandleMsg(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) noe
 	return DefWindowProc(hWnd, msg, wParam, lParam);
 }
 
-void Window::SetTitle(const string& title)
+void Window::SetTitle(const std::string& title)
 {
 	SetWindowText(_hWnd, title.c_str());
 }
 
-optional<int> Window::ProcessMessages()
+std::optional<int> Window::ProcessMessages()
 {
 	MSG msg;
 
