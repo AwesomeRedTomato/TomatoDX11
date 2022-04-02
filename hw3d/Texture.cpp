@@ -12,11 +12,9 @@ namespace Gdiplus
 	using std::max;
 }
 
-void Texture::Init(UINT width, UINT height)
+void Texture::Init()
 {
-	_buffer = std::make_unique<Color[]>(width * height);
-	_width = width;
-	_height = height;
+	_buffer = std::make_unique<Texture::Color[]>(_width * _height);
 
 	D3D11_TEXTURE2D_DESC tex2DDesc;
 	tex2DDesc.Width = _width;
@@ -32,7 +30,7 @@ void Texture::Init(UINT width, UINT height)
 	tex2DDesc.MiscFlags = 0;
 	D3D11_SUBRESOURCE_DATA sd = {};
 	sd.pSysMem = _buffer.get();
-	sd.SysMemPitch = _width * sizeof(Color);
+	sd.SysMemPitch = _width * sizeof(Texture::Color);
 	DEVICE->CreateTexture2D(&tex2DDesc, &sd, _tex2D.GetAddressOf());
 
 	D3D11_SHADER_RESOURCE_VIEW_DESC srvDesc;
@@ -53,7 +51,7 @@ void Texture::Load(const std::wstring& path)
 	Gdiplus::Bitmap bitmap(path.c_str());
 	if (bitmap.GetLastStatus() != Gdiplus::Status::Ok)
 	{
-		throw EXCEPTION(__LINE__, __FILE__);
+		MessageBox(nullptr, "Load Image Failed", "Failed", MB_OK);
 	}
 
 	_width = bitmap.GetWidth();
@@ -82,13 +80,10 @@ void Texture::Save(const std::string& filename)
 		Gdiplus::ImageCodecInfo* imageCodecInfo = nullptr;
 
 		Gdiplus::GetImageEncodersSize(&num, &size);
-		if (size == 0)
-			EXCEPTION(__LINE__, __FILE__);
-
+		assert(size == 0);
 
 		imageCodecInfo = (Gdiplus::ImageCodecInfo*)(malloc(size));
-		if (imageCodecInfo == nullptr)
-			EXCEPTION(__LINE__, __FILE__);
+		assert(imageCodecInfo == nullptr);
 
 		Gdiplus::GetImageEncoders(num, size, imageCodecInfo);
 
@@ -112,8 +107,10 @@ void Texture::Save(const std::string& filename)
 	mbstowcs_s(nullptr, wideName, filename.c_str(), _TRUNCATE);
 
 	Gdiplus::Bitmap bitmap(_width, _height, _width * sizeof(Color), PixelFormat64bppARGB, (BYTE*)_buffer.get());
-	if (bitmap.Save(wideName, &bmpID, nullptr) != Gdiplus::Status::Ok)
-		EXCEPTION(__LINE__, __FILE__);
+	if (bitmap.Save(wideName, &bmpID, nullptr) != Gdiplus::Status::Ok) 
+	{
+		MessageBox(nullptr, "Save Image Failed", "Failed", MB_OK);
+	}
 }
 
 void Texture::Copy(const Texture& src)

@@ -1,9 +1,7 @@
-cbuffer CBuf
-{
-    float4 face_colors[6];
-};
+Texture2D texture_0;
+SamplerState sample_0;
 
-float4 main(uint tid : SV_PrimitiveID) : SV_Target
+float4 main(float2 uv : TEXCOORD) : SV_Target
 {
-    return face_colors[tid / 2];
+    return texture_0.Sample(sample_0, uv);
 }

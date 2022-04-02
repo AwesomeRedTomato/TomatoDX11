@@ -77,7 +77,7 @@ public:
 		}
 	};
 public:
-	void Init(UINT width, UINT height);
+	void Init();
 	void Bind();
 
 	void PutPixel(UINT x, UINT y, Color color) { _buffer[y * _width + x] = color; }
@@ -94,5 +94,6 @@ public:
 
 	ComPtr<ID3D11Texture2D>				_tex2D;
 	ComPtr<ID3D11ShaderResourceView>	_srv;
+	
 };
 

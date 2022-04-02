@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Graphics.h"
 #include "Window.h"
+#include "Plane.h"
 #include "Cube.h"
 #include "Grid.h"
 
@@ -78,6 +79,8 @@ void Graphics::Init(const Window& window)
 	_device->CreateDepthStencilView(depthStencil.Get(), &descDSV, _dsv.GetAddressOf());
 
 	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(),_dsv.Get());
+	
+	_texture->Load(L"Image\\kappa50.png");
 
 }
 
@@ -94,9 +97,9 @@ void Graphics::RenderEnd()
 
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
-	auto cube = std::make_shared<Cube>();
-	_mesh = cube->Init();
-	_mesh->Init(cube->vertices, cube->indices);
+	auto plane = std::make_shared<Plane>();
+	_mesh = plane->Init();
+	_mesh->Init(plane->vertices, plane->indices);
 	_mesh->Bind();
 
 	_cb->Init(angle, x, z);
@@ -104,11 +107,14 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 	_shader->Init();
 	_shader->Bind();
 
-	_texture->Load(L"kappa50.png");
-	
+	_sampler->Init();
+	_sampler->Bind();
+	_texture->Init();
+	_texture->Bind();
 
 	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	_topology->Bind();
 
 	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
+
 }

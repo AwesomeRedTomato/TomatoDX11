@@ -105,6 +105,12 @@
     <ClCompile Include="Component.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIPlusManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dxerr.h">
@@ -172,6 +178,15 @@
     </ClInclude>
     <ClInclude Include="Component.h">
       <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Plane.h">
+      <Filter>헤더 파일\Geometry</Filter>
+    </ClInclude>
+    <ClInclude Include="Sampler.h">
+      <Filter>헤더 파일\Pipeline</Filter>
+    </ClInclude>
+    <ClInclude Include="GDIPlusManager.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

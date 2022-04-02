@@ -5,6 +5,7 @@
 #include "Shader.h"
 #include "Topology.h"
 #include "Texture.h"
+#include "Sampler.h"
 
 class Window;
 class Cube;
@@ -40,7 +41,9 @@ private:
 
 	std::shared_ptr<Mesh> _mesh = std::make_shared<Mesh>();
 	std::shared_ptr<Shader> _shader = std::make_shared<Shader>();
+	std::shared_ptr<Texture> _texture = std::make_shared<Texture>();
+	std::shared_ptr<Sampler> _sampler = std::make_shared<Sampler>();
+
 	std::shared_ptr<Topology> _topology = std::make_shared<Topology>();
 	std::shared_ptr<ConstantBuffer> _cb = std::make_shared<ConstantBuffer>();
-	std::shared_ptr<Texture> _texture = std::make_shared<Texture>();
 };

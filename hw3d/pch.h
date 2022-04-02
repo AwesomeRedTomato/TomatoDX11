@@ -16,6 +16,7 @@
 #include <memory>
 #include <assert.h>
 #include <cmath>
+#include <algorithm>
 //using namespace std;
 
 #include "dxerr.h"
@@ -35,7 +36,7 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "dxgi")
 #pragma comment(lib, "dxguid")
 #pragma comment(lib, "d3dcompiler")
-#pragma comment( lib,"gdiplus" )
+#pragma comment(lib,"gdiplus")
 
 #define SINGLETON(type)				\
 private:							\
@@ -53,8 +54,10 @@ public:								\
 struct Vertex
 {
 	Vertex() {}
-	Vertex(XMFLOAT3 p) : pos(p) {}
+	Vertex(XMFLOAT3 p, XMFLOAT2 u) : pos(p), uv(u) {}
+
 	XMFLOAT3 pos;
+	XMFLOAT2 uv;
 };
 
 extern std::unique_ptr<class Graphics> _gfx;

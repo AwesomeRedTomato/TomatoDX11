@@ -162,12 +162,14 @@
     <ClCompile Include="Exception.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GDIPlusManager.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Mesh.cpp" />
     <ClCompile Include="MeshRenderer.cpp" />
     <ClCompile Include="Mouse.cpp" />
     <ClCompile Include="pch.cpp" />
+    <ClCompile Include="Sampler.cpp" />
     <ClCompile Include="Shader.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="Timer.cpp" />
@@ -185,6 +187,7 @@
     <ClInclude Include="Exception.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GDIPlusManager.h" />
     <ClInclude Include="Graphics.h" />
     <ClInclude Include="Grid.h" />
     <ClInclude Include="Keyboard.h" />
@@ -192,6 +195,8 @@
     <ClInclude Include="MeshRenderer.h" />
     <ClInclude Include="Mouse.h" />
     <ClInclude Include="pch.h" />
+    <ClInclude Include="Plane.h" />
+    <ClInclude Include="Sampler.h" />
     <ClInclude Include="Shader.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="Timer.h" />

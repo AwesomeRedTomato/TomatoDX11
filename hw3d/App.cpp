@@ -2,6 +2,9 @@
 #include "App.h"
 #include "Timer.h"
 #include "Graphics.h"
+#include "GDIPlusManager.h"
+
+GDIPlusManager gdipm;
 
 App::App()
 {
