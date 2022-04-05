@@ -80,7 +80,7 @@ void Graphics::Init(const Window& window)
 
 	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(),_dsv.Get());
 	
-	_texture->Load(L"Image\\kappa50.png");
+	_material->GetTexture()->Load(L"Image\\kappa50.png");
 
 }
 
@@ -105,13 +105,9 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 
 	_cb->Init(angle, x, z);
 	_cb->Bind();
-	_shader->Init();
-	_shader->Bind();
 
-	_sampler->Init();
-	_sampler->Bind();
-	_texture->Init();
-	_texture->Bind();
+	_material->Init();
+	_material->Bind();
 
 	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	_topology->Bind();

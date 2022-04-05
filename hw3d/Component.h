@@ -1,7 +1,7 @@
 #pragma once
 
 class GameObject;
-class Transform;		// 추가 예정
+// class Transform;		// 추가 예정
 
 enum class COMPONENT_TYPE
 {
@@ -20,6 +20,7 @@ public:
 
 public:
 	virtual void Update() {}
+	virtual void Bind() {}
 
 private:	
 	friend class GameObject;
@@ -27,8 +28,7 @@ private:
 
 private:
 	std::shared_ptr<GameObject> GetGameObject() { return _gameObject.lock(); }
-	// 추가예정
-	//std::shared_ptr<GameObjct> GetTransform() { return _gameObject.lock()->GetTransform; }
+	//std::shared_ptr<GameObject> GetTransform() { return _gameObject.lock()->GetTransform(); }
 
 protected:
 	COMPONENT_TYPE				_type;

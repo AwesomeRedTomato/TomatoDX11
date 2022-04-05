@@ -28,7 +28,7 @@ void Mesh::Init(const std::vector<Vertex>& vertices, const std::vector<uint16_t>
 	ibDesc.Usage = D3D11_USAGE_DEFAULT;
 	ibDesc.CPUAccessFlags = 0u;
 	ibDesc.MiscFlags = 0u;
-	ibDesc.ByteWidth = sizeof(indices) * indices.size();
+	ibDesc.ByteWidth = sizeof(uint16_t) * indices.size();
 	ibDesc.StructureByteStride = sizeof(uint16_t);
 	D3D11_SUBRESOURCE_DATA isd = {};
 	isd.pSysMem = indices.data();
