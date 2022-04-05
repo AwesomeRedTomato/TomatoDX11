@@ -16,7 +16,7 @@ void Texture::Init()
 {
 	_buffer = std::make_unique<Texture::Color[]>(_width * _height);
 
-	D3D11_TEXTURE2D_DESC tex2DDesc;
+	D3D11_TEXTURE2D_DESC tex2DDesc = {};
 	tex2DDesc.Width = _width;
 	tex2DDesc.Height = _height;
 	tex2DDesc.MipLevels = 1;

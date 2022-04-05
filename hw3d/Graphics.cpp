@@ -80,8 +80,8 @@ void Graphics::Init(const Window& window)
 
 	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(),_dsv.Get());
 	
-	_texture->Load(L"Image\\kappa50.png");
-
+	_texture->Load(L"Image\\veigar.jpg");
+	 
 }
 
 void Graphics::RenderBegin()

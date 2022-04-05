@@ -10,6 +10,7 @@ App::App()
 {
 	_wnd.Init(800, 600, "DirectX 11");
 	_gfx->Init(_wnd);
+	GET_SINGLE(Timer)->Mark();
 }
 
 int App::Go()
@@ -27,7 +28,8 @@ int App::Go()
 
 void App::Update()
 {
-
+	std::string titleTimer = std::to_string(GET_SINGLE(Timer)->Peek());
+	_wnd.SetTitle("DirectX 11     Time: " + titleTimer);
 }
 
 void App::Render()
