@@ -7,9 +7,9 @@ class Plane
 public:
 	std::shared_ptr<Mesh> Init()
 	{
-		vertices.emplace_back(Vertex(XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f)));
-		vertices.emplace_back(Vertex(XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f)));
-		vertices.emplace_back(Vertex(XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f)));
+		vertices.emplace_back(Vertex(XMFLOAT3(-1.0f, -1.0f, 1.0f), XMFLOAT2(0.0f, 0.0f)));
+		vertices.emplace_back(Vertex(XMFLOAT3(1.0f, -1.0f, 1.0f), XMFLOAT2(1.0f, 0.0f)));
+		vertices.emplace_back(Vertex(XMFLOAT3(-1.0f, 1.0f, 1.0f), XMFLOAT2(0.0f, 1.0f)));
 		vertices.emplace_back(Vertex(XMFLOAT3(1.0f, 1.0f, 1.0f), XMFLOAT2(1.0f, 1.0f)));
 
 		indices.emplace_back(0);

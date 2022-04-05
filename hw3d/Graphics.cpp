@@ -80,8 +80,8 @@ void Graphics::Init(const Window& window)
 
 	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(),_dsv.Get());
 	
-	_texture->Load(L"Image\\veigar.jpg");
-	 
+	_texture->Load(L"Image\\kappa50.png");
+
 }
 
 void Graphics::RenderBegin()
@@ -97,6 +97,7 @@ void Graphics::RenderEnd()
 
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
+
 	auto plane = std::make_shared<Plane>();
 	_mesh = plane->Init();
 	_mesh->Init(plane->vertices, plane->indices);

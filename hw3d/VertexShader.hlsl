@@ -5,8 +5,8 @@ cbuffer CBuf
 
 struct VSOut
 {
-    float4 pos : SV_Position;
     float2 uv : TEXCOORD;
+    float4 pos : SV_Position;
 };
 
 VSOut main(float3 pos : POSITION, float2 uv : TEXCOORD)
