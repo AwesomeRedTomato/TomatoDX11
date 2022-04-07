@@ -8,6 +8,10 @@
 #include "Sampler.h"
 #include "Material.h"
 
+#include "Imgui/imgui.h"
+#include "Imgui/imgui_impl_dx11.h"
+#include "Imgui/imgui_impl_win32.h"
+
 class Window;
 class Cube;
 class Graphics

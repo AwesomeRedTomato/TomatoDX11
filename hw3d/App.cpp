@@ -35,6 +35,6 @@ void App::Update()
 void App::Render()
 {
 	_gfx->RenderBegin();
-	_gfx->DrawTriangle(GET_SINGLE(Timer)->Peek(), 0,0);
+	_gfx->DrawTriangle(GET_SINGLE(Timer)->Peek()/10, 0,0);
 	_gfx->RenderEnd();
 }

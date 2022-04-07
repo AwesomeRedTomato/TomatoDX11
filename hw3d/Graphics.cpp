@@ -5,7 +5,6 @@
 #include "Cube.h"
 #include "Grid.h"
 
-
 void Graphics::Init(const Window& window)
 {	
 	DXGI_SWAP_CHAIN_DESC sd = {};
@@ -80,8 +79,16 @@ void Graphics::Init(const Window& window)
 
 	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(),_dsv.Get());
 	
-	_material->GetTexture()->Load(L"Image\\kappa50.png");
+	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
+	_topology->Bind();
 
+	/********** IMGUI **********/
+	IMGUI_CHECKVERSION();
+	ImGui::CreateContext();
+	ImGuiIO& io = ImGui::GetIO();
+	ImGui_ImplWin32_Init(window._hWnd);
+	ImGui_ImplDX11_Init(DEVICE.Get(), CONTEXT.Get());
+	ImGui::StyleColorsDark();
 }
 
 void Graphics::RenderBegin()
@@ -97,8 +104,8 @@ void Graphics::RenderEnd()
 
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
-
-	auto plane = std::make_shared<Plane>();
+	auto plane = std::make_shared<Cube>();
+	_material->GetTexture()->Load(L"Image\\Leather.jpg");
 	_mesh = plane->Init();
 	_mesh->Init(plane->vertices, plane->indices);
 	_mesh->Bind();
@@ -109,9 +116,22 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 	_material->Init();
 	_material->Bind();
 
-	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	_topology->Bind();
-
 	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
+
+
+#pragma region IMGUI
+	{
+		ImGui_ImplDX11_NewFrame();
+		ImGui_ImplWin32_NewFrame();
+		ImGui::NewFrame();
+
+		ImGui::Begin("test");
+		ImGui::End();
+		ImGui::Render();
+
+		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
+	}
+#pragma endregion
+
 
 }

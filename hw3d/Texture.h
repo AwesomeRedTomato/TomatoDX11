@@ -87,8 +87,8 @@ public:
 	void Save(const std::string& filename);
 	void Copy(const Texture& src);
 
-public:
-	std::unique_ptr<Color[]>			_buffer;
+protected:
+	std::unique_ptr<Color[]>			_buffer = {};
 	UINT								_width;
 	UINT								_height;
 

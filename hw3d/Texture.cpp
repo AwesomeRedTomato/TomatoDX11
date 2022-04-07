@@ -46,23 +46,26 @@ void Texture::Bind()
 
 void Texture::Load(const std::wstring& path)
 {
-	Gdiplus::Bitmap bitmap(path.c_str());
-	if (bitmap.GetLastStatus() != Gdiplus::Status::Ok)
+	if (!_buffer)
 	{
-		MessageBox(nullptr, "Load Image Failed", "Failed", MB_OK);
-	}
-
-	_width = bitmap.GetWidth();
-	_height = bitmap.GetHeight();
-	_buffer = std::make_unique<Color[]>(_width * _height);
-
-	for (UINT y = 0; y < _height; ++y)
-	{
-		for (UINT x = 0; x < _width; ++x)
+		Gdiplus::Bitmap bitmap(path.c_str());
+		if (bitmap.GetLastStatus() != Gdiplus::Status::Ok)
 		{
-			Gdiplus::Color c;
-			bitmap.GetPixel(x, y, &c);
-			_buffer[y * _width + x] = c.GetValue();
+			MessageBox(nullptr, "Load Image Failed", "Failed", MB_OK);
+		}
+
+		_width = bitmap.GetWidth();
+		_height = bitmap.GetHeight();
+		_buffer = std::make_unique<Color[]>(_width * _height);
+
+		for (UINT y = 0; y < _height; ++y)
+		{
+			for (UINT x = 0; x < _width; ++x)
+			{
+				Gdiplus::Color c;
+				bitmap.GetPixel(x, y, &c);
+				_buffer[y * _width + x] = c.GetValue();
+			}
 		}
 	}
 }

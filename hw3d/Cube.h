@@ -9,9 +9,9 @@ public:
 		vertices.resize(24);
 		indices.resize(36);
 
-		float w2 = 0.5f;
-		float h2 = 0.5f;
-		float d2 = 0.5f;
+		float w2 = 1.5f;
+		float h2 = 1.5f;
+		float d2 = 1.5f;
 
 		vertices[0] = Vertex(XMFLOAT3(-w2, -h2, -d2), XMFLOAT2(0.0f, 1.0f));
 		vertices[1] = Vertex(XMFLOAT3(-w2, +h2, -d2), XMFLOAT2(0.0f, 0.0f));

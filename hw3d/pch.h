@@ -2,6 +2,7 @@
 
 
 #include <Windows.h>
+#include <stdlib.h>
 #include <tchar.h>
 #include <chrono>
 #include <string>

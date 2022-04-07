@@ -3,6 +3,13 @@
 #include "Texture.h"
 #include "Sampler.h"
 
+/* 추가 예정
+enum class TEXTURE_TYPE
+{
+	NORMAL
+}
+*/
+
 class Material
 {
 public:
