@@ -43,7 +43,7 @@ public:
 	Mouse _mouse;
 	HWND _hWnd;
 
-private:
+public:
 	int _width;
 	int _height;
 };

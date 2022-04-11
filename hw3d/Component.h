@@ -1,13 +1,13 @@
 #pragma once
 
 class GameObject;
-// class Transform;		// 추가 예정
+class Transform;		// 추가 예정
 
 enum class COMPONENT_TYPE
 {
 	TRANSFORM,
 	MESH_RENDERER,
-	//CAMERA,
+	CAMERA,
 	//LIGHT,
 	MONO_BEHAVIOR,
 };
@@ -20,6 +20,7 @@ public:
 
 public:
 	virtual void Update() {}
+	virtual void Render() {}
 	virtual void Bind() {}
 
 private:	

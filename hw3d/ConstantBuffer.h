@@ -16,6 +16,7 @@ struct Color
 	} face_colors[6];
 };
 
+template<typename T>
 class ConstantBuffer
 {
 public:

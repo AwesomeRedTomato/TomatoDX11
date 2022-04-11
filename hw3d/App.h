@@ -12,7 +12,6 @@ private:
 	void Update();
 	void Render();
 
-
 private:
 	Window _wnd;
 };

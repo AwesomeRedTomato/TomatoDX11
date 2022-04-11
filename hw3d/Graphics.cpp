@@ -7,6 +7,8 @@
 
 void Graphics::Init(const Window& window)
 {	
+	_aspectRatio = static_cast<float>(window._width) / window._height;
+
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc.Width = 0;
 	sd.BufferDesc.Height = 0;
@@ -82,6 +84,8 @@ void Graphics::Init(const Window& window)
 	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	_topology->Bind();
 
+	_material->GetTexture()->Load(L"Image\\Leather.jpg");
+
 	/********** IMGUI **********/
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -89,6 +93,7 @@ void Graphics::Init(const Window& window)
 	ImGui_ImplWin32_Init(window._hWnd);
 	ImGui_ImplDX11_Init(DEVICE.Get(), CONTEXT.Get());
 	ImGui::StyleColorsDark();
+	
 }
 
 void Graphics::RenderBegin()
@@ -105,7 +110,6 @@ void Graphics::RenderEnd()
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
 	auto plane = std::make_shared<Cube>();
-	_material->GetTexture()->Load(L"Image\\Leather.jpg");
 	_mesh = plane->Init();
 	_mesh->Init(plane->vertices, plane->indices);
 	_mesh->Bind();
@@ -119,13 +123,22 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
 
 
-#pragma region IMGUI
+#pragma region Imgui
 	{
+		static int counter = 0;
+		
 		ImGui_ImplDX11_NewFrame();
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
 
 		ImGui::Begin("test");
+		ImGui::Text("Hellooooo");
+		if (ImGui::Button("Click me!"))
+		{
+			counter += 1;
+		}
+		std::string clickCount = "Click Count: " + std::to_string(counter);
+		ImGui::Text(clickCount.c_str());
 		ImGui::End();
 		ImGui::Render();
 

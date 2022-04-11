@@ -61,6 +61,13 @@ struct Vertex
 	XMFLOAT2 uv;
 };
 
+struct TransformParams
+{
+	XMMATRIX matWorld;
+	XMMATRIX matView;
+	XMMATRIX matProjection;
+};
+
 extern std::unique_ptr<class Graphics> _gfx;
 #define DEVICE _gfx->GetDevice()
 #define CONTEXT _gfx->GetContext()

@@ -9,8 +9,8 @@
 #include "Material.h"
 
 #include "Imgui/imgui.h"
-#include "Imgui/imgui_impl_dx11.h"
 #include "Imgui/imgui_impl_win32.h"
+#include "Imgui/imgui_impl_dx11.h"
 
 class Window;
 class Cube;
@@ -27,14 +27,14 @@ public:
 	void RenderBegin();
 	void RenderEnd();
 
-
 	void DrawTriangle(float angle, float x, float z);
-
-
 
 #ifndef NDEBUG
 	DxgiInfoManager _infoManager;
 #endif
+
+public:
+	float _aspectRatio = 0;
 
 private:
 	ComPtr<ID3D11Device> _device;

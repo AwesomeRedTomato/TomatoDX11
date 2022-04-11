@@ -13,7 +13,7 @@ void Transform::Update()
 	_matWorld = _matLocal;
 
 	std::shared_ptr<Transform> parent = GetParentTransform().lock();
-	if (parent !=nullptr)
+	if (parent != nullptr)
 	{
 		_matWorld *= parent->GetWorldMatirx();
 	}
