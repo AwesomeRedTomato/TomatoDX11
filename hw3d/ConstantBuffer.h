@@ -31,7 +31,7 @@ public:
 	void Bind();
 
 protected:
-	ComPtr<ID3D11Buffer>> _constantBuffer;
+	ComPtr<ID3D11Buffer> _constantBuffer;
 	
 	BYTE* _buffer = nullptr;
 
