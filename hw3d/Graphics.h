@@ -12,6 +12,11 @@
 #include "Imgui/imgui_impl_win32.h"
 #include "Imgui/imgui_impl_dx11.h"
 
+struct Transform
+{
+	XMMATRIX transform;
+};
+
 class Window;
 class Cube;
 class Graphics

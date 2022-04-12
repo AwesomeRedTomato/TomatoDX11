@@ -1,10 +1,18 @@
 #pragma once
 
-struct Transform
+enum class CB_TYPE : UINT
 {
-	XMMATRIX _transform;
+	TRANSFORM,
+	COLOR,
+	LIGHT,
+	END,
 };
 
+//struct Transform
+//{
+//	XMMATRIX _transform;
+//};
+//
 struct Color
 {
 	struct
@@ -16,14 +24,17 @@ struct Color
 	} face_colors[6];
 };
 
-template<typename T>
 class ConstantBuffer
 {
 public:
-	void Init(float angle, int x, int z);
+	void Init(void* buffer, UINT size);
 	void Bind();
 
 protected:
-	ComPtr<ID3D11Buffer> _constantBuffer;
-	ComPtr<ID3D11Buffer> _constantBuffer2;
+	ComPtr<ID3D11Buffer>> _constantBuffer;
+	
+	BYTE* _buffer = nullptr;
+
+	UINT _elementSize = 0u;
+	UINT _elementCount = 0u;
 };

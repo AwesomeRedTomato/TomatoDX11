@@ -1,7 +1,7 @@
 #pragma once
 
 class GameObject;
-class Transform;		// 추가 예정
+//class Transform;		// 추가 예정
 
 enum class COMPONENT_TYPE
 {

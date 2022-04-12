@@ -109,12 +109,23 @@ void Graphics::RenderEnd()
 
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
+	Transform transform
+	{
+		 XMMatrixTranspose(
+			XMMatrixRotationZ(angle) *
+			XMMatrixRotationX(angle) *
+			XMMatrixTranslation(x,0.0f,z + 4.0f) *
+			XMMatrixPerspectiveLH(1.0f,3.0f / 4.0f,0.5f,10.0f))
+	};
+
+
+
 	auto plane = std::make_shared<Cube>();
 	_mesh = plane->Init();
 	_mesh->Init(plane->vertices, plane->indices);
 	_mesh->Bind();
 
-	_cb->Init(angle, x, z);
+	_cb->Init(&transform, sizeof(Transform));
 	_cb->Bind();
 
 	_material->Init();

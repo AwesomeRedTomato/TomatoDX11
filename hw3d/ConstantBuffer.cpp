@@ -2,28 +2,25 @@
 #include "ConstantBuffer.h"
 #include "Graphics.h"
 
-void ConstantBuffer::Init(float angle, int x, int z)
+void ConstantBuffer::Init(void* buffer, UINT size)
 {
-	const Transform transform
-	{
-		 XMMatrixTranspose(
-			XMMatrixRotationZ(angle) *
-			XMMatrixRotationX(angle) *
-			XMMatrixTranslation(x,0.0f,z + 4.0f) *
-			XMMatrixPerspectiveLH(1.0f,3.0f / 4.0f,0.5f,10.0f))
+	_elementSize = (size + 255) & ~255;
 
-	};
+	memcpy_s(&_buffer, _elementSize, buffer, size);
 
 	D3D11_BUFFER_DESC tDesc;
 	tDesc.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
 	tDesc.Usage = D3D11_USAGE_DYNAMIC;
 	tDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	tDesc.MiscFlags = 0u;
-	tDesc.ByteWidth = sizeof(transform);
+	tDesc.ByteWidth = size;
 	tDesc.StructureByteStride = 0u;
 	D3D11_SUBRESOURCE_DATA csd = {};
-	csd.pSysMem = &transform;
+	csd.pSysMem = &_buffer;
 	DEVICE->CreateBuffer(&tDesc, &csd, &_constantBuffer);
+
+	D3D11_MAPPED_SUBRESOURCE msr;
+	CONTEXT->Map(_constantBuffer.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &msr);
 
 	const Color cb2 =
 	{
