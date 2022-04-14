@@ -86,6 +86,10 @@ void Graphics::Init(const Window& window)
 
 	_material->GetTexture()->Load(L"Image\\Leather.jpg");
 
+	CreateConstantBuffer(0u, sizeof(Tr), 1);
+
+
+
 	/********** IMGUI **********/
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -109,24 +113,23 @@ void Graphics::RenderEnd()
 
 void Graphics::DrawTriangle(float angle, float x, float z)
 {
-	Transform transform
+	//Cb 
+	Tr tr
 	{
-		 XMMatrixTranspose(
-			XMMatrixRotationZ(angle) *
-			XMMatrixRotationX(angle) *
-			XMMatrixTranslation(x,0.0f,z + 4.0f) *
-			XMMatrixPerspectiveLH(1.0f,3.0f / 4.0f,0.5f,10.0f))
+		XMMatrixTranspose(
+		XMMatrixRotationZ(angle) *
+		XMMatrixRotationX(angle) *
+		XMMatrixTranslation(x, 0.0f, z + 4.0f) *
+		XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
 	};
-
-
-
+	
 	auto plane = std::make_shared<Cube>();
 	_mesh = plane->Init();
 	_mesh->Init(plane->vertices, plane->indices);
 	_mesh->Bind();
 
-	_cb->Init(&transform, sizeof(Transform));
-	_cb->Bind();
+	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
+	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Bind();
 
 	_material->Init();
 	_material->Bind();
@@ -158,4 +161,11 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 #pragma endregion
 
 
+}
+
+void Graphics::CreateConstantBuffer(UINT slot, UINT size, UINT count)
+{
+	std::shared_ptr<ConstantBuffer> buffer = std::make_shared<ConstantBuffer>();
+	buffer->Init(slot, size, count);
+	_CBs.push_back(buffer);
 }

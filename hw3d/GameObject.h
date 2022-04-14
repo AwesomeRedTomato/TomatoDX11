@@ -1,7 +1,8 @@
 #pragma once
 #include "Component.h"
-
-class Transform;
+#include "Transform.h"
+#include "Shader.h"
+#include "Material.h"
 
 class GameObject
 {
@@ -14,8 +15,10 @@ public:
 
 public:
 	std::shared_ptr<Transform> _transform;
+	std::shared_ptr<Shader> _shader;
 
 private:
+	std::array<std::shared_ptr<Component>, (size_t)COMPONENT_TYPE::END> _components;
 
 };
 

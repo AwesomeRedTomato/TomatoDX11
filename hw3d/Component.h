@@ -3,13 +3,14 @@
 class GameObject;
 //class Transform;		// 추가 예정
 
-enum class COMPONENT_TYPE
+enum class COMPONENT_TYPE : UINT
 {
 	TRANSFORM,
 	MESH_RENDERER,
 	CAMERA,
 	//LIGHT,
 	MONO_BEHAVIOR,
+	END
 };
 
 class Component

@@ -7,14 +7,15 @@
 #include "Texture.h"
 #include "Sampler.h"
 #include "Material.h"
+#include "Transform.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_win32.h"
 #include "Imgui/imgui_impl_dx11.h"
 
-struct Transform
+struct Tr
 {
-	XMMATRIX transform;
+	XMMATRIX tf;
 };
 
 class Window;
@@ -27,12 +28,14 @@ public:
 public:
 	ComPtr<ID3D11Device> GetDevice() { return _device; }
 	ComPtr<ID3D11DeviceContext> GetContext() { return _context; }
+	std::shared_ptr<ConstantBuffer> GetConstantBuffer(CB_TYPE type) { return _CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]; }
 
 public:
 	void RenderBegin();
 	void RenderEnd();
 
 	void DrawTriangle(float angle, float x, float z);
+	void CreateConstantBuffer(UINT slot, UINT size, UINT count);
 
 #ifndef NDEBUG
 	DxgiInfoManager _infoManager;
@@ -51,7 +54,7 @@ private:
 
 	std::shared_ptr<Mesh> _mesh = std::make_shared<Mesh>();
 	std::shared_ptr<Material> _material = std::make_shared<Material>();
-
 	std::shared_ptr<Topology> _topology = std::make_shared<Topology>();
-	std::shared_ptr<ConstantBuffer> _cb = std::make_shared<ConstantBuffer>();
+
+	std::vector<std::shared_ptr<ConstantBuffer>> _CBs;
 };

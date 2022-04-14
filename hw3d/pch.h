@@ -7,6 +7,7 @@
 #include <chrono>
 #include <string>
 #include <vector>
+#include <array>
 #include <map>
 #include <optional>
 #include <queue>
@@ -61,13 +62,16 @@ struct Vertex
 	XMFLOAT2 uv;
 };
 
-struct TransformParams
+struct Transforms
 {
 	XMMATRIX matWorld;
 	XMMATRIX matView;
 	XMMATRIX matProjection;
+	XMMATRIX matWV;
+	XMMATRIX matWVP;
 };
 
 extern std::unique_ptr<class Graphics> _gfx;
 #define DEVICE _gfx->GetDevice()
 #define CONTEXT _gfx->GetContext()
+#define CONSTANT_BUFFER(type) _gfx->GetConstantBuffer(type)
