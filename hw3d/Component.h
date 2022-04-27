@@ -22,7 +22,6 @@ public:
 public:
 	virtual void Update() {}
 	virtual void Render() {}
-	virtual void Bind() {}
 
 private:	
 	friend class GameObject;

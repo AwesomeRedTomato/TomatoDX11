@@ -18,6 +18,11 @@ struct Tr
 	XMMATRIX tf;
 };
 
+struct Tr2
+{
+	XMFLOAT2 tf;
+};
+
 class Window;
 class Cube;
 class Graphics
@@ -34,8 +39,24 @@ public:
 	void RenderBegin();
 	void RenderEnd();
 
+
+
+
+public:
 	void DrawTriangle(float angle, float x, float z);
 	void CreateConstantBuffer(UINT slot, UINT size, UINT count);
+
+	void SetCamera(XMMATRIX camera) { _camera = camera; }
+	XMMATRIX GetCamera() { return _camera; }
+
+private:
+	XMMATRIX _projection;
+	XMMATRIX _camera;
+
+
+	Transforms _transform;
+
+
 
 #ifndef NDEBUG
 	DxgiInfoManager _infoManager;

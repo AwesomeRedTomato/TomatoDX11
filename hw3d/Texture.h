@@ -78,7 +78,7 @@ public:
 	};
 public:
 	void Init();
-	void Bind();
+	void Render();
 
 	void PutPixel(UINT x, UINT y, Color color) { _buffer[y * _width + x] = color; }
 	Color GetPixel(UINT x, UINT y) { return _buffer[y * _width + x]; };

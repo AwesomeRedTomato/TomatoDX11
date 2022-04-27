@@ -9,7 +9,7 @@ void ConstantBuffer::Init(UINT slot, UINT size, UINT count)
 	_elementCount = count;
 }
 
-void ConstantBuffer::Bind()
+void ConstantBuffer::Render()
 {
 	CONTEXT->VSSetConstantBuffers(_slot, 1u, _constantBuffer.GetAddressOf());
 }
@@ -23,7 +23,7 @@ void ConstantBuffer::PushData(void* buffer, UINT size)
 	cbDesc.Usage = D3D11_USAGE_DYNAMIC;
 	cbDesc.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
 	cbDesc.MiscFlags = 0u;
-	cbDesc.ByteWidth = _elementSize;
+	cbDesc.ByteWidth = bufferSize;
 	cbDesc.StructureByteStride = 0u;
 
 	D3D11_SUBRESOURCE_DATA csd = {};
@@ -32,6 +32,6 @@ void ConstantBuffer::PushData(void* buffer, UINT size)
 
 	D3D11_MAPPED_SUBRESOURCE msr;
 	CONTEXT->Map(_constantBuffer.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &msr);
-	memcpy_s(msr.pData, _elementSize, buffer, size);
+	memcpy_s(msr.pData, bufferSize, buffer, size);
 	CONTEXT->Unmap(_constantBuffer.Get(), 0u);
 }

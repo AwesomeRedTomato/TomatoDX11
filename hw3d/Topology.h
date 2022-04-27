@@ -3,7 +3,7 @@ class Topology
 {
 public:
 	void Init(D3D11_PRIMITIVE_TOPOLOGY topology);
-	void Bind();
+	void Render();
 
 	D3D11_PRIMITIVE_TOPOLOGY GetTopology() { return _topology; }
 

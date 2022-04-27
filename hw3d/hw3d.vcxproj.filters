@@ -46,6 +46,12 @@
     <Filter Include="Imgui">
       <UniqueIdentifier>{aaa89244-6d8a-43c5-a7fb-69a89d790a49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="소스 파일\Resource">
+      <UniqueIdentifier>{ac524b2a-55bb-4858-a17d-e187f8d6af6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="헤더 파일\Resource">
+      <UniqueIdentifier>{704490a4-caf5-4c2d-a2fb-6d283269468e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dxerr.cpp">
@@ -138,11 +144,8 @@
     <ClCompile Include="GameObject.cpp">
       <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
-    <ClCompile Include="Light.cpp">
-      <Filter>소스 파일\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>소스 파일\Component</Filter>
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -254,11 +257,8 @@
     <ClInclude Include="Imgui\imstb_textedit.h">
       <Filter>Imgui</Filter>
     </ClInclude>
-    <ClInclude Include="Light.h">
-      <Filter>헤더 파일\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>헤더 파일\Component</Filter>
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

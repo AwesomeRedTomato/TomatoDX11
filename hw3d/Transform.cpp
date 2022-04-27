@@ -22,6 +22,5 @@ void Transform::Update()
 
 void Transform::PushData()
 {
-	//CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->
 }
 

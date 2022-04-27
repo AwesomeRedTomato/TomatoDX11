@@ -8,9 +8,9 @@ void Material::Init()
 	_sampler->Init();
 }
 
-void Material::Bind()
+void Material::Render()
 {
-	_shader->Bind();
-	_texture->Bind();
-	_sampler->Bind();
+	_shader->Render();
+	_texture->Render();
+	_sampler->Render();
 }

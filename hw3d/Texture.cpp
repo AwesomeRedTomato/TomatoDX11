@@ -39,7 +39,7 @@ void Texture::Init()
 	DEVICE->CreateShaderResourceView(_tex2D.Get(), &srvDesc, _srv.GetAddressOf());
 }
 
-void Texture::Bind()
+void Texture::Render()
 {
 	CONTEXT->PSSetShaderResources(0u, 1u, _srv.GetAddressOf());
 }

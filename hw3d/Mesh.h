@@ -3,7 +3,7 @@ class Mesh
 {
 public:
 	void Init(const std::vector<Vertex>& vertices, const std::vector<uint16_t>& indices);
-	void Bind();
+	void Render();
 
 	UINT GetIndexCount() { return _indexCount; }
 

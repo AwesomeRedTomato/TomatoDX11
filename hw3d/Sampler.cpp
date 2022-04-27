@@ -13,7 +13,7 @@ void Sampler::Init()
 	DEVICE->CreateSamplerState(&samplerDesc, _samplerState.GetAddressOf());
 }
 
-void Sampler::Bind()
+void Sampler::Render()
 {
 	CONTEXT->PSSetSamplers(0u, 1u, _samplerState.GetAddressOf());
 }

@@ -19,7 +19,7 @@ void Shader::Init()
 	DEVICE->CreateInputLayout(desc, std::size(desc), _vsBlob->GetBufferPointer(), _vsBlob->GetBufferSize(), _inputLayout.GetAddressOf());
 }
 
-void Shader::Bind()
+void Shader::Render()
 {
 	CONTEXT->VSSetShader(_vertexShader.Get(), nullptr, 0u);
 	CONTEXT->PSSetShader(_pixelShader.Get(), nullptr, 0u);

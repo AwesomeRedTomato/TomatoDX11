@@ -3,10 +3,7 @@ class Shader
 {
 public:
 	void Init();
-	void Bind();
-
-	void CreateVertexShader(const std::wstring& path);
-	void CreatePixelShader(const std::wstring& path);
+	void Render();
 
 	void CreateShader(const std::wstring& path, ComPtr<ID3DBlob>& pBlob);
 

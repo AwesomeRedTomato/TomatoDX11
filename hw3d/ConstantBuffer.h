@@ -3,16 +3,18 @@
 enum class CB_TYPE : UINT
 {
 	TRANSFORM,
+	MATERIAL,
 	COLOR,
 	LIGHT,
-	END,
+	END
 };
+
 
 class ConstantBuffer
 {
 public:
 	void Init(UINT slot, UINT size, UINT count);
-	void Bind();
+	void Render();
 
 	void PushData(void* buffer, UINT size);
 

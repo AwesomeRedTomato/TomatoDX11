@@ -8,7 +8,7 @@ class GameObject
 {
 public:
 	void Init();
-	void Bind();
+	void Render();
 	void Update();
 
 	std::shared_ptr<Transform> GetTransform() { return _transform; }

@@ -14,7 +14,7 @@ class Material
 {
 public:
 	void Init();
-	void Bind();
+	void Render();
 
 	std::shared_ptr<Texture> GetTexture() { return _texture; }
 

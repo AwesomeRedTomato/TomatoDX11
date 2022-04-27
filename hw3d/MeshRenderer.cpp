@@ -5,7 +5,7 @@ void MeshRenderer::Init()
 {
 }
 
-void MeshRenderer::Bind()
+void MeshRenderer::Render()
 {
 	
 }

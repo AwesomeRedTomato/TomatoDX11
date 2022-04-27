@@ -7,6 +7,7 @@
 
 void Graphics::Init(const Window& window)
 {	
+
 	_aspectRatio = static_cast<float>(window._width) / window._height;
 
 	DXGI_SWAP_CHAIN_DESC sd = {};
@@ -82,13 +83,14 @@ void Graphics::Init(const Window& window)
 	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(),_dsv.Get());
 	
 	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-	_topology->Bind();
+	_topology->Render();
 
 	_material->GetTexture()->Load(L"Image\\Leather.jpg");
 
-	CreateConstantBuffer(0u, sizeof(Tr), 1);
+	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(Tr), 1u);
+	CreateConstantBuffer(1u, sizeof(Transforms), 1u); // ¼öÁ¤
 
-
+//	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
 
 	/********** IMGUI **********/
 	IMGUI_CHECKVERSION();
@@ -122,19 +124,24 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 		XMMatrixTranslation(x, 0.0f, z + 4.0f) *
 		XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
 	};
-	
+
+	Tr2 tr2;
+	tr2.tf = XMFLOAT2(1.0f, 1.0f);
+
 	auto plane = std::make_shared<Cube>();
 	_mesh = plane->Init();
 	_mesh->Init(plane->vertices, plane->indices);
-	_mesh->Bind();
+	_mesh->Render();
 
 	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
-	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Bind();
+	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
+	_CBs[static_cast<UINT>(CB_TYPE::MATERIAL)]->PushData(&tr2, sizeof(Tr2));
+	_CBs[static_cast<UINT>(CB_TYPE::MATERIAL)]->Render();
 
 	_material->Init();
-	_material->Bind();
-
+	_material->Render();
 	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
+
 
 
 #pragma region Imgui
@@ -145,12 +152,12 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 		ImGui_ImplWin32_NewFrame();
 		ImGui::NewFrame();
 
-		ImGui::Begin("test");
-		ImGui::Text("Hellooooo");
-		if (ImGui::Button("Click me!"))
-		{
-			counter += 1;
-		}
+		static float a = 0.0f;
+
+		ImGui::Begin("Transform");
+
+		ImGui::SliderFloat("R", &a, 0.2f, 80.0f, "%.1f");
+
 		std::string clickCount = "Click Count: " + std::to_string(counter);
 		ImGui::Text(clickCount.c_str());
 		ImGui::End();

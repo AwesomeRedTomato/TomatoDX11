@@ -35,7 +35,7 @@ void Mesh::Init(const std::vector<Vertex>& vertices, const std::vector<uint16_t>
 	DEVICE->CreateBuffer(&ibDesc, &isd, _indexBuffer.GetAddressOf());
 }
 
-void Mesh::Bind()
+void Mesh::Render()
 {
 	CONTEXT->IASetVertexBuffers(0u, 1u, _vertexBuffer.GetAddressOf(), &_vbStride, &_vbOffset);
 	CONTEXT->IASetIndexBuffer(_indexBuffer.Get(), _indexFormat, 0u);

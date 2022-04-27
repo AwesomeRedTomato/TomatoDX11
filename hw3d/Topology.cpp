@@ -15,7 +15,7 @@ void Topology::Init(D3D11_PRIMITIVE_TOPOLOGY topology)
 
 }
 
-void Topology::Bind()
+void Topology::Render()
 {
 	CONTEXT->IASetPrimitiveTopology(_topology);
 	CONTEXT->RSSetViewports(1u, &_viewport);
