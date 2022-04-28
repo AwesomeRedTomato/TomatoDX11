@@ -3,14 +3,19 @@
 
 void Material::Init()
 {
-	_shader->Init();
 	_texture->Init();
+	_shader->Init();
 	_sampler->Init();
 }
 
 void Material::Render()
 {
 	_shader->Render();
-	_texture->Render();
 	_sampler->Render();
+	_texture->Render();
+}
+
+void Material::PushData()
+{
+
 }

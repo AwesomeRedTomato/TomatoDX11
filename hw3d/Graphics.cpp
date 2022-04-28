@@ -125,9 +125,6 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 		XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
 	};
 
-	Tr2 tr2;
-	tr2.tf = XMFLOAT2(1.0f, 1.0f);
-
 	auto plane = std::make_shared<Cube>();
 	_mesh = plane->Init();
 	_mesh->Init(plane->vertices, plane->indices);
@@ -135,8 +132,6 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 
 	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
 	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
-	_CBs[static_cast<UINT>(CB_TYPE::MATERIAL)]->PushData(&tr2, sizeof(Tr2));
-	_CBs[static_cast<UINT>(CB_TYPE::MATERIAL)]->Render();
 
 	_material->Init();
 	_material->Render();

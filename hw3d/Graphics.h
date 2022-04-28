@@ -18,11 +18,6 @@ struct Tr
 	XMMATRIX tf;
 };
 
-struct Tr2
-{
-	XMFLOAT2 tf;
-};
-
 class Window;
 class Cube;
 class Graphics

@@ -52,13 +52,16 @@
     <Filter Include="헤더 파일\Resource">
       <UniqueIdentifier>{704490a4-caf5-4c2d-a2fb-6d283269468e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\Component\GameObject">
+      <UniqueIdentifier>{2105b1a0-b5bc-4120-8a93-3e23794e61db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="소스 파일\Component\GameObject">
+      <UniqueIdentifier>{e14ac8f5-34f1-44c4-8de9-a2e5197c478a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dxerr.cpp">
       <Filter>DxManager</Filter>
-    </ClCompile>
-    <ClCompile Include="Mesh.cpp">
-      <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>소스 파일\Device</Filter>
@@ -96,20 +99,11 @@
     <ClCompile Include="Graphics.cpp">
       <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
-    <ClCompile Include="Shader.cpp">
-      <Filter>소스 파일\Pipeline</Filter>
-    </ClCompile>
     <ClCompile Include="Topology.cpp">
-      <Filter>소스 파일\Pipeline</Filter>
-    </ClCompile>
-    <ClCompile Include="Texture.cpp">
       <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="MeshRenderer.cpp">
       <Filter>소스 파일\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Sampler.cpp">
-      <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="GDIPlusManager.cpp">
       <Filter>Manager</Filter>
@@ -119,9 +113,6 @@
     </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>소스 파일\Component</Filter>
-    </ClCompile>
-    <ClCompile Include="Material.cpp">
-      <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="Imgui\imgui.cpp">
       <Filter>Imgui</Filter>
@@ -145,7 +136,25 @@
       <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>소스 파일\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="MonoBehaviour.cpp">
+      <Filter>소스 파일\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>소스 파일\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>소스 파일\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Sampler.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -179,9 +188,6 @@
     <ClInclude Include="WindowsMessageMap.h">
       <Filter>헤더 파일\Device</Filter>
     </ClInclude>
-    <ClInclude Include="Mesh.h">
-      <Filter>헤더 파일\Pipeline</Filter>
-    </ClInclude>
     <ClInclude Include="pch.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
@@ -206,9 +212,6 @@
     <ClInclude Include="Topology.h">
       <Filter>헤더 파일\Pipeline</Filter>
     </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>헤더 파일\Component</Filter>
-    </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>헤더 파일\Geometry</Filter>
     </ClInclude>
@@ -224,14 +227,8 @@
     <ClInclude Include="MeshRenderer.h">
       <Filter>헤더 파일\Component</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
     <ClInclude Include="Transform.h">
       <Filter>헤더 파일\Component</Filter>
-    </ClInclude>
-    <ClInclude Include="Material.h">
-      <Filter>헤더 파일\Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="Imgui\imstb_truetype.h">
       <Filter>Imgui</Filter>
@@ -258,7 +255,22 @@
       <Filter>Imgui</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>헤더 파일\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="MonoBehaviour.h">
+      <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>헤더 파일\Component\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>헤더 파일\Component\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>헤더 파일\Resource</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

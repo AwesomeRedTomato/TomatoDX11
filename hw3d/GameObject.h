@@ -8,8 +8,12 @@ class GameObject
 {
 public:
 	void Init();
-	void Render();
+
+	void Start();
 	void Update();
+	void LateUpdate();
+
+
 
 	std::shared_ptr<Transform> GetTransform() { return _transform; }
 
@@ -19,6 +23,6 @@ public:
 
 private:
 	std::array<std::shared_ptr<Component>, (size_t)COMPONENT_TYPE::END> _components;
-
+	std::vector < std::shared_ptr<MonoBehaviour
 };
 
