@@ -3,7 +3,7 @@ class Shader
 {
 public:
 	void Init();
-	void Render();
+	void Update();
 
 	void CreateShader(const std::wstring& path, ComPtr<ID3DBlob>& pBlob);
 
@@ -15,6 +15,8 @@ protected:
 
 	ComPtr<ID3D11VertexShader> _vertexShader;
 	ComPtr<ID3D11PixelShader> _pixelShader;
+
+	ComPtr<ID3D11SamplerState> _samplerState;
 
 	ComPtr<ID3D11InputLayout> _inputLayout;
 };

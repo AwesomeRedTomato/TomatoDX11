@@ -17,12 +17,23 @@ void Shader::Init()
 	};
 
 	DEVICE->CreateInputLayout(desc, std::size(desc), _vsBlob->GetBufferPointer(), _vsBlob->GetBufferSize(), _inputLayout.GetAddressOf());
+
+	D3D11_SAMPLER_DESC samplerDesc = {};
+	samplerDesc.Filter = D3D11_FILTER_MIN_MAG_MIP_LINEAR;
+	samplerDesc.AddressU = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressV = D3D11_TEXTURE_ADDRESS_WRAP;
+	samplerDesc.AddressW = D3D11_TEXTURE_ADDRESS_WRAP;
+
+	DEVICE->CreateSamplerState(&samplerDesc, _samplerState.GetAddressOf());
+
 }
 
-void Shader::Render()
+void Shader::Update()
 {
 	CONTEXT->VSSetShader(_vertexShader.Get(), nullptr, 0u);
 	CONTEXT->PSSetShader(_pixelShader.Get(), nullptr, 0u);
+
+	CONTEXT->VSSetSamplers(0u, 1u, _samplerState.GetAddressOf());
 
 	CONTEXT->IASetInputLayout(_inputLayout.Get());
 }

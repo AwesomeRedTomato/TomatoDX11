@@ -147,9 +147,6 @@
     <ClCompile Include="Material.cpp">
       <Filter>소스 파일\Resource</Filter>
     </ClCompile>
-    <ClCompile Include="Sampler.cpp">
-      <Filter>소스 파일\Pipeline</Filter>
-    </ClCompile>
     <ClCompile Include="Shader.cpp">
       <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
@@ -214,9 +211,6 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>헤더 파일\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="Sampler.h">
-      <Filter>헤더 파일\Pipeline</Filter>
     </ClInclude>
     <ClInclude Include="GDIPlusManager.h">
       <Filter>Manager</Filter>

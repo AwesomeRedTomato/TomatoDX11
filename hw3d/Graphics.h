@@ -5,7 +5,6 @@
 #include "Shader.h"
 #include "Topology.h"
 #include "Texture.h"
-#include "Sampler.h"
 #include "Material.h"
 #include "Transform.h"
 
@@ -69,7 +68,6 @@ private:
 	ComPtr<ID3D11DepthStencilView> _dsv;
 
 	std::shared_ptr<Mesh> _mesh = std::make_shared<Mesh>();
-	std::shared_ptr<Material> _material = std::make_shared<Material>();
 	std::shared_ptr<Topology> _topology = std::make_shared<Topology>();
 
 	std::vector<std::shared_ptr<ConstantBuffer>> _CBs;

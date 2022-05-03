@@ -39,9 +39,9 @@ void Texture::Init()
 	DEVICE->CreateShaderResourceView(_tex2D.Get(), &srvDesc, _srv.GetAddressOf());
 }
 
-void Texture::Render()
+void Texture::Render(UINT slot)
 {
-	CONTEXT->PSSetShaderResources(0u, 1u, _srv.GetAddressOf());
+	CONTEXT->PSSetShaderResources(slot, 1u, _srv.GetAddressOf());
 }
 
 void Texture::Load(const std::wstring& path)

@@ -1,23 +1,16 @@
-cbuffer CBuf :register(b0)
+cbuffer TRANSFORM_PARAMS :register(b0)
 {
     matrix transform;
 };
 
-cbuffer CBuf2 : register(b1)
+cbuffer MATERIAL_PARAMS : register(b1)
 {
-    float2 tr2;
-}
+    int tex_on_0;
+    int tex_on_1;
+};
 
-//cbuffer Transform : register(b1)
-//{
-//    float3 position;
-//    float3 rotation;
-//    float3 scale;
-    
-//    matrix world;
-//    matrix view;
-//    matrix projection;
-//};
+Texture2D tex2D_0 : register(t0);
+Texture2D tex2D_1 : register(t1);
 
 struct VSOut
 {
@@ -29,7 +22,6 @@ VSOut main(float3 pos : POSITION, float2 uv : TEXCOORD)
 {
     VSOut vso;
     vso.pos = mul(float4(pos, 1.f), transform);
-    vso.pos += tr2.x;
     vso.uv = uv;
     return vso;
 }

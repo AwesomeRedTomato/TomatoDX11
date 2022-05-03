@@ -3,8 +3,9 @@
 #include "Transform.h"
 #include "Shader.h"
 #include "Material.h"
+#include "MonoBehaviour.h"
 
-class GameObject
+class GameObject : public std::enable_shared_from_this<GameObject>
 {
 public:
 	void Init();
@@ -13,16 +14,14 @@ public:
 	void Update();
 	void LateUpdate();
 
-
-
-	std::shared_ptr<Transform> GetTransform() { return _transform; }
+public:
+	void AddComponent(std::shared_ptr<Component> component);
 
 public:
-	std::shared_ptr<Transform> _transform;
-	std::shared_ptr<Shader> _shader;
+	std::shared_ptr<Transform> GetTransform();
 
 private:
 	std::array<std::shared_ptr<Component>, (size_t)COMPONENT_TYPE::END> _components;
-	std::vector < std::shared_ptr<MonoBehaviour
+	std::vector<std::shared_ptr<MonoBehaviour>> _scripts;
 };
 

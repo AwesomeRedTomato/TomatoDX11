@@ -1,9 +1,14 @@
 #pragma once
+#include "Component.h"
 #include "Mesh.h"
 #include "Material.h"
 
-class MeshRenderer
+class MeshRenderer : public Component
 {
+public:
+	MeshRenderer() : Component(COMPONENT_TYPE::MESH_RENDERER) {}
+	virtual ~MeshRenderer() {}
+
 public:
 	void Init();
 	void Render();
@@ -16,4 +21,3 @@ private:
 	std::shared_ptr<Mesh> _mesh;
 	std::shared_ptr<Material> _material;
 };
-

@@ -6,6 +6,8 @@ public:
 	MonoBehaviour() : Component(COMPONENT_TYPE::MONO_BEHAVIOR) {}
 	virtual ~MonoBehaviour() {};
 
+public:
+
 private:
 };
 

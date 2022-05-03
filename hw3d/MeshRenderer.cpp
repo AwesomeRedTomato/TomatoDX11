@@ -7,5 +7,6 @@ void MeshRenderer::Init()
 
 void MeshRenderer::Render()
 {
-	
+	_material->PushData();
+	_mesh->Render();
 }

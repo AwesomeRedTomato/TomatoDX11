@@ -85,7 +85,6 @@ void Graphics::Init(const Window& window)
 	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	_topology->Render();
 
-	_material->GetTexture()->Load(L"Image\\Leather.jpg");
 
 	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(Tr), 1u);
 	CreateConstantBuffer(1u, sizeof(Transforms), 1u); // ¼öÁ¤
@@ -125,16 +124,27 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 		XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
 	};
 
-	auto plane = std::make_shared<Cube>();
-	_mesh = plane->Init();
-	_mesh->Init(plane->vertices, plane->indices);
-	_mesh->Render();
+	{
+		auto plane = std::make_shared<Cube>();
+		_mesh = plane->Init();
+		_mesh->Init(plane->vertices, plane->indices);
+		_mesh->Render();
 
-	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
-	_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
+		_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
+		_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
 
-	_material->Init();
-	_material->Render();
+		auto shader = std::make_shared<Shader>();
+		shader->Init();
+
+		auto texture = std::make_shared<Texture>();
+		texture->Init();
+		texture->Load(L"Image\\Leather.jpg");
+
+		auto material = std::make_shared<Material>();
+		material->SetShader(shader);
+		material->SetTexture(TEXTURE_TYPE::DIFFUSE, texture);
+		material->PushData();
+	}
 	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
 
 
