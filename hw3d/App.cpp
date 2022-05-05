@@ -22,7 +22,7 @@ int App::Go()
 			return *ecode;
 		}
 		Update();
-		Render();
+		//Render();
 	}
 }
 

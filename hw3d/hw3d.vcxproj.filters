@@ -27,9 +27,6 @@
     <Filter Include="헤더 파일\Geometry">
       <UniqueIdentifier>{7d437e0d-91c0-4ae2-ae23-0bf72c85d7b8}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Manager">
-      <UniqueIdentifier>{c95e8ac4-6cae-4648-ab43-72ec1453b85e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="소스 파일\Component">
       <UniqueIdentifier>{37d27d1f-4556-4dd1-849c-ddb0fc2b31be}</UniqueIdentifier>
     </Filter>
@@ -57,6 +54,12 @@
     </Filter>
     <Filter Include="소스 파일\Component\GameObject">
       <UniqueIdentifier>{e14ac8f5-34f1-44c4-8de9-a2e5197c478a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Scene">
+      <UniqueIdentifier>{2cfd93a0-25e3-4b92-bd98-4c73fcc23033}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GDIPlus">
+      <UniqueIdentifier>{c95e8ac4-6cae-4648-ab43-72ec1453b85e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -106,7 +109,7 @@
       <Filter>소스 파일\Component</Filter>
     </ClCompile>
     <ClCompile Include="GDIPlusManager.cpp">
-      <Filter>Manager</Filter>
+      <Filter>GDIPlus</Filter>
     </ClCompile>
     <ClCompile Include="Component.cpp">
       <Filter>소스 파일\Component</Filter>
@@ -152,6 +155,9 @@
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>소스 파일\Pipeline</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -213,7 +219,7 @@
       <Filter>헤더 파일\Geometry</Filter>
     </ClInclude>
     <ClInclude Include="GDIPlusManager.h">
-      <Filter>Manager</Filter>
+      <Filter>GDIPlus</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>헤더 파일\Geometry</Filter>
@@ -265,6 +271,9 @@
     </ClInclude>
     <ClInclude Include="Mesh.h">
       <Filter>헤더 파일\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

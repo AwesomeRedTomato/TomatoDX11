@@ -1,12 +1,14 @@
 #pragma once
 #include "Exception.h"
-#include "Mesh.h"
 #include "ConstantBuffer.h"
-#include "Shader.h"
 #include "Topology.h"
-#include "Texture.h"
-#include "Material.h"
 #include "Transform.h"
+#include "Shader.h"
+#include "Texture.h"	
+#include "Mesh.h"
+#include "Material.h"
+#include "GameObject.h"
+#include "MeshRenderer.h"
 
 #include "Imgui/imgui.h"
 #include "Imgui/imgui_impl_win32.h"
@@ -67,8 +69,11 @@ private:
 	ComPtr<ID3D11RenderTargetView> _rtv;
 	ComPtr<ID3D11DepthStencilView> _dsv;
 
-	std::shared_ptr<Mesh> _mesh = std::make_shared<Mesh>();
 	std::shared_ptr<Topology> _topology = std::make_shared<Topology>();
-
 	std::vector<std::shared_ptr<ConstantBuffer>> _CBs;
+
+	std::shared_ptr<Texture> texture = std::make_shared<Texture>();
+
+	std::shared_ptr<GameObject> _gameObject = std::make_shared<GameObject>();
+
 };

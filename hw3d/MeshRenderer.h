@@ -10,7 +10,8 @@ public:
 	virtual ~MeshRenderer() {}
 
 public:
-	void Init();
+	void Update() override;
+
 	void Render();
 
 public:

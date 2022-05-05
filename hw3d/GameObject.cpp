@@ -3,15 +3,7 @@
 
 void GameObject::Init()
 {
-	for (const auto& c : _components)
-	{
-		if (c)
-			c->Start();
-	}
-	for (const auto& s : _scripts)
-	{
-		s->Start();
-	}
+	AddComponent(std::make_shared<Transform>());
 }
 
 void GameObject::Start()

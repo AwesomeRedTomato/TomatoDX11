@@ -7,7 +7,6 @@
 
 void Graphics::Init(const Window& window)
 {	
-
 	_aspectRatio = static_cast<float>(window._width) / window._height;
 
 	DXGI_SWAP_CHAIN_DESC sd = {};
@@ -86,6 +85,9 @@ void Graphics::Init(const Window& window)
 	_topology->Render();
 
 
+	
+	_gameObject->Init();
+
 	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(Tr), 1u);
 	CreateConstantBuffer(1u, sizeof(Transforms), 1u); // ¼öÁ¤
 
@@ -124,29 +126,35 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 		XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
 	};
 
+	auto meshRenderer = std::make_shared<MeshRenderer>();
 	{
+		auto mesh = std::make_shared<Mesh>();
 		auto plane = std::make_shared<Cube>();
-		_mesh = plane->Init();
-		_mesh->Init(plane->vertices, plane->indices);
-		_mesh->Render();
+		mesh = plane->Init();
+		mesh->Init(plane->vertices, plane->indices);
 
 		_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
 		_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
 
 		auto shader = std::make_shared<Shader>();
 		shader->Init();
-
-		auto texture = std::make_shared<Texture>();
+		
 		texture->Init();
 		texture->Load(L"Image\\Leather.jpg");
 
 		auto material = std::make_shared<Material>();
 		material->SetShader(shader);
 		material->SetTexture(TEXTURE_TYPE::DIFFUSE, texture);
-		material->PushData();
-	}
-	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
 
+		meshRenderer->SetMesh(mesh);
+		meshRenderer->SetMaterial(material);
+
+	}
+
+	_gameObject->AddComponent(meshRenderer);
+	_gameObject->Start();
+	_gameObject->Update();
+	_gameObject->LateUpdate();
 
 
 #pragma region Imgui
@@ -161,7 +169,7 @@ void Graphics::DrawTriangle(float angle, float x, float z)
 
 		ImGui::Begin("Transform");
 
-		ImGui::SliderFloat("R", &a, 0.2f, 80.0f, "%.1f");
+		ImGui::SliderFloat("R", &a, 50.0f, 80.0f, "%.1f");
 
 		std::string clickCount = "Click Count: " + std::to_string(counter);
 		ImGui::Text(clickCount.c_str());
