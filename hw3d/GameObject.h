@@ -4,6 +4,7 @@
 #include "Shader.h"
 #include "Material.h"
 #include "MonoBehaviour.h"
+#include "Camera.h"
 
 class GameObject : public std::enable_shared_from_this<GameObject>
 {
@@ -19,6 +20,7 @@ public:
 
 public:
 	std::shared_ptr<Transform> GetTransform();
+	std::shared_ptr<Camera> GetCamera();
 
 private:
 	std::array<std::shared_ptr<Component>, (size_t)COMPONENT_TYPE::END> _components;

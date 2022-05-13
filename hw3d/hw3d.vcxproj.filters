@@ -55,11 +55,14 @@
     <Filter Include="소스 파일\Component\GameObject">
       <UniqueIdentifier>{e14ac8f5-34f1-44c4-8de9-a2e5197c478a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Scene">
-      <UniqueIdentifier>{2cfd93a0-25e3-4b92-bd98-4c73fcc23033}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GDIPlus">
       <UniqueIdentifier>{c95e8ac4-6cae-4648-ab43-72ec1453b85e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{27b578f1-03e0-4670-82a1-ebd917728e3e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager\Scene">
+      <UniqueIdentifier>{2cfd93a0-25e3-4b92-bd98-4c73fcc23033}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -156,8 +159,11 @@
     <ClCompile Include="Texture.cpp">
       <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Manager\Scene</Filter>
+    </ClCompile>
     <ClCompile Include="Scene.cpp">
-      <Filter>소스 파일</Filter>
+      <Filter>Manager\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -272,8 +278,14 @@
     <ClInclude Include="Mesh.h">
       <Filter>헤더 파일\Resource</Filter>
     </ClInclude>
+    <ClInclude Include="SceneManager.h">
+      <Filter>Manager\Scene</Filter>
+    </ClInclude>
     <ClInclude Include="Scene.h">
-      <Filter>헤더 파일</Filter>
+      <Filter>Manager\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Manager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -285,6 +297,9 @@
     </None>
     <None Include="DXTrace.inl">
       <Filter>DxManager</Filter>
+    </None>
+    <None Include="SimpleMath.inl">
+      <Filter>Manager</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>

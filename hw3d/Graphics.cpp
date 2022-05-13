@@ -4,11 +4,17 @@
 #include "Plane.h"
 #include "Cube.h"
 #include "Grid.h"
+#include "SceneManager.h"
 
 void Graphics::Init(const Window& window)
 {	
 	_aspectRatio = static_cast<float>(window._width) / window._height;
 
+	_width = window._width;
+	_height = window._height;
+
+
+#pragma region InitEngine
 	DXGI_SWAP_CHAIN_DESC sd = {};
 	sd.BufferDesc.Width = 0;
 	sd.BufferDesc.Height = 0;
@@ -79,29 +85,41 @@ void Graphics::Init(const Window& window)
 	descDSV.Texture2D.MipSlice = 0u;
 	_device->CreateDepthStencilView(depthStencil.Get(), &descDSV, _dsv.GetAddressOf());
 
-	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(),_dsv.Get());
-	
+	_context->OMSetRenderTargets(1u, _rtv.GetAddressOf(), _dsv.Get());
+
 	_topology->Init(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
 	_topology->Render();
+#pragma endregion
+	InitImgui(window);
 
-
-	
-	_gameObject->Init();
+	Start();
 
 	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(Tr), 1u);
-	CreateConstantBuffer(1u, sizeof(Transforms), 1u); // ¼öÁ¤
+}
 
-//	_context->DrawIndexed(_mesh->GetIndexCount(), 0u, 0u);
-
-	/********** IMGUI **********/
+void Graphics::InitImgui(const Window& window)
+{
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
 	ImGuiIO& io = ImGui::GetIO();
 	ImGui_ImplWin32_Init(window._hWnd);
 	ImGui_ImplDX11_Init(DEVICE.Get(), CONTEXT.Get());
 	ImGui::StyleColorsDark();
-	
 }
+
+void Graphics::Start()
+{
+	GET_SINGLE(SceneManager)->LoadScene();
+}
+
+void Graphics::Update()
+{
+	PushData();
+
+	GET_SINGLE(SceneManager)->Update();
+	GET_SINGLE(SceneManager)->UpdateImgui();
+}
+
 
 void Graphics::RenderBegin()
 {
@@ -114,73 +132,22 @@ void Graphics::RenderEnd()
 	_swapChain->Present(0u, 0u);
 }
 
-void Graphics::DrawTriangle(float angle, float x, float z)
+void Graphics::PushData()
 {
-	//Cb 
-	Tr tr
-	{
-		XMMatrixTranspose(
-		XMMatrixRotationZ(angle) *
-		XMMatrixRotationX(angle) *
-		XMMatrixTranslation(x, 0.0f, z + 4.0f) *
-		XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
-	};
+	static float angle = 0.0f;
+	angle += 0.0001;
 
-	auto meshRenderer = std::make_shared<MeshRenderer>();
-	{
-		auto mesh = std::make_shared<Mesh>();
-		auto plane = std::make_shared<Cube>();
-		mesh = plane->Init();
-		mesh->Init(plane->vertices, plane->indices);
+	//Tr tr
+	//{
+	//	XMMatrixTranspose(
+	//	XMMatrixRotationZ(angle) *
+	//	XMMatrixRotationX(angle) *
+	//	XMMatrixTranslation(0, 0.0f, 0 + 4.0f) *
+	//	XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
+	//};
 
-		_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
-		_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
-
-		auto shader = std::make_shared<Shader>();
-		shader->Init();
-		
-		texture->Init();
-		texture->Load(L"Image\\Leather.jpg");
-
-		auto material = std::make_shared<Material>();
-		material->SetShader(shader);
-		material->SetTexture(TEXTURE_TYPE::DIFFUSE, texture);
-
-		meshRenderer->SetMesh(mesh);
-		meshRenderer->SetMaterial(material);
-
-	}
-
-	_gameObject->AddComponent(meshRenderer);
-	_gameObject->Start();
-	_gameObject->Update();
-	_gameObject->LateUpdate();
-
-
-#pragma region Imgui
-	{
-		static int counter = 0;
-		
-		ImGui_ImplDX11_NewFrame();
-		ImGui_ImplWin32_NewFrame();
-		ImGui::NewFrame();
-
-		static float a = 0.0f;
-
-		ImGui::Begin("Transform");
-
-		ImGui::SliderFloat("R", &a, 50.0f, 80.0f, "%.1f");
-
-		std::string clickCount = "Click Count: " + std::to_string(counter);
-		ImGui::Text(clickCount.c_str());
-		ImGui::End();
-		ImGui::Render();
-
-		ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-	}
-#pragma endregion
-
-
+	//_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
+	//_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
 }
 
 void Graphics::CreateConstantBuffer(UINT slot, UINT size, UINT count)

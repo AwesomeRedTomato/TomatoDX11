@@ -1,6 +1,10 @@
 cbuffer TRANSFORM_PARAMS :register(b0)
 {
-    matrix transform;
+    matrix matWorld;
+    matrix matView;
+    matrix matProjection;
+    matrix matWV;
+    matrix matWVP;
 };
 
 cbuffer MATERIAL_PARAMS : register(b1)
@@ -8,6 +12,12 @@ cbuffer MATERIAL_PARAMS : register(b1)
     int tex_on_0;
     int tex_on_1;
 };
+
+// 수정 예정
+cbuffer TR : register(b3)
+{
+    matrix transform;
+}
 
 Texture2D tex2D_0 : register(t0);
 Texture2D tex2D_1 : register(t1);
@@ -21,7 +31,7 @@ struct VSOut
 VSOut main(float3 pos : POSITION, float2 uv : TEXCOORD)
 {
     VSOut vso;
-    vso.pos = mul(float4(pos, 1.f), transform);
+    vso.pos = mul(float4(pos, 1.f), matWVP);
     vso.uv = uv;
     return vso;
 }

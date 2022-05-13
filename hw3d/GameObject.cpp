@@ -67,3 +67,9 @@ std::shared_ptr<Transform> GameObject::GetTransform()
 	UINT index = static_cast<UINT>(COMPONENT_TYPE::TRANSFORM);
 	return std::static_pointer_cast<Transform>(_components[index]);
 }
+
+std::shared_ptr<Camera> GameObject::GetCamera()
+{
+	UINT index = static_cast<UINT>(COMPONENT_TYPE::CAMERA);
+	return std::static_pointer_cast<Camera>(_components[index]);
+}

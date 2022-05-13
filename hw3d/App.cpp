@@ -22,7 +22,7 @@ int App::Go()
 			return *ecode;
 		}
 		Update();
-		//Render();
+		Render();
 	}
 }
 
@@ -35,6 +35,6 @@ void App::Update()
 void App::Render()
 {
 	_gfx->RenderBegin();
-	_gfx->DrawTriangle(GET_SINGLE(Timer)->Peek()/10, 0,0);
+	_gfx->Update();
 	_gfx->RenderEnd();
 }

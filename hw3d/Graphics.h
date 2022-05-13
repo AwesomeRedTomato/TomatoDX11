@@ -16,7 +16,7 @@
 
 struct Tr
 {
-	XMMATRIX tf;
+	MATRIX tf;
 };
 
 class Window;
@@ -25,41 +25,39 @@ class Graphics
 {
 public:
 	void Init(const Window& window);
+	void InitImgui(const Window& window);
+
+	float GetWidth() { return _width; }
+	float GetHeight() { return _height; }
 
 public:
 	ComPtr<ID3D11Device> GetDevice() { return _device; }
 	ComPtr<ID3D11DeviceContext> GetContext() { return _context; }
 	std::shared_ptr<ConstantBuffer> GetConstantBuffer(CB_TYPE type) { return _CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]; }
 
+
 public:
+	void Start();
+	void Update();
+
 	void RenderBegin();
 	void RenderEnd();
 
-
-
+	void PushData();
 
 public:
-	void DrawTriangle(float angle, float x, float z);
 	void CreateConstantBuffer(UINT slot, UINT size, UINT count);
 
-	void SetCamera(XMMATRIX camera) { _camera = camera; }
-	XMMATRIX GetCamera() { return _camera; }
-
 private:
-	XMMATRIX _projection;
-	XMMATRIX _camera;
-
-
-	Transforms _transform;
-
-
-
 #ifndef NDEBUG
 	DxgiInfoManager _infoManager;
 #endif
 
 public:
 	float _aspectRatio = 0;
+	
+	float _width;
+	float _height;
 
 private:
 	ComPtr<ID3D11Device> _device;

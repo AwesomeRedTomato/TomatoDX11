@@ -19,9 +19,8 @@
 #include <assert.h>
 #include <cmath>
 #include <algorithm>
-//using namespace std;
+#include <float.h>
 
-#include "dxerr.h"
 #include <gdiplus.h>
 #include <d3d11.h>
 #include <wrl.h>
@@ -31,6 +30,8 @@
 #include <DirectXMath.h>
 #include <DirectXPackedVector.h>
 #include <DirectXColors.h>
+#include "SimpleMath.h"
+#include "dxerr.h"
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 using namespace Microsoft::WRL;
@@ -39,6 +40,12 @@ using namespace Microsoft::WRL;
 #pragma comment(lib, "dxguid")
 #pragma comment(lib, "d3dcompiler")
 #pragma comment(lib,"gdiplus")
+
+
+using MATRIX = SimpleMath::Matrix;
+using FLOAT2 = SimpleMath::Vector2;
+using FLOAT3 = SimpleMath::Vector3;
+using FLOAT4 = SimpleMath::Vector4;
 
 #define SINGLETON(type)				\
 private:							\
@@ -56,19 +63,19 @@ public:								\
 struct Vertex
 {
 	Vertex() {}
-	Vertex(XMFLOAT3 p, XMFLOAT2 u) : pos(p), uv(u) {}
+	Vertex(FLOAT3 p, FLOAT2 u) : pos(p), uv(u) {}
 
-	XMFLOAT3 pos;
-	XMFLOAT2 uv;
+	FLOAT3 pos;
+	FLOAT2 uv;
 };
 
-struct Transforms
+struct TransformParams
 {
-	XMMATRIX matWorld;
-	XMMATRIX matView;
-	XMMATRIX matProjection;
-	XMMATRIX matWV;
-	XMMATRIX matWVP;
+	MATRIX matWorld;
+	MATRIX matView;
+	MATRIX matProjection;
+	MATRIX matWV;
+	MATRIX matWVP;
 };
 
 extern std::unique_ptr<class Graphics> _gfx;

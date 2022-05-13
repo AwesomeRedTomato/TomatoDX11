@@ -31,7 +31,7 @@ private:
 	friend class GameObject;
 	void SetGameObject(std::shared_ptr<GameObject> gameObject) { _gameObject = gameObject; }
 
-private:
+public:
 	std::shared_ptr<GameObject> GetGameObject();
 	std::shared_ptr<Transform> GetTransform();
 

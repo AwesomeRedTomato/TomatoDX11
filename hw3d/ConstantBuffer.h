@@ -1,6 +1,6 @@
 #pragma once
 
-enum class CB_TYPE : UINT
+enum class CB_TYPE
 {
 	TRANSFORM,
 	MATERIAL,
