@@ -10,15 +10,27 @@ MATRIX Camera::S_MatView;
 MATRIX Camera::S_MatProjection;
 
 
-void Camera::LateUpdate()
+void Camera::FinalUpdate()
 {
 	_matView = GetTransform()->GetWorldMatrix().Invert();
 
-	_matProjection = XMMatrixPerspectiveFovLH(_fov, (3.0f/ 4.0f), _near, _far);
+	_matProjection = XMMatrixPerspectiveFovLH(_fov, _gfx->GetAspectRatio(), _near, _far);
+
+	S_MatView = _matView;
+	S_MatProjection = _matProjection;
 }
 
 void Camera::Render()
 {
-	S_MatView = _matView;
-	S_MatProjection = _matProjection;
+	std::shared_ptr<Scene> scene = GET_SINGLE(SceneManager)->GetActiveScene();
+
+	const std::vector<std::shared_ptr<GameObject>>& gameObjects = scene->GetGameObject();
+
+	for (const auto& g : gameObjects)
+	{
+		if (g->GetMeshRenderer() == nullptr)
+			continue;
+
+		g->GetMeshRenderer()->Render();
+	}
 }

@@ -6,7 +6,9 @@
 
 void Material::PushData()
 {
+	CONSTANT_BUFFER(CB_TYPE::MATERIAL)->Init(static_cast<UINT>(CB_TYPE::MATERIAL), sizeof(MaterialParams), 1u);
 	CONSTANT_BUFFER(CB_TYPE::MATERIAL)->PushData(&_params, sizeof(MaterialParams));
+	CONSTANT_BUFFER(CB_TYPE::MATERIAL)->Render();
 
 	for (UINT i = 0; i < _textures.size(); i++)
 	{

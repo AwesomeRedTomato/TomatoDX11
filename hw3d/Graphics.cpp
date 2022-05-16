@@ -8,10 +8,8 @@
 
 void Graphics::Init(const Window& window)
 {	
-	_aspectRatio = static_cast<float>(window._width) / window._height;
+	_aspectRatio = static_cast<float>(window._width) / static_cast<float>(window._height);
 
-	_width = window._width;
-	_height = window._height;
 
 
 #pragma region InitEngine

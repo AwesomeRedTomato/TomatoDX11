@@ -1,6 +1,7 @@
 #include "pch.h"	
 #include "Scene.h"
 #include "GameObject.h"
+#include "Camera.h"
 
 void Scene::Start()
 {
@@ -25,14 +26,6 @@ void Scene::LateUpdate()
 		g->LateUpdate();
 	}
 
-}
-
-void Scene::Render()
-{
-	for (auto& g : _gameObjects)
-	{
-		g->GetCamera()->Render();
-	}
 }
 
 void Scene::AddGameObject(std::shared_ptr<GameObject> gameObject)

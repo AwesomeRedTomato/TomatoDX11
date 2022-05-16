@@ -27,14 +27,12 @@ public:
 	void Init(const Window& window);
 	void InitImgui(const Window& window);
 
-	float GetWidth() { return _width; }
-	float GetHeight() { return _height; }
-
 public:
 	ComPtr<ID3D11Device> GetDevice() { return _device; }
 	ComPtr<ID3D11DeviceContext> GetContext() { return _context; }
 	std::shared_ptr<ConstantBuffer> GetConstantBuffer(CB_TYPE type) { return _CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]; }
 
+	float GetAspectRatio() { return _aspectRatio; }
 
 public:
 	void Start();

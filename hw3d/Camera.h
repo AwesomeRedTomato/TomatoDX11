@@ -1,6 +1,13 @@
 #pragma once
 #include "Component.h"
 
+// 구현 예정
+enum class PERSPECTIVE_TYPE
+{
+	PERSPECTIVE,
+	OTHOGRAPHIC,
+};
+
 class Camera : public Component
 {
 public:
@@ -8,7 +15,7 @@ public:
 	virtual ~Camera() {}
 
 public:
-	virtual void LateUpdate() override;
+	virtual void FinalUpdate() override;
 	void Render();
 
 public:

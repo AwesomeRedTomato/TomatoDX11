@@ -4,7 +4,7 @@
 
 void MeshRenderer::Update()
 {
-	Render();
+	// Render(); ÀÌ»ç°©´Ï´Ù(camera->Render())
 }
 
 void MeshRenderer::Render()

@@ -9,8 +9,9 @@ class SceneManager
 public:
 	void LoadScene();
 	void Update();
-
 	void UpdateImgui();
+	void Render();
+
 
 public:
 	std::shared_ptr<Scene> GetActiveScene() { return _activeScene; }

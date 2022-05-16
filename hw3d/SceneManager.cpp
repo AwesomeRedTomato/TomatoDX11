@@ -47,6 +47,22 @@ void SceneManager::UpdateImgui()
 
 }
 
+void SceneManager::Render()
+{
+	if (_activeScene == nullptr)
+		return;
+
+	const std::vector<std::shared_ptr<GameObject>>& gameObjects = _activeScene->GetGameObject();
+	
+	for (const auto& g : gameObjects)
+	{
+		if (g->GetCamera() == nullptr)
+			continue;
+
+		g->GetCamera()->Render();
+	}
+}
+
 std::shared_ptr<Scene> SceneManager::LoadTestScene()
 {
 	std::shared_ptr<Scene> scene = std::make_shared<Scene>();
@@ -76,11 +92,15 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 
 		
 	}
-	//auto camera = std::make_shared<Camera>();
-	//gameObject->AddComponent(camera);
+#pragma region Camera
+	std::shared_ptr<GameObject> camera = std::make_shared<GameObject>();
+	camera->AddComponent(std::make_shared<Transform>());
+	camera->AddComponent(std::make_shared<Camera>()); // Near=1, Far=1000, FOV=45µµ
+	camera->GetTransform()->SetLocalPosition(FLOAT3(0.f, 100.f, 0.f));
+	scene->AddGameObject(camera);
+#pragma endregion
 
 	gameObject->AddComponent(meshRenderer);
-	
 	scene->AddGameObject(gameObject);
 
 	return scene;

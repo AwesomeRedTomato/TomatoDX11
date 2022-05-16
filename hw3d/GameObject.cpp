@@ -1,5 +1,12 @@
 #include "pch.h"
 #include "GameObject.h"
+#include "Transform.h"
+#include "Shader.h"
+#include "Material.h"
+#include "MeshRenderer.h"
+#include "MonoBehaviour.h"
+#include "Camera.h"
+
 
 void GameObject::Init()
 {
@@ -45,6 +52,15 @@ void GameObject::LateUpdate()
 	}
 }
 
+void GameObject::FinalUpdate()
+{
+	for (const auto& c : _components)
+	{
+		if (c)
+			c->FinalUpdate();
+	}
+}
+
 void GameObject::AddComponent(std::shared_ptr<Component> component)
 {
 	component->SetGameObject(shared_from_this());
@@ -66,6 +82,12 @@ std::shared_ptr<Transform> GameObject::GetTransform()
 {
 	UINT index = static_cast<UINT>(COMPONENT_TYPE::TRANSFORM);
 	return std::static_pointer_cast<Transform>(_components[index]);
+}
+
+std::shared_ptr<MeshRenderer> GameObject::GetMeshRenderer()
+{
+	UINT index = static_cast<UINT>(COMPONENT_TYPE::MESH_RENDERER);
+	return std::static_pointer_cast<MeshRenderer>(_components[index]);
 }
 
 std::shared_ptr<Camera> GameObject::GetCamera()

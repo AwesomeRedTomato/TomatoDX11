@@ -1,10 +1,12 @@
 #pragma once
 #include "Component.h"
-#include "Transform.h"
-#include "Shader.h"
-#include "Material.h"
-#include "MonoBehaviour.h"
-#include "Camera.h"
+
+class Transform;
+class Shader;
+class Material;
+class MeshRenderer;
+class Camera;
+class MonoBehaviour;
 
 class GameObject : public std::enable_shared_from_this<GameObject>
 {
@@ -14,12 +16,14 @@ public:
 	void Start();
 	void Update();
 	void LateUpdate();
+	void FinalUpdate();
 
 public:
 	void AddComponent(std::shared_ptr<Component> component);
 
 public:
 	std::shared_ptr<Transform> GetTransform();
+	std::shared_ptr<MeshRenderer> GetMeshRenderer();
 	std::shared_ptr<Camera> GetCamera();
 
 private:
