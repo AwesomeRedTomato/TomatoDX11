@@ -94,7 +94,7 @@ void Graphics::Init(const Window& window)
 
 	Start();
 
-	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(Tr), 1u);
+	CreateConstantBuffer((UINT)CB_TYPE::COLOR, sizeof(Tr), 1u);
 }
 
 void Graphics::InitImgui(const Window& window)
@@ -137,17 +137,18 @@ void Graphics::PushData()
 	static float angle = 0.0f;
 	angle += 0.0001;
 
-	//Tr tr
-	//{
-	//	XMMatrixTranspose(
-	//	XMMatrixRotationZ(angle) *
-	//	XMMatrixRotationX(angle) *
-	//	XMMatrixTranslation(0, 0.0f, 0 + 4.0f) *
-	//	XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
-	//};
+	Tr tr
+	{
+		XMMatrixTranspose(
+		XMMatrixRotationZ(angle) *
+		XMMatrixRotationX(angle) *
+		XMMatrixTranslation(0, 0.0f, 0 + 4.0f) *
+		XMMatrixPerspectiveLH(1.0f, 3.0f / 4.0f, 0.5f, 10.0f))
+	};
 
-	//_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->PushData(&tr, sizeof(Tr));
-	//_CBs[static_cast<UINT>(CB_TYPE::TRANSFORM)]->Render();
+	CONSTANT_BUFFER(CB_TYPE::COLOR)->Init(2u, sizeof(Tr), 1u);
+	CONSTANT_BUFFER(CB_TYPE::COLOR)->PushData(&tr, sizeof(Tr));
+	CONSTANT_BUFFER(CB_TYPE::COLOR)->Render();
 }
 
 void Graphics::CreateConstantBuffer(UINT slot, UINT size, UINT count)

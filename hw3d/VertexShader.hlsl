@@ -14,7 +14,7 @@ cbuffer MATERIAL_PARAMS : register(b1)
 };
 
 // 수정 예정
-cbuffer TR : register(b3)
+cbuffer TR : register(b2)
 {
     matrix transform;
 }
@@ -31,7 +31,7 @@ struct VSOut
 VSOut main(float3 pos : POSITION, float2 uv : TEXCOORD)
 {
     VSOut vso;
-    vso.pos = mul(float4(pos, 1.f), matWVP);
+    vso.pos = mul(float4(pos, 1.f), transform);
     vso.uv = uv;
     return vso;
 }

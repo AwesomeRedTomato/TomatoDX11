@@ -76,8 +76,8 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 
 		
 	}
-	auto camera = std::make_shared<Camera>();
-	gameObject->AddComponent(camera);
+	//auto camera = std::make_shared<Camera>();
+	//gameObject->AddComponent(camera);
 
 	gameObject->AddComponent(meshRenderer);
 	
