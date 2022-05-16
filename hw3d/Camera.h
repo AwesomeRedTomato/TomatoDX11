@@ -16,6 +16,8 @@ public:
 
 public:
 	virtual void FinalUpdate() override;
+
+
 	void Render();
 
 public:
@@ -24,8 +26,8 @@ public:
 	float _fov = XM_PI / 4.0f;
 	float _scale = 1.0f;
 
-	MATRIX _matView;
-	MATRIX _matProjection;
+	MATRIX _matView = {};
+	MATRIX _matProjection = {};
 
 	static MATRIX S_MatView;
 	static MATRIX S_MatProjection;

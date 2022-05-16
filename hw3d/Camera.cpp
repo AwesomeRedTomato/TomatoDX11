@@ -12,7 +12,7 @@ MATRIX Camera::S_MatProjection;
 
 void Camera::FinalUpdate()
 {
-	_matView = GetTransform()->GetWorldMatrix().Invert();
+	_matView = GetTransform()->GetWorldMatrix();
 
 	_matProjection = XMMatrixPerspectiveFovLH(_fov, _gfx->GetAspectRatio(), _near, _far);
 

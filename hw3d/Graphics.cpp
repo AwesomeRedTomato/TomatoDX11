@@ -92,7 +92,8 @@ void Graphics::Init(const Window& window)
 
 	Start();
 
-	CreateConstantBuffer((UINT)CB_TYPE::COLOR, sizeof(Tr), 1u);
+	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(TransformParams), 1u);
+	//CreateConstantBuffer((UINT)CB_TYPE::COLOR, sizeof(Tr), 1u);
 }
 
 void Graphics::InitImgui(const Window& window)
@@ -115,14 +116,16 @@ void Graphics::Update()
 	PushData();
 
 	GET_SINGLE(SceneManager)->Update();
-	GET_SINGLE(SceneManager)->UpdateImgui();
 }
-
 
 void Graphics::RenderBegin()
 {
 	CONTEXT->ClearRenderTargetView(_rtv.Get(), Colors::LightGray);
 	CONTEXT->ClearDepthStencilView(_dsv.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
+
+	ImGui_ImplDX11_NewFrame();
+	ImGui_ImplWin32_NewFrame();
+	ImGui::NewFrame();
 }
 
 void Graphics::Render()
@@ -132,6 +135,7 @@ void Graphics::Render()
 
 void Graphics::RenderEnd()
 {
+	GET_SINGLE(SceneManager)->UpdateImgui();
 	_swapChain->Present(0u, 0u);
 }
 

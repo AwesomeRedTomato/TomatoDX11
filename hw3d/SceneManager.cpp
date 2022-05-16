@@ -28,11 +28,6 @@ void SceneManager::Update()
 void SceneManager::UpdateImgui()
 {
 	static int counter = 0;
-
-	ImGui_ImplDX11_NewFrame();
-	ImGui_ImplWin32_NewFrame();
-	ImGui::NewFrame();
-
 	static float a = 0.0f;
 
 	ImGui::Begin("Transform");
@@ -67,8 +62,13 @@ void SceneManager::Render()
 std::shared_ptr<Scene> SceneManager::LoadTestScene()
 {
 	std::shared_ptr<Scene> scene = std::make_shared<Scene>();
+
+#pragma region Cube
 	std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>();
-	gameObject->Init();
+	gameObject->AddComponent(std::make_shared<Transform>());
+	std::shared_ptr<Transform> transform = gameObject->GetTransform();
+	transform->SetLocalPosition(FLOAT3(0.0f, 100.0f, 0.0f));
+	transform->SetLocalScale(FLOAT3(100.0f, 100.0f, 100.0f));
 
 	auto meshRenderer = std::make_shared<MeshRenderer>();
 	{
@@ -90,9 +90,12 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 
 		meshRenderer->SetMesh(mesh);
 		meshRenderer->SetMaterial(material);
-
-		
 	}
+	gameObject->AddComponent(meshRenderer);
+#pragma endregion
+	scene->AddGameObject(gameObject);
+
+
 #pragma region Camera
 	std::shared_ptr<GameObject> camera = std::make_shared<GameObject>();
 	camera->AddComponent(std::make_shared<Transform>());
@@ -101,8 +104,6 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 	scene->AddGameObject(camera);
 #pragma endregion
 
-	gameObject->AddComponent(meshRenderer);
-	scene->AddGameObject(gameObject);
 
 	return scene;
 
