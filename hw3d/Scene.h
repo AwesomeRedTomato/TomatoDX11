@@ -8,6 +8,7 @@ public:
 	void Start();
 	void Update();
 	void LateUpdate();
+	void FinalUpdate();
 
 public:
 	void AddGameObject(std::shared_ptr<GameObject> gameObject);

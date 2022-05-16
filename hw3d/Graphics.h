@@ -39,6 +39,7 @@ public:
 	void Update();
 
 	void RenderBegin();
+	void Render();
 	void RenderEnd();
 
 	void PushData();
@@ -53,9 +54,6 @@ private:
 
 public:
 	float _aspectRatio = 0;
-	
-	float _width;
-	float _height;
 
 private:
 	ComPtr<ID3D11Device> _device;

@@ -30,6 +30,9 @@ Window::WindowClass::~WindowClass()
 
 void Window::Init(int width, int height, const char* name)
 {
+	_width = width;
+	_height = height;
+
 	RECT wr;
 	wr.left = 100;
 	wr.right = width + wr.left;

@@ -125,6 +125,11 @@ void Graphics::RenderBegin()
 	CONTEXT->ClearDepthStencilView(_dsv.Get(), D3D11_CLEAR_DEPTH, 1.0f, 0u);
 }
 
+void Graphics::Render()
+{
+	GET_SINGLE(SceneManager)->Render();
+}
+
 void Graphics::RenderEnd()
 {
 	_swapChain->Present(0u, 0u);

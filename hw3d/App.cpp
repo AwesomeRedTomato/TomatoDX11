@@ -36,5 +36,6 @@ void App::Render()
 {
 	_gfx->RenderBegin();
 	_gfx->Update();
+	_gfx->Render();
 	_gfx->RenderEnd();
 }

@@ -31,7 +31,7 @@ struct VSOut
 VSOut main(float3 pos : POSITION, float2 uv : TEXCOORD)
 {
     VSOut vso;
-    vso.pos = mul(float4(pos, 1.f), transform);
+    vso.pos = mul(float4(pos, 1.f), matWVP);
     vso.uv = uv;
     return vso;
 }
