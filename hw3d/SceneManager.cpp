@@ -27,20 +27,10 @@ void SceneManager::Update()
 
 void SceneManager::UpdateImgui()
 {
-	static int counter = 0;
-	static float a = 0.0f;
-
-	ImGui::Begin("Transform");
-
-	ImGui::SliderFloat("R", &a, 50.0f, 80.0f, "%.1f");
-
-	std::string clickCount = "Click Count: " + std::to_string(counter);
-	ImGui::Text(clickCount.c_str());
-	ImGui::End();
+	_activeScene->UpdateImGui();
+	
 	ImGui::Render();
-
 	ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
-
 }
 
 void SceneManager::Render()
@@ -65,7 +55,9 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 
 #pragma region Cube
 	std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>();
+	gameObject->SetObjectName("Cube");
 	gameObject->AddComponent(std::make_shared<Transform>());
+
 	std::shared_ptr<Transform> transform = gameObject->GetTransform();
 	transform->SetLocalPosition(FLOAT3(0.0f, 100.0f, 0.0f));
 	transform->SetLocalScale(FLOAT3(100.0f, 100.0f, 100.0f));
@@ -98,6 +90,7 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 
 #pragma region Camera
 	std::shared_ptr<GameObject> camera = std::make_shared<GameObject>();
+	camera->SetObjectName("Camera");
 	camera->AddComponent(std::make_shared<Transform>());
 	camera->AddComponent(std::make_shared<Camera>()); // Near=1, Far=1000, FOV=45µµ
 	camera->GetTransform()->SetLocalPosition(FLOAT3(0.f, 100.f, 0.f));
@@ -106,5 +99,4 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 
 
 	return scene;
-
 }

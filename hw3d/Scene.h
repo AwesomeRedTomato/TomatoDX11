@@ -10,6 +10,8 @@ public:
 	void LateUpdate();
 	void FinalUpdate();
 
+	void UpdateImGui();
+
 public:
 	void AddGameObject(std::shared_ptr<GameObject> gameObject);
 	void RemoveGameObject(std::shared_ptr<GameObject> gameObject);

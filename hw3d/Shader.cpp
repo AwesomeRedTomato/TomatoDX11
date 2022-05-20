@@ -4,8 +4,8 @@
 
 void Shader::Init()
 {
-	CreateShader(L"VertexShader.cso", _vsBlob);
-	CreateShader(L"PixelShader.cso", _psBlob);
+	CreateShader(L"SolidVS.cso", _vsBlob);
+	CreateShader(L"SolidPS.cso", _psBlob);
 
 	DEVICE->CreateVertexShader(_vsBlob->GetBufferPointer(), _vsBlob->GetBufferSize(), nullptr, _vertexShader.GetAddressOf());
 	DEVICE->CreatePixelShader(_psBlob->GetBufferPointer(), _psBlob->GetBufferSize(), nullptr, _pixelShader.GetAddressOf());

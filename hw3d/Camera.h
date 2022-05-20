@@ -17,7 +17,6 @@ public:
 public:
 	virtual void FinalUpdate() override;
 
-
 	void Render();
 
 public:

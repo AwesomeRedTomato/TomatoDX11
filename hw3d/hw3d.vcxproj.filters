@@ -30,9 +30,6 @@
     <Filter Include="소스 파일\Component">
       <UniqueIdentifier>{37d27d1f-4556-4dd1-849c-ddb0fc2b31be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="DxManager">
-      <UniqueIdentifier>{b0cccdfc-e4b1-48cc-b371-83bb83b6e865}</UniqueIdentifier>
-    </Filter>
     <Filter Include="헤더 파일\Component">
       <UniqueIdentifier>{5f20e00b-3fa0-40f5-8d47-36a4171420de}</UniqueIdentifier>
     </Filter>
@@ -55,19 +52,19 @@
     <Filter Include="소스 파일\Component\GameObject">
       <UniqueIdentifier>{e14ac8f5-34f1-44c4-8de9-a2e5197c478a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="GDIPlus">
-      <UniqueIdentifier>{c95e8ac4-6cae-4648-ab43-72ec1453b85e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{27b578f1-03e0-4670-82a1-ebd917728e3e}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager\Scene">
       <UniqueIdentifier>{2cfd93a0-25e3-4b92-bd98-4c73fcc23033}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Manager\DxManager">
+      <UniqueIdentifier>{b0cccdfc-e4b1-48cc-b371-83bb83b6e865}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dxerr.cpp">
-      <Filter>DxManager</Filter>
+      <Filter>Manager\DxManager</Filter>
     </ClCompile>
     <ClCompile Include="App.cpp">
       <Filter>소스 파일\Device</Filter>
@@ -111,12 +108,6 @@
     <ClCompile Include="MeshRenderer.cpp">
       <Filter>소스 파일\Component</Filter>
     </ClCompile>
-    <ClCompile Include="GDIPlusManager.cpp">
-      <Filter>GDIPlus</Filter>
-    </ClCompile>
-    <ClCompile Include="Component.cpp">
-      <Filter>소스 파일\Component</Filter>
-    </ClCompile>
     <ClCompile Include="Transform.cpp">
       <Filter>소스 파일\Component</Filter>
     </ClCompile>
@@ -137,9 +128,6 @@
     </ClCompile>
     <ClCompile Include="Imgui\imgui_widgets.cpp">
       <Filter>Imgui</Filter>
-    </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>소스 파일\Pipeline</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>소스 파일\Component</Filter>
@@ -168,10 +156,19 @@
     <ClCompile Include="Light.cpp">
       <Filter>소스 파일\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>소스 파일\Component\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GDIPlusManager.cpp">
+      <Filter>Manager\DxManager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>소스 파일\Component\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dxerr.h">
-      <Filter>DxManager</Filter>
+      <Filter>Manager\DxManager</Filter>
     </ClInclude>
     <ClInclude Include="App.h">
       <Filter>헤더 파일\Device</Filter>
@@ -226,9 +223,6 @@
     </ClInclude>
     <ClInclude Include="Plane.h">
       <Filter>헤더 파일\Geometry</Filter>
-    </ClInclude>
-    <ClInclude Include="GDIPlusManager.h">
-      <Filter>GDIPlus</Filter>
     </ClInclude>
     <ClInclude Include="Sphere.h">
       <Filter>헤더 파일\Geometry</Filter>
@@ -287,38 +281,38 @@
     <ClInclude Include="Scene.h">
       <Filter>Manager\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="SimpleMath.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="Light.h">
       <Filter>헤더 파일\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GDIPlusManager.h">
+      <Filter>Manager\DxManager</Filter>
+    </ClInclude>
+    <ClInclude Include="SimpleMath.h">
+      <Filter>Manager\DxManager</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="DXGetErrorDescription.inl">
-      <Filter>DxManager</Filter>
+      <Filter>Manager\DxManager</Filter>
     </None>
     <None Include="DXGetErrorString.inl">
-      <Filter>DxManager</Filter>
+      <Filter>Manager\DxManager</Filter>
     </None>
     <None Include="DXTrace.inl">
-      <Filter>DxManager</Filter>
+      <Filter>Manager\DxManager</Filter>
+    </None>
+    <None Include="Params.hlsli">
+      <Filter>셰이더</Filter>
     </None>
     <None Include="SimpleMath.inl">
-      <Filter>Manager</Filter>
+      <Filter>Manager\DxManager</Filter>
     </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="PhongVS.hlsl">
-      <Filter>셰이더</Filter>
-    </FxCompile>
     <FxCompile Include="SolidVS.hlsl">
       <Filter>셰이더</Filter>
     </FxCompile>
     <FxCompile Include="SolidPS.hlsl">
-      <Filter>셰이더</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongPS.hlsl">
       <Filter>셰이더</Filter>
     </FxCompile>
   </ItemGroup>

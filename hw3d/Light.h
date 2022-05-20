@@ -35,12 +35,11 @@ public:
 	void SetSpecular(const FLOAT3& specular) { _lightParams.specular = specular; }
 
 	void SetLightType(LIGHT_TYPE type) { _lightParams.lightType; }
-
+	void SetLightRange(float range) { _lightParams.range; }
+	void SetLightAngel(float angle) { _lightParams.angle; }
 
 public:
-	void Start();
-	void Update();
-	void LateUpdate();
+	void FinalUpdate() override;
 
 protected:
 	LIGHT_PARAMS _lightParams;

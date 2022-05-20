@@ -9,7 +9,6 @@
 MATRIX Camera::S_MatView;
 MATRIX Camera::S_MatProjection;
 
-
 void Camera::FinalUpdate()
 {
 	_matView = GetTransform()->GetWorldMatrix();
@@ -18,6 +17,7 @@ void Camera::FinalUpdate()
 
 	S_MatView = _matView;
 	S_MatProjection = _matProjection;
+
 }
 
 void Camera::Render()

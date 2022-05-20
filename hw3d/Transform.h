@@ -9,6 +9,7 @@ public:
 	
 public:
 	virtual void LateUpdate() override;
+	virtual void UpdateImGui() override;
 	void PushData();
 
 public:
@@ -19,13 +20,13 @@ public:
 	MATRIX& GetWorldMatrix() { return _matWorld; }
 	FLOAT3 GetWorldPosition() { return _matWorld.Translation(); }
 
-
 	void SetLocalPosition(const FLOAT3& position) { _localPosition = position; }
 	void SetLocalRotation(const FLOAT3& rotation) { _localRotation = rotation; }
 	void SetLocalScale(const FLOAT3& scale) { _localScale = scale; }
 
 	void SetParentTransform(std::shared_ptr<Transform> parent) { _parent = parent; }
 	std::weak_ptr<Transform> GetParentTransform() { return _parent; }
+
 
 private:
 	FLOAT3 _localPosition = {};
@@ -35,6 +36,6 @@ private:
 	MATRIX _matLocal = {};
 	MATRIX _matWorld = {};
 
-	std::weak_ptr<Transform> _parent;
+	std::weak_ptr<Transform> _parent = {};
 };
 

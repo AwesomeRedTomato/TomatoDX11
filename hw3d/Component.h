@@ -25,6 +25,8 @@ public:
 	virtual void LateUpdate() {}
 	virtual void FinalUpdate() {}
 
+	virtual void UpdateImGui() {}
+
 public:
 	COMPONENT_TYPE GetType() { return _type; }
 

@@ -71,11 +71,8 @@ struct Vertex
 
 struct TransformParams
 {
-	MATRIX matWorld;
 	MATRIX matView;
-	MATRIX matProjection;
-	MATRIX matWV;
-	MATRIX matWVP;
+	MATRIX matViewProjection;
 };
 
 extern std::unique_ptr<class Graphics> _gfx;

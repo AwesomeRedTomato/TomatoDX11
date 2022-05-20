@@ -61,6 +61,15 @@ void GameObject::FinalUpdate()
 	}
 }
 
+void GameObject::UpdateImGui()
+{
+	for (const auto& c : _components)
+	{
+		if(c)
+			c->UpdateImGui();
+	}
+}
+
 void GameObject::AddComponent(std::shared_ptr<Component> component)
 {
 	component->SetGameObject(shared_from_this());

@@ -36,6 +36,14 @@ void Scene::FinalUpdate()
 	}
 }
 
+void Scene::UpdateImGui()
+{
+	for (const auto& g : _gameObjects)
+	{
+		g->UpdateImGui();
+	}
+}
+
 
 void Scene::AddGameObject(std::shared_ptr<GameObject> gameObject)
 {

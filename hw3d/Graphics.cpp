@@ -131,11 +131,12 @@ void Graphics::RenderBegin()
 void Graphics::Render()
 {
 	GET_SINGLE(SceneManager)->Render();
+	GET_SINGLE(SceneManager)->UpdateImgui();
 }
 
 void Graphics::RenderEnd()
 {
-	GET_SINGLE(SceneManager)->UpdateImgui();
+	ImGui::EndFrame();
 	_swapChain->Present(0u, 0u);
 }
 
