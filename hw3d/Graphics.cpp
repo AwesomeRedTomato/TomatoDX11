@@ -93,7 +93,7 @@ void Graphics::Init(const Window& window)
 	Start();
 
 	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(TransformParams), 1u);
-	//CreateConstantBuffer((UINT)CB_TYPE::COLOR, sizeof(Tr), 1u);
+	CreateConstantBuffer((UINT)CB_TYPE::COLOR, sizeof(Tr), 1u);
 }
 
 void Graphics::InitImgui(const Window& window)
@@ -155,7 +155,7 @@ void Graphics::PushData()
 	};
 
 	CONSTANT_BUFFER(CB_TYPE::COLOR)->Init(2u, sizeof(Tr), 1u);
-	CONSTANT_BUFFER(CB_TYPE::COLOR)->PushData(&tr, sizeof(Tr));
+	CONSTANT_BUFFER(CB_TYPE::COLOR)->PushData(&tr);
 	CONSTANT_BUFFER(CB_TYPE::COLOR)->Render();
 }
 

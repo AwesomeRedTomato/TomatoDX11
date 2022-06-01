@@ -14,7 +14,7 @@ void ConstantBuffer::Render()
 	CONTEXT->VSSetConstantBuffers(_slot, 1u, _constantBuffer.GetAddressOf());
 }
 
-void ConstantBuffer::PushData(void* buffer, UINT size)
+void ConstantBuffer::PushData(void* buffer)
 {
 	UINT bufferSize = _elementSize * _elementCount;
 
@@ -32,6 +32,6 @@ void ConstantBuffer::PushData(void* buffer, UINT size)
 
 	D3D11_MAPPED_SUBRESOURCE msr;
 	CONTEXT->Map(_constantBuffer.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &msr);
-	memcpy_s(msr.pData, bufferSize, buffer, size);
+	memcpy_s(msr.pData, bufferSize, buffer, _elementSize);
 	CONTEXT->Unmap(_constantBuffer.Get(), 0u);
 }

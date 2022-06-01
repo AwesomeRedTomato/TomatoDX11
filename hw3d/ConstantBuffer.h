@@ -16,7 +16,7 @@ public:
 	void Init(UINT slot, UINT size, UINT count);
 	void Render();
 
-	void PushData(void* buffer, UINT size);
+	void PushData(void* buffer);
 
 protected:
 	ComPtr<ID3D11Buffer> _constantBuffer;

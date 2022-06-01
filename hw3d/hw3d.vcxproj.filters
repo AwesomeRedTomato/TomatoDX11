@@ -61,6 +61,9 @@
     <Filter Include="Manager\DxManager">
       <UniqueIdentifier>{b0cccdfc-e4b1-48cc-b371-83bb83b6e865}</UniqueIdentifier>
     </Filter>
+    <Filter Include="헤더 파일\test">
+      <UniqueIdentifier>{793938dc-6967-40e4-8053-4a85bc9bd6c4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="dxerr.cpp">

@@ -11,13 +11,12 @@ MATRIX Camera::S_MatProjection;
 
 void Camera::FinalUpdate()
 {
-	_matView = GetTransform()->GetWorldMatrix();
+	_matView = GetTransform()->GetWorldMatrix().Invert();
 
 	_matProjection = XMMatrixPerspectiveFovLH(_fov, _gfx->GetAspectRatio(), _near, _far);
 
 	S_MatView = _matView;
 	S_MatProjection = _matProjection;
-
 }
 
 void Camera::Render()

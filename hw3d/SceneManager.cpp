@@ -59,8 +59,9 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 	gameObject->AddComponent(std::make_shared<Transform>());
 
 	std::shared_ptr<Transform> transform = gameObject->GetTransform();
-	transform->SetLocalPosition(FLOAT3(0.0f, 100.0f, 0.0f));
-	transform->SetLocalScale(FLOAT3(100.0f, 100.0f, 100.0f));
+	transform->SetLocalPosition(FLOAT3(0.0f, 0.0f, 0.7f));
+	transform->SetLocalScale(FLOAT3(0.2f, 0.2f, 0.2f));
+	transform->SetLocalRotation(FLOAT3(70.0f, 70.0f, 0.0f));
 
 	auto meshRenderer = std::make_shared<MeshRenderer>();
 	{
@@ -93,7 +94,7 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 	camera->SetObjectName("Camera");
 	camera->AddComponent(std::make_shared<Transform>());
 	camera->AddComponent(std::make_shared<Camera>()); // Near=1, Far=1000, FOV=45µµ
-	camera->GetTransform()->SetLocalPosition(FLOAT3(0.f, 100.f, 0.f));
+	camera->GetTransform()->SetLocalPosition(FLOAT3(0.f, 0.f, 0.f));
 	scene->AddGameObject(camera);
 #pragma endregion
 

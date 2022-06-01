@@ -2,11 +2,11 @@
 #include "Component.h"
 
 // 구현 예정
-enum class PERSPECTIVE_TYPE
-{
-	PERSPECTIVE,
-	OTHOGRAPHIC,
-};
+//enum class PERSPECTIVE_TYPE
+//{
+//	PERSPECTIVE,
+//	OTHOGRAPHIC,
+//};
 
 class Camera : public Component
 {
@@ -16,10 +16,9 @@ public:
 
 public:
 	virtual void FinalUpdate() override;
-
 	void Render();
 
-public:
+private:
 	float _near = 1.0f;
 	float _far = 1000.f;
 	float _fov = XM_PI / 4.0f;
@@ -28,6 +27,8 @@ public:
 	MATRIX _matView = {};
 	MATRIX _matProjection = {};
 
+public:
 	static MATRIX S_MatView;
 	static MATRIX S_MatProjection;
 };
+

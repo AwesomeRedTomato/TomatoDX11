@@ -1,7 +1,10 @@
 cbuffer TRANSFORM_PARAMS : register(b0)
 {
-    matrix matView;
-    matrix matViewProjection;
+    row_major matrix g_matWorld;
+    row_major matrix g_matView;
+    row_major matrix g_matProjection;
+    row_major matrix g_matWV;
+    row_major matrix g_matWVP;
 };
 
 cbuffer MATERIAL_PARAMS : register(b1)
@@ -9,11 +12,6 @@ cbuffer MATERIAL_PARAMS : register(b1)
     int tex_on_0;
     int tex_on_1;
 };
-
-cbuffer TR : register(b2)
-{
-    matrix transform;
-}
 
 cbuffer LIGHT_PARAMS : register(b3)
 {
