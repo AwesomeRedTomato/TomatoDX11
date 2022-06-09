@@ -8,6 +8,7 @@
 #include "Cube.h"
 #include "Transform.h"
 #include "Camera.h"
+#include "Light.h"
 
 void SceneManager::LoadScene()
 {
@@ -60,8 +61,9 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 
 	std::shared_ptr<Transform> transform = gameObject->GetTransform();
 	transform->SetLocalPosition(FLOAT3(0.0f, 0.0f, 0.7f));
-	transform->SetLocalScale(FLOAT3(0.2f, 0.2f, 0.2f));
+	transform->SetLocalScale(FLOAT3(1.0f, 1.0f, 1.0f));
 	transform->SetLocalRotation(FLOAT3(70.0f, 70.0f, 0.0f));
+
 
 	auto meshRenderer = std::make_shared<MeshRenderer>();
 	{
@@ -85,19 +87,26 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 		meshRenderer->SetMaterial(material);
 	}
 	gameObject->AddComponent(meshRenderer);
-#pragma endregion
 	scene->AddGameObject(gameObject);
-
+#pragma endregion
 
 #pragma region Camera
 	std::shared_ptr<GameObject> camera = std::make_shared<GameObject>();
 	camera->SetObjectName("Camera");
 	camera->AddComponent(std::make_shared<Transform>());
 	camera->AddComponent(std::make_shared<Camera>()); // Near=1, Far=1000, FOV=45µµ
-	camera->GetTransform()->SetLocalPosition(FLOAT3(0.f, 0.f, 0.f));
+	camera->GetTransform()->SetLocalPosition(FLOAT3(0.0f, 0.0f, -10.0f));
 	scene->AddGameObject(camera);
+#pragma endregion
+
+
+#pragma region PointLight
+	std::shared_ptr<GameObject> pointLight = std::make_shared<GameObject>();
+	pointLight->SetObjectName("PointLight");
+
 #pragma endregion
 
 
 	return scene;
 }
+

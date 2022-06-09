@@ -31,3 +31,16 @@ cbuffer LIGHT_PARAMS : register(b3)
 
 Texture2D texture_0 : register(t0);
 SamplerState samplerState_0 : register(s0);
+
+struct VSIn
+{
+    float3 pos : POSITION;
+    float2 uv : TEXCOORD;
+};
+
+struct VSOut
+{
+    float2 uv : TEXCOORD;
+    float4 pos : SV_Position;
+};
+

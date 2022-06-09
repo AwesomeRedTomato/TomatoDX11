@@ -20,10 +20,6 @@ public:
 	const MATRIX& GetWorldMatrix() { return _matWorld; }
 	FLOAT3 GetWorldPosition() { return _matWorld.Translation(); }
 
-	FLOAT3 GetRight() { return _matWorld.Right(); }
-	FLOAT3 GetUp() { return _matWorld.Up(); }
-	FLOAT3 GetLook() { return _matWorld.Backward(); }
-
 	void SetLocalPosition(const FLOAT3& position) { _localPosition = position; }
 	void SetLocalRotation(const FLOAT3& rotation) { _localRotation = rotation; }
 	void SetLocalScale(const FLOAT3& scale) { _localScale = scale; }
@@ -43,4 +39,3 @@ private:
 
 	std::weak_ptr<Transform> _parent;
 };
-

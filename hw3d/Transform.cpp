@@ -33,7 +33,7 @@ void Transform::UpdateImGui()
 		if (ImGui::Begin(GetGameObject()->GetObjectName().c_str()))
 		{
 			ImGui::Text("Transform");
-			ImGui::SliderFloat3("Position", position, -1.0f, 1.0f);
+			ImGui::SliderFloat3("Position", position, -10.0f, 100.0f);
 			ImGui::SliderFloat3("Rotation", rotation, -180.0f, 180.0f);
 			ImGui::SliderFloat3("Scale", scale, 0.0f, 1.0f);
 
@@ -43,7 +43,7 @@ void Transform::UpdateImGui()
 
 			if(ImGui::Button("Reset"))
 			{
-				GetTransform()->SetLocalScale(FLOAT3(0.3f, 0.3f, 0.3f));
+				GetTransform()->SetLocalScale(FLOAT3(1.0f, 1.0f, 1.0f));
 				GetTransform()->SetLocalPosition(FLOAT3(0, 0, 0));
 				GetTransform()->SetLocalRotation(FLOAT3(0, 0, 0));
 			}

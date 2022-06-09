@@ -20,7 +20,7 @@ public:
 
 private:
 	float _near = 1.0f;
-	float _far = 1000.f;
+	float _far = 1000.0f;
 	float _fov = XM_PI / 4.0f;
 	float _scale = 1.0f;
 

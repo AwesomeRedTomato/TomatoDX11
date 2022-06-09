@@ -9,35 +9,36 @@ public:
 		vertices.resize(24);
 		indices.resize(36);
 
-		float w2 = 1.5f;
-		float h2 = 1.5f;
-		float d2 = 1.5f;
+		float w2 = 1.0f;
+		float h2 = 1.0f;
+		float d2 = 1.0f;
 
+		// ¾Õ¸é
 		vertices[0] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(0.0f, 1.0f));
 		vertices[1] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(0.0f, 0.0f));
 		vertices[2] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(1.0f, 0.0f));
 		vertices[3] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(1.0f, 1.0f));
-		//µÞ¸é								
+		// µÞ¸é								
 		vertices[4] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(1.0f, 1.0f));
 		vertices[5] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(0.0f, 1.0f));
 		vertices[6] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(0.0f, 0.0f));
 		vertices[7] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(1.0f, 0.0f));
-		//À­¸é								
+		// À­¸é								
 		vertices[8] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(0.0f, 1.0f));
 		vertices[9] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(0.0f, 0.0f));
 		vertices[10] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(1.0f, 0.0f));
 		vertices[11] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(1.0f, 1.0f));
-		//¾Æ·§¸é												  )
+		// ¾Æ·§¸é												  )
 		vertices[12] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(1.0f, 1.0f));
 		vertices[13] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(0.0f, 1.0f));
 		vertices[14] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(0.0f, 0.0f));
 		vertices[15] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(1.0f, 0.0f));
-		//¿ÞÂÊ¸é												   )
+		// ¿ÞÂÊ¸é												   )
 		vertices[16] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(0.0f, 1.0f));
 		vertices[17] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(0.0f, 0.0f));
 		vertices[18] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(1.0f, 0.0f));
 		vertices[19] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(1.0f, 1.0f));
-		//¿À¸¥ÂÊ¸é												  )
+		// ¿À¸¥ÂÊ¸é												  )
 		vertices[20] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(0.0f, 1.0f));
 		vertices[21] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(0.0f, 0.0f));
 		vertices[22] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(1.0f, 0.0f));

@@ -4,5 +4,5 @@
 
 void Light::FinalUpdate()
 {
-	_lightParams.position = GetTransform()->GetWorldPosition();
+	
 }
