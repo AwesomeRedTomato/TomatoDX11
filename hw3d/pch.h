@@ -63,19 +63,35 @@ public:								\
 struct Vertex
 {
 	Vertex() {}
-	Vertex(FLOAT3 p, FLOAT2 u) : pos(p), uv(u) {}
+	Vertex(FLOAT3 p, FLOAT2 u, FLOAT3 n) : pos(p), uv(u), normal(n) {}
 
 	FLOAT3 pos;
 	FLOAT2 uv;
+	FLOAT3 normal;
 };
 
-struct TransformParams
+struct TRANSFORM_PARAMS
 {
 	MATRIX matWorld;
 	MATRIX matView;
 	MATRIX matProjection;
 	MATRIX matWV;
 	MATRIX matWVP;
+};
+
+struct LIGHT_PARAMS
+{
+	FLOAT4		lightPosition;
+	FLOAT4		lightDirection;
+
+	FLOAT4		diffuseColor;
+	FLOAT4		ambientColor;
+	FLOAT4		specularColor;
+
+	UINT		lightType;
+	float		intensity;
+	float		range;	// point light radius
+	float		angle;
 };
 
 extern std::unique_ptr<class Graphics> _gfx;

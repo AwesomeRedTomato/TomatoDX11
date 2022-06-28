@@ -28,12 +28,13 @@ public:
 	void SetParent(std::shared_ptr<Transform> parent) { _parent = parent; }
 	std::weak_ptr<Transform> GetParent() { return _parent; }
 
-private:
+public:
 	// Parent ±‚¡ÿ
 	FLOAT3 _localPosition = {};
 	FLOAT3 _localRotation = {};
 	FLOAT3 _localScale = { 1.f, 1.f, 1.f };
 
+private:
 	MATRIX _matLocal = {};
 	MATRIX _matWorld = {};
 

@@ -2,7 +2,7 @@
 #include "Transform.h"
 #include "Graphics.h"
 #include "Camera.h"
-#include "TomatoMath.h"
+// #include "TomatoMath.h"
 
 void Transform::FinalUpdate()
 {
@@ -54,15 +54,14 @@ void Transform::UpdateImGui()
 
 void Transform::PushData()
 {
-	TransformParams transformParams = {};
+	TRANSFORM_PARAMS transformParams = {};
 	transformParams.matWorld = _matWorld;
 	transformParams.matView = Camera::S_MatView;
 	transformParams.matProjection = Camera::S_MatProjection;
 	transformParams.matWV = _matWorld * Camera::S_MatView;
 	transformParams.matWVP = _matWorld * Camera::S_MatView * Camera::S_MatProjection;
 
-	CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->Init(static_cast<UINT>(CB_TYPE::TRANSFORM), sizeof(TransformParams), 1u);
+	CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->Init(static_cast<UINT>(CB_TYPE::TRANSFORM), sizeof(TRANSFORM_PARAMS), 1u);
 	CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->PushData(&transformParams);
-	CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->Render();
 }
 

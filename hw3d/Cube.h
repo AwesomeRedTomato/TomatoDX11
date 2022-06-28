@@ -4,7 +4,7 @@
 class Cube
 {
 public:
-	std::shared_ptr<Mesh> Init()
+	Cube()
 	{
 		vertices.resize(24);
 		indices.resize(36);
@@ -14,35 +14,35 @@ public:
 		float d2 = 1.0f;
 
 		// 앞면
-		vertices[0] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(0.0f, 1.0f));
-		vertices[1] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(0.0f, 0.0f));
-		vertices[2] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(1.0f, 0.0f));
-		vertices[3] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(1.0f, 1.0f));
+		vertices[0] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(0.0f, 1.0f), FLOAT3(0.0f, 0.0f, -1.0f));
+		vertices[1] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(0.0f, 0.0f), FLOAT3(0.0f, 0.0f, -1.0f));
+		vertices[2] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(1.0f, 0.0f), FLOAT3(0.0f, 0.0f, -1.0f));
+		vertices[3] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(1.0f, 1.0f), FLOAT3(0.0f, 0.0f, -1.0f));
 		// 뒷면								
-		vertices[4] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(1.0f, 1.0f));
-		vertices[5] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(0.0f, 1.0f));
-		vertices[6] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(0.0f, 0.0f));
-		vertices[7] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(1.0f, 0.0f));
+		vertices[4] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(1.0f, 1.0f), FLOAT3(0.0f, 0.0f, 1.0f));
+		vertices[5] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(0.0f, 1.0f), FLOAT3(0.0f, 0.0f, 1.0f));
+		vertices[6] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(0.0f, 0.0f), FLOAT3(0.0f, 0.0f, 1.0f));
+		vertices[7] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(1.0f, 0.0f), FLOAT3(0.0f, 0.0f, 1.0f));
 		// 윗면								
-		vertices[8] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(0.0f, 1.0f));
-		vertices[9] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(0.0f, 0.0f));
-		vertices[10] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(1.0f, 0.0f));
-		vertices[11] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(1.0f, 1.0f));
-		// 아랫면												  )
-		vertices[12] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(1.0f, 1.0f));
-		vertices[13] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(0.0f, 1.0f));
-		vertices[14] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(0.0f, 0.0f));
-		vertices[15] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(1.0f, 0.0f));
-		// 왼쪽면												   )
-		vertices[16] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(0.0f, 1.0f));
-		vertices[17] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(0.0f, 0.0f));
-		vertices[18] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(1.0f, 0.0f));
-		vertices[19] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(1.0f, 1.0f));
-		// 오른쪽면												  )
-		vertices[20] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(0.0f, 1.0f));
-		vertices[21] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(0.0f, 0.0f));
-		vertices[22] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(1.0f, 0.0f));
-		vertices[23] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(1.0f, 1.0f));
+		vertices[8] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(0.0f, 1.0f), FLOAT3(0.0f, 1.0f, 0.0f));
+		vertices[9] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(0.0f, 0.0f), FLOAT3(0.0f, 1.0f, 0.0f));
+		vertices[10] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(1.0f, 0.0f), FLOAT3(0.0f, 1.0f, 0.0f));
+		vertices[11] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(1.0f, 1.0f), FLOAT3(0.0f, 1.0f, 0.0f));
+		// 아랫면												  
+		vertices[12] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(1.0f, 1.0f), FLOAT3(0.0f, -1.0f, 0.0f));
+		vertices[13] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(0.0f, 1.0f), FLOAT3(0.0f, -1.0f, 0.0f));
+		vertices[14] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(0.0f, 0.0f), FLOAT3(0.0f, -1.0f, 0.0f));
+		vertices[15] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(1.0f, 0.0f), FLOAT3(0.0f, -1.0f, 0.0f));
+		// 왼쪽면
+		vertices[16] = Vertex(FLOAT3(-w2, -h2, +d2), FLOAT2(0.0f, 1.0f), FLOAT3(-1.0f, 0.0f, 0.0f));
+		vertices[17] = Vertex(FLOAT3(-w2, +h2, +d2), FLOAT2(0.0f, 0.0f), FLOAT3(-1.0f, 0.0f, 0.0f));
+		vertices[18] = Vertex(FLOAT3(-w2, +h2, -d2), FLOAT2(1.0f, 0.0f), FLOAT3(-1.0f, 0.0f, 0.0f));
+		vertices[19] = Vertex(FLOAT3(-w2, -h2, -d2), FLOAT2(1.0f, 1.0f), FLOAT3(-1.0f, 0.0f, 0.0f));
+		// 오른쪽면
+		vertices[20] = Vertex(FLOAT3(+w2, -h2, -d2), FLOAT2(0.0f, 1.0f), FLOAT3(1.0f, 0.0f, 0.0f));
+		vertices[21] = Vertex(FLOAT3(+w2, +h2, -d2), FLOAT2(0.0f, 0.0f), FLOAT3(1.0f, 0.0f, 0.0f));
+		vertices[22] = Vertex(FLOAT3(+w2, +h2, +d2), FLOAT2(1.0f, 0.0f), FLOAT3(1.0f, 0.0f, 0.0f));
+		vertices[23] = Vertex(FLOAT3(+w2, -h2, +d2), FLOAT2(1.0f, 1.0f), FLOAT3(1.0f, 0.0f, 0.0f));
 
 		// 앞면
 		indices[0] = 0; indices[1] = 1; indices[2] = 2;
@@ -62,13 +62,7 @@ public:
 		// 오른쪽면
 		indices[30] = 20; indices[31] = 21; indices[32] = 22;
 		indices[33] = 20; indices[34] = 22; indices[35] = 23;
-
-
-		std::shared_ptr<Mesh> mesh = std::make_unique<Mesh>();
-		mesh->Init(vertices, indices);
-
-		return mesh;
-	}
+}
 
 public:
 	std::vector<Vertex> vertices;

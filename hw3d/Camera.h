@@ -16,6 +16,7 @@ public:
 
 public:
 	virtual void FinalUpdate() override;
+	// virtual void UpdateImGui() override; othgraphic 구현 예정
 	void Render();
 
 private:

@@ -69,7 +69,7 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 	{
 		auto mesh = std::make_shared<Mesh>();
 		auto cube = std::make_shared<Cube>();
-		mesh = cube->Init();
+		//mesh = cube->Init();
 		mesh->Init(cube->vertices, cube->indices);
 
 		auto shader = std::make_shared<Shader>();
@@ -103,7 +103,9 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 #pragma region PointLight
 	std::shared_ptr<GameObject> pointLight = std::make_shared<GameObject>();
 	pointLight->SetObjectName("PointLight");
-
+	pointLight->AddComponent(std::make_shared<Transform>());
+	pointLight->AddComponent(std::make_shared<Light>());
+	scene->AddGameObject(pointLight);
 #pragma endregion
 
 

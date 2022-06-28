@@ -8,40 +8,20 @@ enum class LIGHT_TYPE
 	SPOT_LIGHT,
 };
 
-struct LIGHT_PARAMS
-{
-	FLOAT4		diffuse;
-	FLOAT4		ambient;
-	FLOAT4		specular;
-
-	FLOAT4		position;
-	FLOAT4		direction;
-
-	UINT		lightType;
-	float		range;
-	float		angle;
-	UINT		padding;
-};
-
 class Light : public Component
 {
 public:
-	Light() : Component(COMPONENT_TYPE::LIGHT) {}
+	Light();
 	virtual ~Light() = default;
 
 public:
-	void SetDiffuse(const FLOAT3& diffuse) { _lightParams.diffuse = diffuse; }
-	void SetAmbient(const FLOAT3& ambient) { _lightParams.ambient = ambient; }
-	void SetSpecular(const FLOAT3& specular) { _lightParams.specular = specular; }
-
-	void SetLightType(LIGHT_TYPE type) { _lightParams.lightType; }
-	void SetLightRange(float range) { _lightParams.range; }
-	void SetLightAngel(float angle) { _lightParams.angle; }
+	virtual void FinalUpdate() override;
+	virtual	void UpdateImGui() override;
+	void PushData();
 
 public:
-	void FinalUpdate() override;
+	void SetType(LIGHT_TYPE type) { _lightParams.lightType = (UINT)type; }
 
-protected:
-	LIGHT_PARAMS _lightParams;
+public:
+	LIGHT_PARAMS _lightParams = {};
 };
-

@@ -9,11 +9,6 @@ void ConstantBuffer::Init(UINT slot, UINT size, UINT count)
 	_elementCount = count;
 }
 
-void ConstantBuffer::Render()
-{
-	CONTEXT->VSSetConstantBuffers(_slot, 1u, _constantBuffer.GetAddressOf());
-}
-
 void ConstantBuffer::PushData(void* buffer)
 {
 	UINT bufferSize = _elementSize * _elementCount;
@@ -34,4 +29,6 @@ void ConstantBuffer::PushData(void* buffer)
 	CONTEXT->Map(_constantBuffer.Get(), 0u, D3D11_MAP_WRITE_DISCARD, 0u, &msr);
 	memcpy_s(msr.pData, bufferSize, buffer, _elementSize);
 	CONTEXT->Unmap(_constantBuffer.Get(), 0u);
+	
+	CONTEXT->VSSetConstantBuffers(_slot, 1u, _constantBuffer.GetAddressOf());
 }

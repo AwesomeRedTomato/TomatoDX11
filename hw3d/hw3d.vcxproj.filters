@@ -318,5 +318,11 @@
     <FxCompile Include="SolidPS.hlsl">
       <Filter>셰이더</Filter>
     </FxCompile>
+    <FxCompile Include="PhongVS.hlsl">
+      <Filter>셰이더</Filter>
+    </FxCompile>
+    <FxCompile Include="PhongPS.hlsl">
+      <Filter>셰이더</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

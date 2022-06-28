@@ -53,7 +53,10 @@ private:
 #endif
 
 public:
-	float _aspectRatio = 0;
+	float _aspectRatio = 0.0f;
+
+	float _width = 0.0f;
+	float _height = 0.0;
 
 private:
 	ComPtr<ID3D11Device> _device;

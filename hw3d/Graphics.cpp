@@ -8,6 +8,8 @@
 
 void Graphics::Init(const Window& window)
 {	
+	_width = window._width;
+	_height = window._height;
 	_aspectRatio = static_cast<float>(window._width) / static_cast<float>(window._height);
 
 #pragma region InitEngine
@@ -64,8 +66,8 @@ void Graphics::Init(const Window& window)
 
 	ComPtr<ID3D11Texture2D> depthStencil;
 	D3D11_TEXTURE2D_DESC descDepth = {};
-	descDepth.Width = 800u;
-	descDepth.Height = 600u;
+	descDepth.Width = window._width;
+	descDepth.Height = window._height;
 	descDepth.MipLevels = 1u;
 	descDepth.ArraySize = 1u;
 	descDepth.Format = DXGI_FORMAT_D32_FLOAT;
@@ -90,8 +92,8 @@ void Graphics::Init(const Window& window)
 
 	Start();
 
-	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(TransformParams), 1u);
-	CreateConstantBuffer((UINT)CB_TYPE::COLOR, sizeof(Tr), 1u);
+	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(TRANSFORM_PARAMS), 1u);
+	CreateConstantBuffer((UINT)CB_TYPE::LIGHT, sizeof(LIGHT_PARAMS), 1u);
 }
 
 void Graphics::InitImgui(const Window& window)
@@ -154,7 +156,6 @@ void Graphics::PushData()
 
 	CONSTANT_BUFFER(CB_TYPE::COLOR)->Init(2u, sizeof(Tr), 1u);
 	CONSTANT_BUFFER(CB_TYPE::COLOR)->PushData(&tr);
-	CONSTANT_BUFFER(CB_TYPE::COLOR)->Render();
 }
 
 void Graphics::CreateConstantBuffer(UINT slot, UINT size, UINT count)
