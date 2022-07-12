@@ -12,6 +12,11 @@ public:
 
 	void UpdateImGui();
 
+	void Render();
+
+public:
+	void PushLightData();
+
 public:
 	void AddGameObject(std::shared_ptr<GameObject> gameObject);
 	void RemoveGameObject(std::shared_ptr<GameObject> gameObject);

@@ -18,22 +18,34 @@ cbuffer MATERIAL_PARAMS : register(b1)
 
 cbuffer COLOR_PARAMS : register(b2)
 {
-  
+    float g_color;
+};
+
+struct LightColor
+{
+    float4 ambient;
+    float4 diffuse;
+    float4 specular;
+};
+
+struct LightInfo
+{
+    LightColor  color;
+    
+    float4      pos;
+    float4      direction;
+    int         type;          // directional, spot, point
+           
+    float       range;         // light range
+    float       angle;         // direction
+    float       padding;
 };
 
 cbuffer LIGHT_PARAMS : register(b3)
 {
-    float4 g_lightPos;
-    float4 g_lightDirection;
-           
-    float4 g_diffuseColor;
-    float4 g_ambientColor;
-    float4 g_specularColor;
-    
-    float  g_intensity;
-    int    g_lightType;
-    float  g_range;
-    float  g_angle;
+    int         g_lightCount;
+    float3      g_lightPadding;
+    LightInfo   g_light[50];
 };
 
 Texture2D texture_0 : register(t0);

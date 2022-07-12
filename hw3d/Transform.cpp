@@ -2,7 +2,6 @@
 #include "Transform.h"
 #include "Graphics.h"
 #include "Camera.h"
-// #include "TomatoMath.h"
 
 void Transform::FinalUpdate()
 {
@@ -24,22 +23,14 @@ void Transform::FinalUpdate()
 
 void Transform::UpdateImGui()
 {
-	float scale[3]	 = { _localScale.x, _localScale.y, _localScale.z };
-	float rotation[3] = { _localRotation.x, _localRotation.y, _localRotation.z };
-	float position[3] = { _localPosition.x, _localPosition.y, _localPosition.z };
-	
 	if (!GetGameObject()->GetObjectName().empty())
 	{
 		if (ImGui::Begin(GetGameObject()->GetObjectName().c_str()))
 		{
 			ImGui::Text("Transform");
-			ImGui::SliderFloat3("Position", position, -10.0f, 100.0f);
-			ImGui::SliderFloat3("Rotation", rotation, -180.0f, 180.0f);
-			ImGui::SliderFloat3("Scale", scale, 0.0f, 1.0f);
-
-			GetTransform()->SetLocalScale(FLOAT3(scale[0], scale[1], scale[2]));
-			GetTransform()->SetLocalPosition(FLOAT3(position[0], position[1], position[2]));
-			GetTransform()->SetLocalRotation(FLOAT3(rotation[0], rotation[1], rotation[2]));
+			ImGui::SliderFloat3("Position", &_localPosition.x, -10.0f, 100.0f);
+			ImGui::SliderFloat3("Rotation", &_localRotation.x, -180.0f, 180.0f);
+			ImGui::SliderFloat3("Scale", &_localScale.x, 0.0f, 1.0f);
 
 			if(ImGui::Button("Reset"))
 			{

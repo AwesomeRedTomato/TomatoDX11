@@ -6,6 +6,7 @@ class Shader;
 class Material;
 class MeshRenderer;
 class Camera;
+class Light;
 class MonoBehaviour;
 
 class GameObject : public std::enable_shared_from_this<GameObject>
@@ -32,6 +33,7 @@ public:
 	std::shared_ptr<Transform> GetTransform();
 	std::shared_ptr<MeshRenderer> GetMeshRenderer();
 	std::shared_ptr<Camera> GetCamera();
+	std::shared_ptr<Light> GetLight();
 
 private:
 	std::array<std::shared_ptr<Component>, (size_t)COMPONENT_TYPE::END> _components;

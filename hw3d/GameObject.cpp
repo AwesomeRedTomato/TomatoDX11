@@ -6,6 +6,7 @@
 #include "MeshRenderer.h"
 #include "MonoBehaviour.h"
 #include "Camera.h"
+#include "Light.h"
 
 
 void GameObject::Init()
@@ -103,4 +104,10 @@ std::shared_ptr<Camera> GameObject::GetCamera()
 {
 	UINT index = static_cast<UINT>(COMPONENT_TYPE::CAMERA);
 	return std::static_pointer_cast<Camera>(_components[index]);
+}
+
+std::shared_ptr<Light> GameObject::GetLight()
+{
+	UINT index = static_cast<UINT>(COMPONENT_TYPE::LIGHT);
+	return std::static_pointer_cast<Light>(_components[index]);
 }

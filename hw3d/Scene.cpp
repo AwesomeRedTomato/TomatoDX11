@@ -2,6 +2,8 @@
 #include "Scene.h"
 #include "GameObject.h"
 #include "Camera.h"
+#include "Light.h"
+#include "Graphics.h"
 
 void Scene::Start()
 {
@@ -25,7 +27,6 @@ void Scene::LateUpdate()
 	{
 		g->LateUpdate();
 	}
-
 }
 
 void Scene::FinalUpdate()
@@ -44,6 +45,36 @@ void Scene::UpdateImGui()
 	}
 }
 
+void Scene::Render()
+{
+	PushLightData();
+
+	for (auto& g : _gameObjects)
+	{
+		if (g->GetCamera() == nullptr)
+			continue;
+
+		g->GetCamera()->Render();
+	}
+}
+
+void Scene::PushLightData()
+{
+	LIGHT_PARAMS lightParams = {};
+	
+	for (auto& g : _gameObjects)
+	{
+		if (g->GetLight() == nullptr)
+			continue;
+
+		const LightInfo& lightInfo = g->GetLight()->GetLightInfo();
+
+		lightParams.lights[lightParams.lightCount] = lightInfo;
+		++lightParams.lightCount;
+	}
+
+	CONSTANT_BUFFER(CB_TYPE::LIGHT)->PushData(&lightParams);
+}
 
 void Scene::AddGameObject(std::shared_ptr<GameObject> gameObject)
 {

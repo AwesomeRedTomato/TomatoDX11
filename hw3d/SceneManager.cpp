@@ -6,6 +6,7 @@
 #include "ConstantBuffer.h"
 #include "Texture.h"
 #include "Cube.h"
+#include "Sphere.h"
 #include "Transform.h"
 #include "Camera.h"
 #include "Light.h"
@@ -36,18 +37,9 @@ void SceneManager::UpdateImgui()
 
 void SceneManager::Render()
 {
-	if (_activeScene == nullptr)
-		return;
+	if (_activeScene)
+		_activeScene->Render();
 
-	const std::vector<std::shared_ptr<GameObject>>& gameObjects = _activeScene->GetGameObject();
-	
-	for (const auto& g : gameObjects)
-	{
-		if (g->GetCamera() == nullptr)
-			continue;
-
-		g->GetCamera()->Render();
-	}
 }
 
 std::shared_ptr<Scene> SceneManager::LoadTestScene()
@@ -55,60 +47,65 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 	std::shared_ptr<Scene> scene = std::make_shared<Scene>();
 
 #pragma region Cube
-	std::shared_ptr<GameObject> gameObject = std::make_shared<GameObject>();
-	gameObject->SetObjectName("Cube");
-	gameObject->AddComponent(std::make_shared<Transform>());
-
-	std::shared_ptr<Transform> transform = gameObject->GetTransform();
-	transform->SetLocalPosition(FLOAT3(0.0f, 0.0f, 0.7f));
-	transform->SetLocalScale(FLOAT3(1.0f, 1.0f, 1.0f));
-	transform->SetLocalRotation(FLOAT3(70.0f, 70.0f, 0.0f));
-
-
-	auto meshRenderer = std::make_shared<MeshRenderer>();
 	{
-		auto mesh = std::make_shared<Mesh>();
-		auto cube = std::make_shared<Cube>();
-		//mesh = cube->Init();
-		mesh->Init(cube->vertices, cube->indices);
+		std::shared_ptr<GameObject> objCube = std::make_shared<GameObject>();
+		objCube->SetObjectName("Cube");
+		objCube->AddComponent(std::make_shared<Transform>());
 
-		auto shader = std::make_shared<Shader>();
-		shader->Init();
+		std::shared_ptr<Transform> transform = objCube->GetTransform();
+		transform->SetLocalPosition(FLOAT3(0.0f, 0.0f, 0.7f));
+		transform->SetLocalScale(FLOAT3(1.0f, 1.0f, 1.0f));
+		transform->SetLocalRotation(FLOAT3(70.0f, 70.0f, 0.0f));
 
-		auto texture = std::make_shared<Texture>();
-		texture->Load(L"Image\\Leather.jpg");
-		texture->Init();
 
-		auto material = std::make_shared<Material>();
-		material->SetShader(shader);
-		material->SetTexture(TEXTURE_TYPE::DIFFUSE, texture);
+		auto meshRenderer = std::make_shared<MeshRenderer>();
+		{
+			auto mesh = std::make_shared<Mesh>();
+			auto cube = std::make_shared<Cube>();
+			mesh->Init(cube->vertices, cube->indices);
 
-		meshRenderer->SetMesh(mesh);
-		meshRenderer->SetMaterial(material);
+			auto shader = std::make_shared<Shader>();
+			shader->Init();
+
+			auto texture = std::make_shared<Texture>();
+			texture->Load(L"Image\\Leather.jpg");
+			texture->Init();
+
+			auto material = std::make_shared<Material>();
+			material->SetShader(shader);
+			material->SetTexture(TEXTURE_TYPE::DIFFUSE, texture);
+
+			meshRenderer->SetMesh(mesh);
+			meshRenderer->SetMaterial(material);
+		}
+		objCube->AddComponent(meshRenderer);
+		scene->AddGameObject(objCube);
 	}
-	gameObject->AddComponent(meshRenderer);
-	scene->AddGameObject(gameObject);
 #pragma endregion
+
 
 #pragma region Camera
-	std::shared_ptr<GameObject> camera = std::make_shared<GameObject>();
-	camera->SetObjectName("Camera");
-	camera->AddComponent(std::make_shared<Transform>());
-	camera->AddComponent(std::make_shared<Camera>()); // Near=1, Far=1000, FOV=45µµ
-	camera->GetTransform()->SetLocalPosition(FLOAT3(0.0f, 0.0f, -10.0f));
-	scene->AddGameObject(camera);
+	{
+		std::shared_ptr<GameObject> camera = std::make_shared<GameObject>();
+		camera->SetObjectName("Camera");
+		camera->AddComponent(std::make_shared<Transform>());
+		camera->AddComponent(std::make_shared<Camera>()); // Near=1, Far=1000, FOV=45µµ
+		camera->GetTransform()->SetLocalPosition(FLOAT3(0.0f, 0.0f, -10.0f));
+		scene->AddGameObject(camera);
+	}
 #pragma endregion
 
-
-#pragma region PointLight
-	std::shared_ptr<GameObject> pointLight = std::make_shared<GameObject>();
-	pointLight->SetObjectName("PointLight");
-	pointLight->AddComponent(std::make_shared<Transform>());
-	pointLight->AddComponent(std::make_shared<Light>());
-	scene->AddGameObject(pointLight);
+#pragma region Light
+	{
+		std::shared_ptr<GameObject> light = std::make_shared<GameObject>();
+		light->SetObjectName("Point Light");
+		light->AddComponent(std::make_shared<Transform>());
+		light->AddComponent(std::make_shared<Light>());
+		light->GetLight()->SetLightType(LIGHT_TYPE::POINT_LIGHT);
+		scene->AddGameObject(light);
+	}
 #pragma endregion
 
 
 	return scene;
 }
-

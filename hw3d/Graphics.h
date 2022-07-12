@@ -42,8 +42,6 @@ public:
 	void Render();
 	void RenderEnd();
 
-	void PushData();
-
 public:
 	void CreateConstantBuffer(UINT slot, UINT size, UINT count);
 

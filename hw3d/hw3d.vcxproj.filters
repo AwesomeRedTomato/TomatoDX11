@@ -310,18 +310,15 @@
     <None Include="SimpleMath.inl">
       <Filter>Manager\DxManager</Filter>
     </None>
+    <None Include="Utils.hlsli">
+      <Filter>셰이더</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="SolidVS.hlsl">
+    <FxCompile Include="VS.hlsl">
       <Filter>셰이더</Filter>
     </FxCompile>
-    <FxCompile Include="SolidPS.hlsl">
-      <Filter>셰이더</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongVS.hlsl">
-      <Filter>셰이더</Filter>
-    </FxCompile>
-    <FxCompile Include="PhongPS.hlsl">
+    <FxCompile Include="PS.hlsl">
       <Filter>셰이더</Filter>
     </FxCompile>
   </ItemGroup>
