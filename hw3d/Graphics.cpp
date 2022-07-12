@@ -1,7 +1,6 @@
 #include "pch.h"
 #include "Graphics.h"
 #include "Window.h"
-#include "Plane.h"
 #include "Cube.h"
 #include "Grid.h"
 #include "SceneManager.h"

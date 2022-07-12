@@ -12,8 +12,9 @@ struct VSOut
 float4 main(VSOut pin) : SV_TARGET
 {
     float4 color = float4(1.0f, 1.0f, 1.0f, 1.0f);
+    //float4 color = texture_0.Sample(samplerState_0, pin.uv);
     
-    LightColor totalColor = (LightColor)0.0f;
+    LightColor totalColor = (LightColor) 0.0f;
     
     for (int i = 0; i < g_lightCount; ++i)
     {

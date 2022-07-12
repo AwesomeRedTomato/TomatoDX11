@@ -32,19 +32,19 @@ struct LightInfo
 {
     LightColor  color;
     
-    float4      pos;
+    float4      position;
     float4      direction;
     int         type;          // directional, spot, point
            
     float       range;         // light range
     float       angle;         // direction
-    float       padding;
+    int       padding;
 };
 
 cbuffer LIGHT_PARAMS : register(b3)
 {
     int         g_lightCount;
-    float3      g_lightPadding;
+    float3      padding;
     LightInfo   g_light[50];
 };
 

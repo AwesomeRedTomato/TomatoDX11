@@ -99,10 +99,36 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 	{
 		std::shared_ptr<GameObject> light = std::make_shared<GameObject>();
 		light->SetObjectName("Point Light");
+
 		light->AddComponent(std::make_shared<Transform>());
+
+		auto meshRenderer = std::make_shared<MeshRenderer>();
+		{
+			auto mesh = std::make_shared<Mesh>();
+			auto cube = std::make_shared<Cube>();
+			mesh->Init(cube->vertices, cube->indices);
+
+			auto shader = std::make_shared<Shader>();
+			shader->Init();
+
+			auto texture = std::make_shared<Texture>();
+			texture->Load(L"Image\\Leather.jpg");
+			texture->Init();
+
+			auto material = std::make_shared<Material>();
+			material->SetShader(shader);
+			material->SetTexture(TEXTURE_TYPE::DIFFUSE, texture);
+
+			meshRenderer->SetMesh(mesh);
+			meshRenderer->SetMaterial(material);
+		}
+		light->AddComponent(meshRenderer);
+
 		light->AddComponent(std::make_shared<Light>());
 		light->GetLight()->SetLightType(LIGHT_TYPE::POINT_LIGHT);
+
 		scene->AddGameObject(light);
+
 	}
 #pragma endregion
 

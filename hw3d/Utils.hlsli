@@ -22,7 +22,7 @@ LightColor CalculateLightColor(int lightIndex, float3 viewNormal, float3 viewPos
     // Point Light
     else if(g_light[lightIndex].type == 1)
     {
-        float3 viewLightPos = mul(float4(g_light[lightIndex].pos.xyz, 1.0f), g_matView).xyz;
+        float3 viewLightPos = mul(float4(g_light[lightIndex].position.xyz, 1.0f), g_matView).xyz;
         viewLightDir = normalize(viewPos - viewLightDir);
         diffuseRatio = saturate(dot(-viewLightDir, viewNormal));
         
@@ -32,17 +32,11 @@ LightColor CalculateLightColor(int lightIndex, float3 viewNormal, float3 viewPos
         else
             distanceRatio = saturate(1.0f - pow(dist / g_light[lightIndex].range, 2));
     }
-    //// Spot Light
-    //else
-    //{
-    //    float3 viewLightPos = mul(float4(g_light[lightIndex].pos.xyz, 1.0f), g_matView));
-    //    viewLightDir = 
-    //}
-    
+
     float3 reflectionDir = normalize(viewLightDir + 2 * (saturate(dot(-viewLightDir, viewNormal)) * viewNormal));
     float3 eyeDir = normalize(viewPos);
     
-    specularRatio = pow(saturate(dot(-eyeDir, reflectionDir)), 2);
+    specularRatio = pow(saturate(dot(-eyeDir, reflectionDir)), 5);
 
     color.diffuse = g_light[lightIndex].color.diffuse * diffuseRatio * distanceRatio;
     color.ambient = g_light[lightIndex].color.ambient * distanceRatio;

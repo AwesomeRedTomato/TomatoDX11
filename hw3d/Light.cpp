@@ -4,9 +4,15 @@
 #include "Transform.h"
 #include "Imgui/imgui.h"
 
-void Light::Start()
+Light::Light()
+	:
+	Component(COMPONENT_TYPE::LIGHT)
 {
-	_lightInfo.color.ambient = FLOAT3(1.0f, 1.0f, 1.0f);
+	_lightInfo.color.specular = FLOAT3(1.0f, 1.0f, 1.0f);
+
+	_lightInfo.type = (UINT)LIGHT_TYPE::POINT_LIGHT;
+	_lightInfo.range = 100.0f;
+	_lightInfo.angle = XM_PIDIV4;
 }
 
 void Light::FinalUpdate()
