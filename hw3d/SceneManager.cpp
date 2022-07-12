@@ -57,7 +57,6 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 		transform->SetLocalScale(FLOAT3(1.0f, 1.0f, 1.0f));
 		transform->SetLocalRotation(FLOAT3(70.0f, 70.0f, 0.0f));
 
-
 		auto meshRenderer = std::make_shared<MeshRenderer>();
 		{
 			auto mesh = std::make_shared<Mesh>();
@@ -98,9 +97,6 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 #pragma region Light
 	{
 		std::shared_ptr<GameObject> light = std::make_shared<GameObject>();
-		light->SetObjectName("Point Light");
-
-		light->AddComponent(std::make_shared<Transform>());
 
 		auto meshRenderer = std::make_shared<MeshRenderer>();
 		{
@@ -122,11 +118,10 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 			meshRenderer->SetMesh(mesh);
 			meshRenderer->SetMaterial(material);
 		}
-		light->AddComponent(meshRenderer);
 
+		light->SetObjectName("Light");
+		light->AddComponent(std::make_shared<Transform>());
 		light->AddComponent(std::make_shared<Light>());
-		light->GetLight()->SetLightType(LIGHT_TYPE::POINT_LIGHT);
-
 		scene->AddGameObject(light);
 
 	}

@@ -12,12 +12,19 @@ Light::Light()
 
 	_lightInfo.type = (UINT)LIGHT_TYPE::POINT_LIGHT;
 	_lightInfo.range = 100.0f;
-	_lightInfo.angle = XM_PIDIV4;
+	_lightInfo.angle = XM_PI;
+	
+	_lightInfo.color.ambient = FLOAT3(0.3f, 0.3f, 0.3f);
+	_lightInfo.color.diffuse = FLOAT3(0.3, 0.3f, 0.3f);
+	_lightInfo.color.specular = FLOAT3(1.0f, 1.0f, 1.0f);
+	
+	_lightInfo.range = 10000.0f;
 }
 
 void Light::FinalUpdate()
 {
 	_lightInfo.position = GetTransform()->GetWorldPosition();
+	_lightInfo.direction = GetTransform()->GetLocalRotation();
 }
 
 void Light::UpdateImGui()
@@ -27,6 +34,7 @@ void Light::UpdateImGui()
 		ImGui::Text("\nLight");
 		ImGui::ColorEdit3("Ambient Color", &_lightInfo.color.ambient.x);
 		ImGui::ColorEdit3("Diffuse Color", &_lightInfo.color.diffuse.x);
+		ImGui::SliderFloat("Range", &_lightInfo.range, 0.0f, 10000.0f);
 		ImGui::ColorEdit3("Specular Color", &_lightInfo.color.specular.x);
 
 		ImGui::End();

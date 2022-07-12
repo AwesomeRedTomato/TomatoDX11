@@ -1,6 +1,7 @@
 #ifndef _PARAMS_HLSLI_
 #define _PARAMS_HLSLI_
 
+/********** Vertex Constant **********/
 cbuffer TRANSFORM_PARAMS : register(b0)
 {
     row_major matrix g_matWorld;
@@ -21,13 +22,13 @@ cbuffer COLOR_PARAMS : register(b2)
     float g_color;
 };
 
+/********** Pixel Constant **********/
 struct LightColor
 {
     float4 ambient;
     float4 diffuse;
     float4 specular;
 };
-
 struct LightInfo
 {
     LightColor  color;
@@ -38,7 +39,7 @@ struct LightInfo
            
     float       range;         // light range
     float       angle;         // direction
-    int       padding;
+    int         padding;
 };
 
 cbuffer LIGHT_PARAMS : register(b3)

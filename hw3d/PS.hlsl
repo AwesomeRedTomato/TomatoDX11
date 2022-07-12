@@ -12,7 +12,7 @@ struct VSOut
 float4 main(VSOut pin) : SV_TARGET
 {
     float4 color = float4(1.0f, 1.0f, 1.0f, 1.0f);
-    //float4 color = texture_0.Sample(samplerState_0, pin.uv);
+    // float4 color = texture_0.Sample(samplerState_0, pin.uv);
     
     LightColor totalColor = (LightColor) 0.0f;
     
@@ -24,9 +24,9 @@ float4 main(VSOut pin) : SV_TARGET
         totalColor.specular += color.specular;
     }
     
-    color.xyz = (totalColor.diffuse.xyz * color.xyz) +
-             (totalColor.ambient.xyz * color.xyz) +
-             (totalColor.specular.xyz * color.xyz);
+    color.xyz = (totalColor.diffuse.xyz * color.xyz)
+        + totalColor.ambient.xyz * color.xyz
+        + totalColor.specular.xyz;
     
     return color;
 }

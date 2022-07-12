@@ -72,8 +72,8 @@ void Scene::PushLightData()
 		lightParams.lights[lightParams.lightCount] = lightInfo;
 		++lightParams.lightCount;
 	}
-
-	CONSTANT_BUFFER(CB_TYPE::LIGHT)->PushData(&lightParams);
+	CONSTANT_BUFFER(CB_TYPE::LIGHT)->Init(static_cast<UINT>(CB_TYPE::LIGHT), sizeof(LIGHT_PARAMS), lightParams.lightCount);
+	CONSTANT_BUFFER(CB_TYPE::LIGHT)->PushPixelConstant(&lightParams); // 수정 예정
 }
 
 void Scene::AddGameObject(std::shared_ptr<GameObject> gameObject)

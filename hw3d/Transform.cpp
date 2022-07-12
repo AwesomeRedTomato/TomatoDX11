@@ -53,6 +53,6 @@ void Transform::PushData()
 	transformParams.matWVP = _matWorld * Camera::S_MatView * Camera::S_MatProjection;
 
 	CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->Init(static_cast<UINT>(CB_TYPE::TRANSFORM), sizeof(TRANSFORM_PARAMS), 1u);
-	CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->PushData(&transformParams);
+	CONSTANT_BUFFER(CB_TYPE::TRANSFORM)->PushVertexConstant(&transformParams);
 }
 

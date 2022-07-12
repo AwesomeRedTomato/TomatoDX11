@@ -93,7 +93,7 @@ void Graphics::Init(const Window& window)
 	Start();
 
 	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(TRANSFORM_PARAMS), 1u);
-	CreateConstantBuffer((UINT)CB_TYPE::LIGHT, sizeof(LIGHT_PARAMS), 1u);	// 수정 예정 &lightParams? LIGHT_PARAMS?
+	CreateConstantBuffer((UINT)CB_TYPE::LIGHT, sizeof(LIGHT_PARAMS), 50);	// 수정 예정 &lightParams? LIGHT_PARAMS?
 }
 
 void Graphics::InitImgui(const Window& window)
