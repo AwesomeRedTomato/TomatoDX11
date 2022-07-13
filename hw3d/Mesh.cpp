@@ -40,5 +40,5 @@ void Mesh::Render()
 	CONTEXT->IASetVertexBuffers(0u, 1u, _vertexBuffer.GetAddressOf(), &_vbStride, &_vbOffset);
 	CONTEXT->IASetIndexBuffer(_indexBuffer.Get(), _indexFormat, 0u);
 
-	CONTEXT->DrawIndexed(_indexCount, 0u, 0u);
+	CONTEXT->DrawIndexedInstanced(_indexCount,1u, 0u, 0u, 0u);
 }

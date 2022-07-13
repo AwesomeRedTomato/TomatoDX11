@@ -97,6 +97,7 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 #pragma region Light
 	{
 		std::shared_ptr<GameObject> light = std::make_shared<GameObject>();
+		light->SetObjectName("Light");
 
 		auto meshRenderer = std::make_shared<MeshRenderer>();
 		{
@@ -118,10 +119,11 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 			meshRenderer->SetMesh(mesh);
 			meshRenderer->SetMaterial(material);
 		}
-
-		light->SetObjectName("Light");
+		light->AddComponent(meshRenderer);
 		light->AddComponent(std::make_shared<Transform>());
 		light->AddComponent(std::make_shared<Light>());
+		light->GetTransform()->SetLocalScale(FLOAT3(0.1f, 0.1f, 0.1f));
+		light->GetTransform()->SetLocalPosition(FLOAT3(1.0f, -0.6f, -6.0f));
 		scene->AddGameObject(light);
 
 	}
