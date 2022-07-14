@@ -93,7 +93,8 @@ void Graphics::Init(const Window& window)
 	Start();
 
 	CreateConstantBuffer((UINT)CB_TYPE::TRANSFORM, sizeof(TRANSFORM_PARAMS), 1u);
-	CreateConstantBuffer((UINT)CB_TYPE::LIGHT, sizeof(LIGHT_PARAMS), 50);	// 수정 예정 &lightParams? LIGHT_PARAMS?
+	CreateConstantBuffer((UINT)CB_TYPE::MATERIAL, sizeof(MATERIAL_PARAMS), 1u);
+	CreateConstantBuffer((UINT)CB_TYPE::LIGHT, sizeof(LIGHT_PARAMS), 1u);	// 수정 예정 &lightParams? LIGHT_PARAMS?
 }
 
 void Graphics::InitImgui(const Window& window)
@@ -140,6 +141,9 @@ void Graphics::RenderEnd()
 
 void Graphics::CreateConstantBuffer(UINT slot, UINT size, UINT count)
 {
+	UINT typeInt = static_cast<UINT>(slot);
+	assert(_CBs.size() == typeInt);
+
 	std::shared_ptr<ConstantBuffer> buffer = std::make_shared<ConstantBuffer>();
 	buffer->Init(slot, size, count);
 	_CBs.push_back(buffer);

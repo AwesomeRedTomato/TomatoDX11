@@ -122,6 +122,7 @@ std::shared_ptr<Scene> SceneManager::LoadTestScene()
 		light->AddComponent(meshRenderer);
 		light->AddComponent(std::make_shared<Transform>());
 		light->AddComponent(std::make_shared<Light>());
+		light->GetLight()->SetLightType(LIGHT_TYPE::POINT_LIGHT);
 		light->GetTransform()->SetLocalScale(FLOAT3(0.1f, 0.1f, 0.1f));
 		light->GetTransform()->SetLocalPosition(FLOAT3(1.0f, -0.6f, -6.0f));
 		scene->AddGameObject(light);

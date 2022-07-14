@@ -12,7 +12,7 @@ enum
 	TEXTURE_COUNT = static_cast<uint8_t>(TEXTURE_TYPE::END),
 };
 
-struct MaterialParams
+struct MATERIAL_PARAMS
 {
 	void SetTexOn(UINT index, UINT value) { texOnParams[index] = value; }
 
@@ -34,7 +34,7 @@ public:
 	void SetTexture(TEXTURE_TYPE type, std::shared_ptr<Texture> texture) { _textures[static_cast<UINT>(type)] = texture; }
 
 private:
-	MaterialParams										_params;
+	MATERIAL_PARAMS										_params;
 	std::shared_ptr<Shader>								_shader;
 	std::array<std::shared_ptr<Texture>, TEXTURE_COUNT> _textures;
 };

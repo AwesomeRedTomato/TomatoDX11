@@ -4,7 +4,6 @@ enum class CB_TYPE
 {
 	TRANSFORM,
 	MATERIAL,
-	COLOR,
 	LIGHT,
 	END
 };
@@ -14,6 +13,7 @@ class ConstantBuffer
 {
 public:
 	void Init(UINT slot, UINT size, UINT count);
+
 	void PushVertexConstant(void* buffer);
 	void PushPixelConstant(void* buffer);
 

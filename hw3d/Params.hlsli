@@ -17,11 +17,6 @@ cbuffer MATERIAL_PARAMS : register(b1)
     int g_tex_on_1;
 };
 
-cbuffer COLOR_PARAMS : register(b2)
-{
-    float g_color;
-};
-
 /********** Pixel Constant **********/
 struct LightColor
 {
@@ -42,7 +37,7 @@ struct LightInfo
     int         padding;
 };
 
-cbuffer LIGHT_PARAMS : register(b3)
+cbuffer LIGHT_PARAMS : register(b2)
 {
     int         g_lightCount;
     float3      padding;

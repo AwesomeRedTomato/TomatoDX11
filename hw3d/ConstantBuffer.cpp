@@ -54,5 +54,5 @@ void ConstantBuffer::PushPixelConstant(void* buffer)
 	memcpy_s(msr.pData, bufferSize, buffer, _elementSize);
 	CONTEXT->Unmap(_constantBuffer.Get(), 0u);
 
-	CONTEXT->PSSetConstantBuffers(_slot, _elementCount, _constantBuffer.GetAddressOf());
+	CONTEXT->PSSetConstantBuffers(_slot, 1u, _constantBuffer.GetAddressOf());
 }
